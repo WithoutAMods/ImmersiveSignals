@@ -1,0 +1,83 @@
+{
+    "variants": {
+        "facing=north,signal_number=0": { "model": "immersivesignals:block/signal_zs3_0", "y": 0 },
+        "facing=east,signal_number=0": { "model": "immersivesignals:block/signal_zs3_0", "y": 90  },
+        "facing=south,signal_number=0": { "model": "immersivesignals:block/signal_zs3_0", "y": 180  },
+        "facing=west,signal_number=0": { "model": "immersivesignals:block/signal_zs3_0", "y": 270  },
+        
+        "facing=north,signal_number=1": { "model": "immersivesignals:block/signal_zs3_1", "y": 0 },
+        "facing=east,signal_number=1": { "model": "immersivesignals:block/signal_zs3_1", "y": 90  },
+        "facing=south,signal_number=1": { "model": "immersivesignals:block/signal_zs3_1", "y": 180  },
+        "facing=west,signal_number=1": { "model": "immersivesignals:block/signal_zs3_1", "y": 270  },
+        
+        "facing=north,signal_number=2": { "model": "immersivesignals:block/signal_zs3_2", "y": 0 },
+        "facing=east,signal_number=2": { "model": "immersivesignals:block/signal_zs3_2", "y": 90  },
+        "facing=south,signal_number=2": { "model": "immersivesignals:block/signal_zs3_2", "y": 180  },
+        "facing=west,signal_number=2": { "model": "immersivesignals:block/signal_zs3_2", "y": 270  },
+        
+        "facing=north,signal_number=3": { "model": "immersivesignals:block/signal_zs3_3", "y": 0 },
+        "facing=east,signal_number=3": { "model": "immersivesignals:block/signal_zs3_3", "y": 90  },
+        "facing=south,signal_number=3": { "model": "immersivesignals:block/signal_zs3_3", "y": 180  },
+        "facing=west,signal_number=3": { "model": "immersivesignals:block/signal_zs3_3", "y": 270  },
+        
+        "facing=north,signal_number=4": { "model": "immersivesignals:block/signal_zs3_4", "y": 0 },
+        "facing=east,signal_number=4": { "model": "immersivesignals:block/signal_zs3_4", "y": 90  },
+        "facing=south,signal_number=4": { "model": "immersivesignals:block/signal_zs3_4", "y": 180  },
+        "facing=west,signal_number=4": { "model": "immersivesignals:block/signal_zs3_4", "y": 270  },
+        
+        "facing=north,signal_number=5": { "model": "immersivesignals:block/signal_zs3_5", "y": 0 },
+        "facing=east,signal_number=5": { "model": "immersivesignals:block/signal_zs3_5", "y": 90  },
+        "facing=south,signal_number=5": { "model": "immersivesignals:block/signal_zs3_5", "y": 180  },
+        "facing=west,signal_number=5": { "model": "immersivesignals:block/signal_zs3_5", "y": 270  },
+        
+        "facing=north,signal_number=6": { "model": "immersivesignals:block/signal_zs3_6", "y": 0 },
+        "facing=east,signal_number=6": { "model": "immersivesignals:block/signal_zs3_6", "y": 90  },
+        "facing=south,signal_number=6": { "model": "immersivesignals:block/signal_zs3_6", "y": 180  },
+        "facing=west,signal_number=6": { "model": "immersivesignals:block/signal_zs3_6", "y": 270  },
+        
+        "facing=north,signal_number=7": { "model": "immersivesignals:block/signal_zs3_7", "y": 0 },
+        "facing=east,signal_number=7": { "model": "immersivesignals:block/signal_zs3_7", "y": 90  },
+        "facing=south,signal_number=7": { "model": "immersivesignals:block/signal_zs3_7", "y": 180  },
+        "facing=west,signal_number=7": { "model": "immersivesignals:block/signal_zs3_7", "y": 270  },
+        
+        "facing=north,signal_number=8": { "model": "immersivesignals:block/signal_zs3_8", "y": 0 },
+        "facing=east,signal_number=8": { "model": "immersivesignals:block/signal_zs3_8", "y": 90  },
+        "facing=south,signal_number=8": { "model": "immersivesignals:block/signal_zs3_8", "y": 180  },
+        "facing=west,signal_number=8": { "model": "immersivesignals:block/signal_zs3_8", "y": 270  },
+        
+        "facing=north,signal_number=9": { "model": "immersivesignals:block/signal_zs3_9", "y": 0 },
+        "facing=east,signal_number=9": { "model": "immersivesignals:block/signal_zs3_9", "y": 90  },
+        "facing=south,signal_number=9": { "model": "immersivesignals:block/signal_zs3_9", "y": 180  },
+        "facing=west,signal_number=9": { "model": "immersivesignals:block/signal_zs3_9", "y": 270  },
+        
+        "facing=north,signal_number=10": { "model": "immersivesignals:block/signal_zs3_10", "y": 0 },
+        "facing=east,signal_number=10": { "model": "immersivesignals:block/signal_zs3_10", "y": 90  },
+        "facing=south,signal_number=10": { "model": "immersivesignals:block/signal_zs3_10", "y": 180  },
+        "facing=west,signal_number=10": { "model": "immersivesignals:block/signal_zs3_10", "y": 270  },
+        
+        "facing=north,signal_number=11": { "model": "immersivesignals:block/signal_zs3_11", "y": 0 },
+        "facing=east,signal_number=11": { "model": "immersivesignals:block/signal_zs3_11", "y": 90  },
+        "facing=south,signal_number=11": { "model": "immersivesignals:block/signal_zs3_11", "y": 180  },
+        "facing=west,signal_number=11": { "model": "immersivesignals:block/signal_zs3_11", "y": 270  },
+        
+        "facing=north,signal_number=12": { "model": "immersivesignals:block/signal_zs3_12", "y": 0 },
+        "facing=east,signal_number=12": { "model": "immersivesignals:block/signal_zs3_12", "y": 90  },
+        "facing=south,signal_number=12": { "model": "immersivesignals:block/signal_zs3_12", "y": 180  },
+        "facing=west,signal_number=12": { "model": "immersivesignals:block/signal_zs3_12", "y": 270  },
+        
+        "facing=north,signal_number=13": { "model": "immersivesignals:block/signal_zs3_13", "y": 0 },
+        "facing=east,signal_number=13": { "model": "immersivesignals:block/signal_zs3_13", "y": 90  },
+        "facing=south,signal_number=13": { "model": "immersivesignals:block/signal_zs3_13", "y": 180  },
+        "facing=west,signal_number=13": { "model": "immersivesignals:block/signal_zs3_13", "y": 270  },
+        
+        "facing=north,signal_number=14": { "model": "immersivesignals:block/signal_zs3_14", "y": 0 },
+        "facing=east,signal_number=14": { "model": "immersivesignals:block/signal_zs3_14", "y": 90  },
+        "facing=south,signal_number=14": { "model": "immersivesignals:block/signal_zs3_14", "y": 180  },
+        "facing=west,signal_number=14": { "model": "immersivesignals:block/signal_zs3_14", "y": 270  },
+        
+        "facing=north,signal_number=15": { "model": "immersivesignals:block/signal_zs3_15", "y": 0 },
+        "facing=east,signal_number=15": { "model": "immersivesignals:block/signal_zs3_15", "y": 90  },
+        "facing=south,signal_number=15": { "model": "immersivesignals:block/signal_zs3_15", "y": 180  },
+        "facing=west,signal_number=15": { "model": "immersivesignals:block/signal_zs3_15", "y": 270  }
+    }
+}

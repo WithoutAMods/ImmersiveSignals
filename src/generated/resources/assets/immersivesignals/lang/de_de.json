@@ -1,0 +1,9 @@
+{
+  "block.immersivesignals.signalfundation.name": "Signal",
+  "block.immersivesignals.signalmain.name": "Signal",
+  "block.immersivesignals.signalpost.name": "Signal",
+  "block.immersivesignals.signalzs3.name": "Signal",
+  "block.immersivesignals.signalzs3v.name": "Signal",
+  "item.immersivesignals.signal": "Signal",
+  "itemGroup.immersivesignals": "Immersive Signals"
+}
