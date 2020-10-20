@@ -24,7 +24,7 @@ repositories {
 }
 
 version = "${immersivesignals_version}"
-group = 'withoutaname.mods' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = 'withoutaname.mods.immersivesignals' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'ImmersiveSignals'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
