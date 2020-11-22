@@ -6,7 +6,10 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
 import withoutaname.mods.immersivesignals.modules.signal.SignalRegistration;
@@ -23,19 +26,21 @@ public class BaseSignalControllerBlock extends Block {
 				.hardnessAndResistance(1.5F, 6.0F));
 	}
 
-	public static void registerBlocks(RegistryEvent.Register<Block> event) {
-		event.getRegistry().register(new RedstoneSignalControllerBlock());
-	}
-
-	public static void registerItems(RegistryEvent.Register<Item> event) {
-		Item.Properties properties = new Item.Properties()
-				.group(ModSetup.defaultItemGroup)
-				.maxStackSize(64);
-		event.getRegistry().register(new BlockItem(SignalControllerRegistration.REDSTONE_SIGNAL_CONTROLLER.get(), properties).setRegistryName("redstonesignalcontroller"));
-	}
-
 	@Override
 	public boolean hasTileEntity(BlockState state) {
+		return true;
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+		worldIn.getTileEntity(currentPos).setPos(currentPos);
+		return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public boolean needsPostProcessing(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return true;
 	}
 

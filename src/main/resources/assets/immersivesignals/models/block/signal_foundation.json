@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "immersivesignals:custom/signal_fundation",
+		"1": "immersivesignals:custom/signal_foundation",
 		"particle": "immersivesignals:custom/signal_post"
 	},
 	"elements": [
@@ -77,7 +77,7 @@
 			"children": [0]
 		},
 		{
-			"name": "Fundation",
+			"name": "Foundation",
 			"origin": [8, 8, 8],
 			"children": [1, 2, 3, 4]
 		}

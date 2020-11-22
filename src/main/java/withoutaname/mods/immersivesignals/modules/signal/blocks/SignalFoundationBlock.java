@@ -8,7 +8,7 @@ import net.minecraft.util.Direction;
 
 public class SignalFoundationBlock extends BaseSignalBlock {
 
-	public static final String REGISTRY_NAME = "signalfoundation";
+	public static final String REGISTRY_NAME = "signal_foundation";
 
 	public SignalFoundationBlock() {
 		super();

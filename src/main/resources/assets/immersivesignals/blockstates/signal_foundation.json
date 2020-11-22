@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "immersivesignals:block/signal_foundation", "y": 0 },
+        "facing=east": { "model": "immersivesignals:block/signal_foundation", "y": 90  },
+        "facing=south": { "model": "immersivesignals:block/signal_foundation", "y": 180  },
+        "facing=west": { "model": "immersivesignals:block/signal_foundation", "y": 270  }
+    }
+}

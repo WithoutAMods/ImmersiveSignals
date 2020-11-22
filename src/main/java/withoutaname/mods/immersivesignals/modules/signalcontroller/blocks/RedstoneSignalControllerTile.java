@@ -2,6 +2,7 @@ package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks;
 
 import java.util.Random;
 
+import net.minecraft.block.BlockState;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,15 +16,8 @@ public class RedstoneSignalControllerTile extends BaseSignalControllerTile{
 
 	private static final Logger LOGGER = LogManager.getLogger();
 
-	public RedstoneSignalControllerTile() {
-		super(SignalControllerRegistration.REDSTONE_SIGNAL_CONTROLLER_TILE.get());
-		
-	}
-
-	public RedstoneSignalControllerTile(World world) {
-		this();
-		this.world = world;
-		updateSignalPattern();
+	public RedstoneSignalControllerTile(World world, BlockState state) {
+		super(SignalControllerRegistration.REDSTONE_SIGNAL_CONTROLLER_TILE.get(), world, state);
 	}
 
 	public void updateSignalPattern() {

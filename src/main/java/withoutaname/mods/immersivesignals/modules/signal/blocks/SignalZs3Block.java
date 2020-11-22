@@ -13,7 +13,7 @@ import net.minecraft.world.IBlockReader;
 
 public class SignalZs3Block extends BaseSignalBlock {
 
-	public static final String REGISTRY_NAME = "signalzs3";
+	public static final String REGISTRY_NAME = "signal_zs3";
 
 	public SignalZs3Block() {
 		super();

@@ -22,6 +22,7 @@ public class SignalControllerRegistration {
 
 	public static void init() {
 		BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+		ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 		TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 

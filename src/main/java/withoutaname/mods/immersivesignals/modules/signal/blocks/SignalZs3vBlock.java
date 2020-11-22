@@ -8,7 +8,7 @@ import net.minecraft.util.Direction;
 
 public class SignalZs3vBlock extends BaseSignalBlock {
 
-	public static final String REGISTRY_NAME = "signalzs3v";
+	public static final String REGISTRY_NAME = "signal_zs3v";
 
 	public SignalZs3vBlock() {
 		super();

@@ -2,7 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "immersivesignals:signalzs3",
+      "name": "immersivesignals:signal_post",
       "rolls": 1,
       "entries": [
         {

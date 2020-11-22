@@ -23,7 +23,7 @@ public class RedstoneSignalControllerBlock extends BaseSignalControllerBlock {
 	@Nullable
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new RedstoneSignalControllerTile((World) world);
+		return new RedstoneSignalControllerTile((World) world, state);
 	}
 
 	@Override
