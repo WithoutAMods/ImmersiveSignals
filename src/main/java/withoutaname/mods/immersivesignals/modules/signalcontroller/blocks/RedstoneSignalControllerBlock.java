@@ -6,6 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -27,35 +28,14 @@ public class RedstoneSignalControllerBlock extends BaseSignalControllerBlock {
 	}
 
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
-		LOGGER.info("tick");
-	}
-
-	@Override
-	public int tickRate(IWorldReader worldIn) {
-		return 2;
-	}
-
-	@Override
-	public void observedNeighborChange(BlockState observerState, World world, BlockPos observerPos, Block changedBlock, BlockPos changedBlockPos) {
-		LOGGER.info("observedNeighborChange");
+	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
 		if(!world.isRemote()) {
-			TileEntity te = world.getTileEntity(observerPos);
+			TileEntity te = world.getTileEntity(currentPos);
 			if(te instanceof RedstoneSignalControllerTile) {
 				((RedstoneSignalControllerTile) te).updateSignalPattern();
 			}
 		}
-	}
-
-	@Override
-	public void onNeighborChange(BlockState state, IWorldReader world, BlockPos pos, BlockPos neighbor) {
-		LOGGER.info("onNeighborChange");
-		if(!world.isRemote()) {
-			TileEntity te = world.getTileEntity(pos);
-			if(te instanceof RedstoneSignalControllerTile) {
-				((RedstoneSignalControllerTile) te).updateSignalPattern();
-			}
-		}
+		return super.updatePostPlacement(stateIn, facing, facingState, world, currentPos, facingPos);
 	}
 
 	@Override
@@ -63,8 +43,4 @@ public class RedstoneSignalControllerBlock extends BaseSignalControllerBlock {
 		return true;
 	}
 
-	@Override
-	public boolean shouldCheckWeakPower(BlockState state, IWorldReader world, BlockPos pos, Direction side) {
-		return true;
-	}
 }

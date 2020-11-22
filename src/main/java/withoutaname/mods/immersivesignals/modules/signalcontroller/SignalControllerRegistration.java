@@ -31,6 +31,6 @@ public class SignalControllerRegistration {
 	public static final RegistryObject<Item> REDSTONE_SIGNAL_CONTROLLER_ITEM = ITEMS
 			.register(RedstoneSignalControllerBlock.REGISTRY_NAME, () -> new BlockItem(REDSTONE_SIGNAL_CONTROLLER.get(), ModSetup.getStandardItemProperties()));
 	public static final RegistryObject<TileEntityType<RedstoneSignalControllerTile>> REDSTONE_SIGNAL_CONTROLLER_TILE = TILES
-			.register(RedstoneSignalControllerBlock.REGISTRY_NAME, () -> TileEntityType.Builder.create(RedstoneSignalControllerTile::new, REDSTONE_SIGNAL_CONTROLLER.get()).build(null));
+			.register(RedstoneSignalControllerBlock.REGISTRY_NAME, () -> TileEntityType.Builder.create(() -> new RedstoneSignalControllerTile(null, null), REDSTONE_SIGNAL_CONTROLLER.get()).build(null));
 
 }
