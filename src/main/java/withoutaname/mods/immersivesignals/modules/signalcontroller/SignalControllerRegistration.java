@@ -10,15 +10,15 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.RedstoneSignalControllerBlock;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.RedstoneSignalControllerTile;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.RedstoneAdapterBlock;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.RedstoneAdapterTile;
 import withoutaname.mods.immersivesignals.setup.ModSetup;
 
 public class SignalControllerRegistration {
 
-	private static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, MODID);
-	private static final DeferredRegister<Item> ITEMS = new DeferredRegister<Item>(ForgeRegistries.ITEMS, MODID);
-	private static final DeferredRegister<TileEntityType<?>> TILES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, MODID);
+	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
+	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+	private static final DeferredRegister<TileEntityType<?>> TILES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, MODID);
 
 	public static void init() {
 		BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -26,11 +26,11 @@ public class SignalControllerRegistration {
 		TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
 	}
 
-	public static final RegistryObject<RedstoneSignalControllerBlock> REDSTONE_SIGNAL_CONTROLLER = BLOCKS
-			.register(RedstoneSignalControllerBlock.REGISTRY_NAME, RedstoneSignalControllerBlock::new);
+	public static final RegistryObject<RedstoneAdapterBlock> REDSTONE_SIGNAL_CONTROLLER = BLOCKS
+			.register(RedstoneAdapterBlock.REGISTRY_NAME, RedstoneAdapterBlock::new);
 	public static final RegistryObject<Item> REDSTONE_SIGNAL_CONTROLLER_ITEM = ITEMS
-			.register(RedstoneSignalControllerBlock.REGISTRY_NAME, () -> new BlockItem(REDSTONE_SIGNAL_CONTROLLER.get(), ModSetup.getStandardItemProperties()));
-	public static final RegistryObject<TileEntityType<RedstoneSignalControllerTile>> REDSTONE_SIGNAL_CONTROLLER_TILE = TILES
-			.register(RedstoneSignalControllerBlock.REGISTRY_NAME, () -> TileEntityType.Builder.create(() -> new RedstoneSignalControllerTile(null, null), REDSTONE_SIGNAL_CONTROLLER.get()).build(null));
+			.register(RedstoneAdapterBlock.REGISTRY_NAME, () -> new BlockItem(REDSTONE_SIGNAL_CONTROLLER.get(), ModSetup.defaultItemProperties));
+	public static final RegistryObject<TileEntityType<RedstoneAdapterTile>> REDSTONE_SIGNAL_CONTROLLER_TILE = TILES
+			.register(RedstoneAdapterBlock.REGISTRY_NAME, () -> TileEntityType.Builder.create(() -> new RedstoneAdapterTile(), REDSTONE_SIGNAL_CONTROLLER.get()).build(null));
 
 }

@@ -18,9 +18,9 @@ import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControl
 import withoutaname.mods.immersivesignals.setup.ModSetup;
 import withoutaname.mods.immersivesignals.tools.SignalPattern;
 
-public class BaseSignalControllerBlock extends Block {
+public class BaseAdapterBlock extends Block {
 
-	public BaseSignalControllerBlock() {
+	public BaseAdapterBlock() {
 		super(Properties.create(Material.IRON)
 				.sound(SoundType.METAL)
 				.hardnessAndResistance(1.5F, 6.0F));
@@ -28,19 +28,6 @@ public class BaseSignalControllerBlock extends Block {
 
 	@Override
 	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-		worldIn.getTileEntity(currentPos).setPos(currentPos);
-		return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
-	}
-
-	@SuppressWarnings("deprecation")
-	@Override
-	public boolean needsPostProcessing(BlockState state, IBlockReader worldIn, BlockPos pos) {
 		return true;
 	}
 

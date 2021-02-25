@@ -159,17 +159,16 @@ public class BaseSignalBlock extends Block{
 		SignalMastsignMode(String name) {
 			this.name = name;
 		}
-
-		@Override
-		public String getName() {
-			return name;
-		}
 		
 		@Override
 		public String toString() {
-			return getName();
+			return name;
 		}
-		
+
+		@Override
+		public String getString() {
+			return name;
+		}
 	}
 	
 	public enum SignalMainPattern implements IStringSerializable {
@@ -185,13 +184,13 @@ public class BaseSignalBlock extends Block{
 		}
 
 		@Override
-		public String getName() {
+		public String toString() {
 			return name;
 		}
-		
+
 		@Override
-		public String toString() {
-			return getName();
+		public String getString() {
+			return name;
 		}
 		
 	}
