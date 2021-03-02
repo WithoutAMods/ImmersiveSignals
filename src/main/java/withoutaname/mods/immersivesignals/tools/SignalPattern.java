@@ -1,76 +1,76 @@
 package withoutaname.mods.immersivesignals.tools;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import withoutaname.mods.immersivesignals.modules.signal.SignalRegistration;
-import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
+import net.minecraft.nbt.CompoundNBT;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock.SignalMainPattern;
 
 public class SignalPattern {
-	
-	private int zs3vNumber;
-	
-	private SignalMainPattern mainPattern;
-	private boolean white0;
-	private boolean white1;
-	private boolean white2;
-	private boolean zs7;
-	
-	private int zs3Number;
-	
-	public static final SignalPattern DEFAULT_SIGNAL_PATTERN = new SignalPattern(0, SignalMainPattern.MODE_NONE, false, false, false, false, 0);
-	
-	public SignalPattern(int zs3vNumber,
-			SignalMainPattern mainPattern, boolean white0, boolean white1, boolean white2, boolean zs7,
-			int zs3Number) {
-		setZs3vNumber(zs3vNumber);
+
+	private SignalMainPattern mainPattern = SignalMainPattern.NONE;
+	private int zs3 = 0;
+	private int zs3v = 0;
+	private boolean shortenedBrakingDistance = false;
+	private boolean approachSignalRepeater = false;
+	private boolean zs7 = false;
+	private boolean sh1 = false;
+	private boolean zs1 = false;
+	private boolean markerLight = false;
+
+	private Runnable onChanged = () -> {};
+
+	public SignalPattern() {
+	}
+
+	public SignalPattern(Runnable onChanged) {
+		this.onChanged = onChanged;
+	}
+
+	public SignalPattern(SignalMainPattern mainPattern, int zs3, int zs3v, boolean shortenedBrakingDistance, boolean approachSignalRepeater, boolean zs7, boolean sh1, boolean zs1, boolean markerLight) {
 		setMainPattern(mainPattern);
-		setWhite0(white0);
-		setWhite1(white1);
-		setWhite2(white2);
+		setZs3(zs3);
+		setZs3v(zs3v);
+		setShortenedBrakingDistance(shortenedBrakingDistance);
+		setApproachSignalRepeater(approachSignalRepeater);
 		setZs7(zs7);
-		setZs3Number(zs3Number);
-	}
-	
-	public BlockState getZs3vBlockState(World world, BlockPos pos) {
-		if(world.getBlockState(pos).getBlock() == SignalRegistration.SIGNAL_ZS3V.get()) {
-			return world.getBlockState(pos)
-					.with(BaseSignalBlock.SIGNAL_NUMBER, zs3vNumber);
-		}
-		return null;
-	}
-	
-	public BlockState getMainBlockState(World world, BlockPos pos) {
-		if(world.getBlockState(pos).getBlock() == SignalRegistration.SIGNAL_MAIN.get()) {
-			return world.getBlockState(pos)
-					.with(BaseSignalBlock.SIGNAL_MAIN_PATTERN, mainPattern)
-					.with(BaseSignalBlock.SIGNAL_WHITE0, white0)
-					.with(BaseSignalBlock.SIGNAL_WHITE1, white1)
-					.with(BaseSignalBlock.SIGNAL_WHITE2, white2)
-					.with(BaseSignalBlock.SIGNAL_ZS7, zs7);
-		}
-		return null;
-	}
-	
-	public BlockState getZs3BlockState(World world, BlockPos pos) {
-		if(world.getBlockState(pos).getBlock() == SignalRegistration.SIGNAL_ZS3.get()) {
-			return world.getBlockState(pos)
-					.with(BaseSignalBlock.SIGNAL_NUMBER, zs3Number);
-		}
-		return null;
+		setSh1(sh1);
+		setZs1(zs1);
+		setMarkerLight(markerLight);
 	}
 
-	public int getZs3vNumber() {
-		return zs3vNumber;
+	public SignalPattern(SignalMainPattern mainPattern, int zs3, int zs3v, boolean shortenedBrakingDistance, boolean approachSignalRepeater, boolean zs7, boolean sh1, boolean zs1, boolean markerLight, Runnable onChanged) {
+		this(mainPattern, zs3, zs3v, shortenedBrakingDistance, approachSignalRepeater, zs7, sh1, zs1, markerLight);
+		this.onChanged = onChanged;
 	}
 
-	public void setZs3vNumber(int zs3vNumber) {
-		if(0 <= zs3vNumber && zs3vNumber <= 15) {
-			this.zs3vNumber = zs3vNumber;
-		} else {
-			this.zs3vNumber = 0;
-		}
+	public void setOnChanged(Runnable onChanged) {
+		this.onChanged = onChanged;
+	}
+
+	public static SignalPattern fromNBT(CompoundNBT compoundNBT) {
+		SignalPattern signalPattern = new SignalPattern();
+		signalPattern.setMainPattern(SignalMainPattern.fromString(compoundNBT.getString("main")));
+		signalPattern.setZs3(compoundNBT.getInt("zs3"));
+		signalPattern.setZs3v(compoundNBT.getInt("zs3v"));
+		signalPattern.setShortenedBrakingDistance(compoundNBT.getBoolean("shortenedBrakingDistance"));
+		signalPattern.setApproachSignalRepeater(compoundNBT.getBoolean("approachSignalRepeater"));
+		signalPattern.setZs7(compoundNBT.getBoolean("zs7"));
+		signalPattern.setSh1(compoundNBT.getBoolean("sh1"));
+		signalPattern.setZs1(compoundNBT.getBoolean("zs1"));
+		signalPattern.setMarkerLight(compoundNBT.getBoolean("markerLight"));
+		return signalPattern;
+	}
+
+	public CompoundNBT toNBT() {
+		CompoundNBT compoundNBT = new CompoundNBT();
+		compoundNBT.putString("main", mainPattern.toString());
+		compoundNBT.putInt("zs3", zs3);
+		compoundNBT.putInt("zs3v", zs3v);
+		compoundNBT.putBoolean("shortenedBrakingDistance", shortenedBrakingDistance);
+		compoundNBT.putBoolean("approachSignalRepeater", approachSignalRepeater);
+		compoundNBT.putBoolean("zs7", zs7);
+		compoundNBT.putBoolean("sh1", sh1);
+		compoundNBT.putBoolean("zs1", zs1);
+		compoundNBT.putBoolean("markerLight", markerLight);
+		return compoundNBT;
 	}
 
 	public SignalMainPattern getMainPattern() {
@@ -79,30 +79,95 @@ public class SignalPattern {
 
 	public void setMainPattern(SignalMainPattern mainPattern) {
 		this.mainPattern = mainPattern;
+		if (!isZs3Possible()) {
+			zs3 = 0;
+		}
+		if (!isZs3vPossible()) {
+			zs3v = 0;
+		}
+		if (!isShortenedBrakingDistancePossible()) {
+			shortenedBrakingDistance = false;
+		}
+		if (!isApproachSignalRepeaterPossible()) {
+			approachSignalRepeater = false;
+		}
+		if (!isZs7Possible()) {
+			zs7 = false;
+		}
+		if (!isSh1Possible()) {
+			sh1 = false;
+		}
+		if (!isZs1Possible()) {
+			zs1 = false;
+		}
+		if (!isMarkerLightPossible()) {
+			markerLight = false;
+		}
+		onChanged.run();
 	}
 
-	public boolean isWhite0() {
-		return white0;
+	public boolean isZs3Possible() {
+		return (mainPattern == SignalMainPattern.KS1 || mainPattern == SignalMainPattern.KS2) && !markerLight;
 	}
 
-	public void setWhite0(boolean white0) {
-		this.white0 = white0;
+	public int getZs3() {
+		return zs3;
 	}
 
-	public boolean isWhite1() {
-		return white1;
+	public void setZs3(int zs3) {
+		if (isZs3Possible()) {
+			this.zs3 = zs3;
+			onChanged.run();
+		}
 	}
 
-	public void setWhite1(boolean white1) {
-		this.white1 = white1;
+	public boolean isZs3vPossible() {
+		return mainPattern == SignalMainPattern.KS1 && !markerLight;
 	}
 
-	public boolean isWhite2() {
-		return white2;
+	public int getZs3v() {
+		return zs3v;
 	}
 
-	public void setWhite2(boolean white2) {
-		this.white2 = white2;
+	public void setZs3v(int zs3v) {
+		if (isZs3vPossible()) {
+			this.zs3v = zs3v;
+			onChanged.run();
+		}
+	}
+
+	public boolean isShortenedBrakingDistancePossible() {
+		return !approachSignalRepeater && ((mainPattern == SignalMainPattern.KS1 && zs3v != 0) || mainPattern == SignalMainPattern.KS2) && !markerLight;
+	}
+
+	public boolean isShortenedBrakingDistance() {
+		return shortenedBrakingDistance;
+	}
+
+	public void setShortenedBrakingDistance(boolean shortenedBrakingDistance) {
+		if (isShortenedBrakingDistancePossible()) {
+			this.shortenedBrakingDistance = shortenedBrakingDistance;
+			onChanged.run();
+		}
+	}
+
+	public boolean isApproachSignalRepeaterPossible() {
+		return !shortenedBrakingDistance && ((mainPattern == SignalMainPattern.KS1 && zs3v != 0) || mainPattern == SignalMainPattern.KS2) && !markerLight;
+	}
+
+	public boolean isApproachSignalRepeater() {
+		return approachSignalRepeater;
+	}
+
+	public void setApproachSignalRepeater(boolean approachSignalRepeater) {
+		if (isApproachSignalRepeaterPossible()) {
+			this.approachSignalRepeater = approachSignalRepeater;
+			onChanged.run();
+		}
+	}
+
+	public boolean isZs7Possible() {
+		return !sh1 && !markerLight;
 	}
 
 	public boolean isZs7() {
@@ -110,19 +175,55 @@ public class SignalPattern {
 	}
 
 	public void setZs7(boolean zs7) {
-		this.zs7 = zs7;
-	}
-
-	public int getZs3Number() {
-		return zs3Number;
-	}
-
-	public void setZs3Number(int zs3Number) {
-		if(0 <= zs3Number && zs3Number <= 15) {
-			this.zs3Number = zs3Number;
-		} else {
-			this.zs3Number = 0;
+		if (isZs7Possible()) {
+			this.zs7 = zs7;
+			onChanged.run();
 		}
 	}
-	
+
+	public boolean isSh1Possible() {
+		return mainPattern == SignalMainPattern.HP0 && !zs7 && !markerLight;
+	}
+
+	public boolean isSh1() {
+		return sh1;
+	}
+
+	public void setSh1(boolean sh1) {
+		if (isSh1Possible()) {
+			this.sh1 = sh1;
+			onChanged.run();
+		}
+	}
+
+	public boolean isZs1Possible() {
+		return true;
+	}
+
+	public boolean isZs1() {
+		return zs1;
+	}
+
+	public void setZs1(boolean zs1) {
+		if (isZs1Possible()) {
+			this.zs1 = zs1;
+			onChanged.run();
+		}
+	}
+
+	public boolean isMarkerLightPossible() {
+		return mainPattern == SignalMainPattern.NONE && zs3 == 0 && zs3v == 0
+				&& !shortenedBrakingDistance && !approachSignalRepeater && !zs7 && !sh1;
+	}
+
+	public boolean isMarkerLight() {
+		return markerLight;
+	}
+
+	public void setMarkerLight(boolean markerLight) {
+		if (isMarkerLightPossible()) {
+			this.markerLight = markerLight;
+			onChanged.run();
+		}
+	}
 }

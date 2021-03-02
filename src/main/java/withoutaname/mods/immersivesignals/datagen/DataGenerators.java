@@ -11,6 +11,7 @@ public class DataGenerators {
 	@SubscribeEvent
 	public static void gatherData(GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
+		generator.addProvider(new BlockStates(generator, event.getExistingFileHelper()));
 		generator.addProvider(new Recipes(generator));
 		generator.addProvider(new Language(generator, "en_us"));
 		generator.addProvider(new Language(generator, "de_de"));

@@ -112,7 +112,7 @@ public class BaseSignalBlock extends Block{
 			}
 			world.setBlockState(pos.add(0, mainHeight - 1, 0), SignalRegistration.SIGNAL_MAIN.get().getDefaultState()
 					.with(BlockStateProperties.HORIZONTAL_FACING, facing)
-					.with(SIGNAL_MAIN_PATTERN, SignalMainPattern.MODE_NONE)
+					.with(SIGNAL_MAIN_PATTERN, SignalMainPattern.NONE)
 					.with(SIGNAL_WHITE0, false)
 					.with(SIGNAL_WHITE1, false)
 					.with(SIGNAL_WHITE2, false)
@@ -172,15 +172,27 @@ public class BaseSignalBlock extends Block{
 	}
 	
 	public enum SignalMainPattern implements IStringSerializable {
-		MODE_NONE("none"),
-		MODE_HP0("hp0"),
-		MODE_KS1("ks1"),
-		MODE_KS2("ks2");
+		NONE("none"),
+		HP0("hp0"),
+		KS1("ks1"),
+		KS2("ks2");
 		
 		private final String name;
 
 		SignalMainPattern(String name) {
 			this.name = name;
+		}
+
+		public static SignalMainPattern fromString(String name) {
+			if ("hp0".equalsIgnoreCase(name)) {
+				return HP0;
+			} else if ("ks1".equalsIgnoreCase(name)) {
+				return KS1;
+			} else if ("ks2".equalsIgnoreCase(name)) {
+				return KS2;
+			} else {
+				return NONE;
+			}
 		}
 
 		@Override

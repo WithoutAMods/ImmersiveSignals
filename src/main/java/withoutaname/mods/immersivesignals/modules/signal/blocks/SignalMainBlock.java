@@ -14,7 +14,7 @@ public class SignalMainBlock extends BaseSignalBlock {
 		super();
 		this.setDefaultState(this.stateContainer.getBaseState()
 				.with(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH)
-				.with(SIGNAL_MAIN_PATTERN, SignalMainPattern.MODE_NONE)
+				.with(SIGNAL_MAIN_PATTERN, SignalMainPattern.NONE)
 				.with(SIGNAL_WHITE0, false)
 				.with(SIGNAL_WHITE1, false)
 				.with(SIGNAL_WHITE2, false)

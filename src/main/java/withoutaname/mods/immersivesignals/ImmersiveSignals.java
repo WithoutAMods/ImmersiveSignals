@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import withoutaname.mods.immersivesignals.modules.signal.SignalRegistration;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
+import withoutaname.mods.immersivesignals.setup.ClientSetup;
 import withoutaname.mods.immersivesignals.setup.ModSetup;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -22,6 +23,7 @@ public class ImmersiveSignals {
 
 		// Register the setup method for modloading
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(ModSetup::init);
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
 	}
 
 }

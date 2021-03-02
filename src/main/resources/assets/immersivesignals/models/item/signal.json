@@ -1,13 +1,13 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "immersivesignals:custom/signal_fundation",
+		"0": "immersivesignals:custom/signal_foundation",
 		"1": "immersivesignals:custom/signal_post",
 		"2": "immersivesignals:custom/signal_signal",
 		"3": "immersivesignals:custom/signal_main",
 		"4": "immersivesignals:custom/signal_zs3",
 		"5": "immersivesignals:custom/signal_zs3v",
-		"particle": "immersivesignals:custom/signal_fundation"
+		"particle": "immersivesignals:custom/signal_foundation"
 	},
 	"elements": [
 		{

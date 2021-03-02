@@ -9,6 +9,11 @@
           "type": "minecraft:item",
           "name": "immersivesignals:signal"
         }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
       ]
     }
   ]
