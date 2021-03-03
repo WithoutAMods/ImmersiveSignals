@@ -5,7 +5,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class BaseAdapterBlock extends Block {
@@ -23,6 +25,13 @@ public abstract class BaseAdapterBlock extends Block {
 	@Override
 	public boolean hasTileEntity(BlockState state) {
 		return true;
+	}
+
+	public void update(World worldIn, BlockPos pos) {
+		final TileEntity te = worldIn.getTileEntity(pos);
+		if (te instanceof BaseAdapterTile) {
+			((BaseAdapterTile) te).update();
+		}
 	}
 
 }

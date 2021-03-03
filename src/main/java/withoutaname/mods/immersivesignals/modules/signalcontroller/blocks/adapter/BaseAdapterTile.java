@@ -8,7 +8,7 @@ import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControl
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerTile;
 import withoutaname.mods.immersivesignals.tools.SignalPattern;
 
-public class BaseAdapterTile extends TileEntity {
+public abstract class BaseAdapterTile extends TileEntity {
 
 	public BaseAdapterTile(TileEntityType<? extends BaseAdapterTile> tileEntityType) {
 		super(tileEntityType);
@@ -36,5 +36,7 @@ public class BaseAdapterTile extends TileEntity {
 			}
 		}
 	}
+
+	public abstract void update();
 
 }

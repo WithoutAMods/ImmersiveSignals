@@ -34,6 +34,7 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 	public void setDefaultPattern(SignalPattern defaultPattern) {
 		this.defaultPattern = defaultPattern;
 		defaultPattern.setOnChanged(this::updateSignal);
+		this.updateSignal();
 	}
 
 	public boolean isOverride() {

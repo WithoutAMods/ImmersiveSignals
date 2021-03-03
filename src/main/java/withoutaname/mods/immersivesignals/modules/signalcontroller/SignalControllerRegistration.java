@@ -1,7 +1,5 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller;
 
-import static withoutaname.mods.immersivesignals.ImmersiveSignals.MODID;
-
 import net.minecraft.block.Block;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
@@ -14,13 +12,18 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.PredicateAdapterTile;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.redstone.RedstoneAdapterBlock;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.redstone.RedstoneAdapterContainer;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.redstone.RedstoneAdapterTile;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.PredicateAdapterContainer;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerContainer;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerTile;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.RedstonePredicate;
 import withoutaname.mods.immersivesignals.setup.ModSetup;
+
+import java.util.function.Supplier;
+
+import static withoutaname.mods.immersivesignals.ImmersiveSignals.MODID;
 
 public class SignalControllerRegistration {
 
@@ -47,11 +50,16 @@ public class SignalControllerRegistration {
 
 	public static final RegistryObject<RedstoneAdapterBlock> REDSTONE_ADAPTER_BLOCK = BLOCKS.register("redstone_adapter", RedstoneAdapterBlock::new);
 	public static final RegistryObject<BlockItem> REDSTONE_ADAPTER_ITEM = ITEMS.register("redstone_adapter", () -> new BlockItem(REDSTONE_ADAPTER_BLOCK.get(), ModSetup.defaultItemProperties));
-	public static final RegistryObject<TileEntityType<RedstoneAdapterTile>> REDSTONE_ADAPTER_TILE = TILES.register("redstone_adapter", () -> TileEntityType.Builder.create(RedstoneAdapterTile::new, REDSTONE_ADAPTER_BLOCK.get()).build(null));
-	public static final RegistryObject<ContainerType<RedstoneAdapterContainer>> REDSTONE_ADAPTER_CONTAINER = CONTAINERS.register("redstone_adapter", () -> IForgeContainerType.create((windowId, inv, data) -> {
+	public static final RegistryObject<TileEntityType<PredicateAdapterTile<RedstonePredicate>>> REDSTONE_ADAPTER_TILE = TILES.register("redstone_adapter", () -> TileEntityType.Builder.create(new Supplier<PredicateAdapterTile<RedstonePredicate>>() {
+		@Override
+		public PredicateAdapterTile<RedstonePredicate> get() {
+			return new PredicateAdapterTile<>(REDSTONE_ADAPTER_TILE.get(), new RedstonePredicate());
+		}
+	}, REDSTONE_ADAPTER_BLOCK.get()).build(null));
+	public static final RegistryObject<ContainerType<PredicateAdapterContainer<RedstonePredicate>>> REDSTONE_ADAPTER_CONTAINER = CONTAINERS.register("redstone_adapter", () -> IForgeContainerType.create((windowId, inv, data) -> {
 		BlockPos pos = data.readBlockPos();
 		World world = inv.player.getEntityWorld();
-		return new RedstoneAdapterContainer(windowId, world, pos);
+		return new PredicateAdapterContainer<>(windowId, world, pos);
 	}));
 
 }

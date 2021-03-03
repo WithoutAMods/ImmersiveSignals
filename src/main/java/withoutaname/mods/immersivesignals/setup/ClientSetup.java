@@ -8,8 +8,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.redstone.RedstoneAdapterScreen;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.PredicateAdapterScreen;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerScreen;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.RedstonePredicate;
 
 @Mod.EventBusSubscriber(modid = ImmersiveSignals.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientSetup {
@@ -19,7 +20,7 @@ public class ClientSetup {
 	public static void init(final FMLClientSetupEvent event) {
 		ScreenManager.registerFactory(SignalControllerRegistration.SIGNAL_CONTROLLER_CONTAINER.get(), SignalControllerScreen::new);
 
-		ScreenManager.registerFactory(SignalControllerRegistration.REDSTONE_ADAPTER_CONTAINER.get(), RedstoneAdapterScreen::new);
+		ScreenManager.registerFactory(SignalControllerRegistration.REDSTONE_ADAPTER_CONTAINER.get(), PredicateAdapterScreen<RedstonePredicate>::new);
 	}
 
 }
