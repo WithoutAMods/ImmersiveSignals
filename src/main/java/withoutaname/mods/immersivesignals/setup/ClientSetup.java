@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.PredicateAdapterScreen;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterScreen;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerScreen;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.RedstonePredicate;
 

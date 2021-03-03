@@ -1,4 +1,4 @@
-package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter;
+package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.block.BlockState;
@@ -7,6 +7,7 @@ import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.tileentity.TileEntityType;
 import org.jetbrains.annotations.NotNull;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.BaseAdapterTile;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.BasePredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.MultiPredicate;
 import withoutaname.mods.immersivesignals.tools.SignalPattern;

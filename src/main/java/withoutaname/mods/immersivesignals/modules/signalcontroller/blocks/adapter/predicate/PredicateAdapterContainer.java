@@ -1,4 +1,4 @@
-package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter;
+package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.Container;

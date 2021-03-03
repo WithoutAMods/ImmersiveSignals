@@ -1,4 +1,4 @@
-package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.redstone;
+package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.redstone;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.PredicateAdapterBlock;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.PredicateAdapterTile;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterBlock;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterTile;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.RedstonePredicate;
 
 public class RedstoneAdapterBlock extends PredicateAdapterBlock<RedstonePredicate> {

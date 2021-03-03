@@ -1,4 +1,4 @@
-package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter;
+package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;

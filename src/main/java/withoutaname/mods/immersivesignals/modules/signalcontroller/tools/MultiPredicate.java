@@ -2,7 +2,7 @@ package withoutaname.mods.immersivesignals.modules.signalcontroller.tools;
 
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.PredicateAdapterTile;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterTile;
 
 import java.util.ArrayList;
 import java.util.List;
