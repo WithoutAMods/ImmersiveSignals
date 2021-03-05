@@ -10,6 +10,8 @@ import net.minecraftforge.fml.client.gui.widget.Slider;
 import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PatternModifyPacket;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
 import withoutaname.mods.immersivesignals.tools.SignalPattern;
 
 import java.util.function.Consumer;
@@ -26,7 +28,7 @@ public class SignalPatternScreen extends Screen {
 
 	private final Screen lastScreen;
 	private final Supplier<SignalPattern> patternSupplier;
-	private final Consumer<Integer> buttonIdConsumer;
+	//private final Consumer<Integer> buttonIdConsumer;
 
 	private Button mainNoneButton;
 	private Button mainHp0Button;
@@ -41,11 +43,10 @@ public class SignalPatternScreen extends Screen {
 	private Button zs1Button;
 	private Button markerLightButton;
 
-	public SignalPatternScreen(Screen lastScreen, Supplier<SignalPattern> patternSupplier, Consumer<Integer> buttonIdConsumer) {
+	public SignalPatternScreen(Screen lastScreen, Supplier<SignalPattern> patternSupplier) {
 		super(StringTextComponent.EMPTY);
 		this.lastScreen = lastScreen;
 		this.patternSupplier = patternSupplier;
-		this.buttonIdConsumer = buttonIdConsumer;
 	}
 
 	@Override
@@ -64,33 +65,41 @@ public class SignalPatternScreen extends Screen {
 		final int split4Width = (width - 3 * 4) / 4;
 
 		mainNoneButton = addButton(new Button(i, j, split4Width, 20, new StringTextComponent("None"),
-				p_onPress_1_ -> buttonIdConsumer.accept(0)));
+				p_onPress_1_ -> sendPacket(0, 0)));
 		mainHp0Button = addButton(new Button(i + split4Width + 4, j, split4Width, 20, new StringTextComponent("Hp0"),
-				p_onPress_1_ -> buttonIdConsumer.accept((1 << 4))));
+				p_onPress_1_ -> sendPacket(0, 1)));
 		mainKs1Button = addButton(new Button(i +  2 * (split4Width + 4), j, split4Width, 20, new StringTextComponent("Ks1"),
-				p_onPress_1_ -> buttonIdConsumer.accept((2 << 4))));
+				p_onPress_1_ -> sendPacket(0, 2)));
 		mainKs2Button = addButton(new Button(i + 3 * (split4Width + 4), j, split4Width, 20, new StringTextComponent("Ks2"),
-				p_onPress_1_ -> buttonIdConsumer.accept((3 << 4))));
+				p_onPress_1_ -> sendPacket(0, 3)));
 		zs3Button = addButton(new Slider(i, j + 24, split2Width, 20, title, title,
 				0, 15, patternSupplier.get().getZs3(), false, false, p_onPress_1_ -> {},
-				slider -> buttonIdConsumer.accept(1 + (slider.getValueInt() << 4))));
+				slider -> sendPacket(1, slider.getValueInt())));
 		zs3vButton = addButton(new Slider(i + split2Width + 4, j + 24, split2Width, 20, title, title,
 				0, 15, patternSupplier.get().getZs3v(), false, false, p_onPress_1_ -> {},
-				slider -> buttonIdConsumer.accept(2 + (slider.getValueInt() << 4))));
+				slider -> sendPacket(2, slider.getValueInt())));
 		shortenedBrakingDistanceButton = addButton(new Button(i, j + 48, width, 20, title,
-				p_onPress_1_ -> buttonIdConsumer.accept(3)));
+				p_onPress_1_ -> sendPacket(3)));
 		approachSignalRepeaterButton = addButton(new Button(i, j + 72, width, 20, title,
-				p_onPress_1_ -> buttonIdConsumer.accept(4)));
+				p_onPress_1_ -> sendPacket(4)));
 		zs7Button = addButton(new Button(i, j + 96, split3Width, 20, title,
-				p_onPress_1_ -> buttonIdConsumer.accept(5)));
+				p_onPress_1_ -> sendPacket(5)));
 		sh1Button = addButton(new Button(i + split3Width + 5, j + 96, split3Width, 20, title,
-				p_onPress_1_ -> buttonIdConsumer.accept(6)));
+				p_onPress_1_ -> sendPacket(6)));
 		zs1Button = addButton(new Button(i + 2 * (split3Width + 5), j + 96, split3Width, 20, title,
-				p_onPress_1_ -> buttonIdConsumer.accept(7)));
+				p_onPress_1_ -> sendPacket(7)));
 		markerLightButton = addButton(new Button(i, j + 120, width, 20, title,
-				p_onPress_1_ -> buttonIdConsumer.accept(8)));
+				p_onPress_1_ -> sendPacket(8)));
 		
 		this.update();
+	}
+
+	private void sendPacket(int buttonID) {
+		sendPacket(buttonID, 0);
+	}
+
+	private void sendPacket(int buttonID, int value) {
+		SignalControllerNetworking.sendToServer(new PatternModifyPacket(buttonID, value));
 	}
 	
 	public void update() {

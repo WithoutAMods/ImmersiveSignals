@@ -115,7 +115,7 @@ public class SignalPattern {
 	}
 
 	public void setZs3(int zs3) {
-		if (isZs3Possible()) {
+		if (isZs3Possible() && zs3 >= 0 && zs3 <= 15) {
 			this.zs3 = zs3;
 			onChanged.run();
 		}
@@ -130,7 +130,7 @@ public class SignalPattern {
 	}
 
 	public void setZs3v(int zs3v) {
-		if (isZs3vPossible()) {
+		if (isZs3vPossible() && zs3v >= 0 && zs3v <= 15) {
 			this.zs3v = zs3v;
 			onChanged.run();
 		}

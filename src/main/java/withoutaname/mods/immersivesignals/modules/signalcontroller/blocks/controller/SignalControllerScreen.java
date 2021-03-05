@@ -33,7 +33,7 @@ public class SignalControllerScreen extends BaseScreen<SignalControllerContainer
 		assert minecraft != null;
 		assert minecraft.playerController != null;
 		overrideButton = addButton(new Button(i + 48, j + 41, 120, 20, title,
-				p_onPress_1_ -> minecraft.playerController.sendEnchantPacket(container.windowId, 10)));
+				p_onPress_1_ -> minecraft.playerController.sendEnchantPacket(container.windowId, 0)));
 
 		container.setOnOverrideChanged(this::onOverrideChanged);
 		onOverrideChanged();
@@ -41,7 +41,7 @@ public class SignalControllerScreen extends BaseScreen<SignalControllerContainer
 		addButton(new Button(i + 48, j + 41 + 24, 120, 20,
 				new StringTextComponent("Set Override Pattern"),
 				p_onPress_1_ -> {
-					final SignalPatternScreen signalSelectionScreen = new SignalPatternScreen(this, container::getOverridePattern, id -> minecraft.playerController.sendEnchantPacket(container.windowId, id));
+					final SignalPatternScreen signalSelectionScreen = new SignalPatternScreen(this, container::getOverridePattern);
 					this.minecraft.displayGuiScreen(signalSelectionScreen);
 					container.setOnOverridePatternChanged(signalSelectionScreen::update);
 				}));
