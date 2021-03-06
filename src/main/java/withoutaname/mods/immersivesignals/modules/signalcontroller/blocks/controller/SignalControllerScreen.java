@@ -17,7 +17,7 @@ public class SignalControllerScreen extends BaseScreen<SignalControllerContainer
 	private Button overrideButton;
 
 	public SignalControllerScreen(SignalControllerContainer container, PlayerInventory playerInventory, ITextComponent title) {
-		super(container, new ResourceLocation(ImmersiveSignals.MODID, "textures/gui/container/signal_controller.png"), playerInventory, title, 180, 126);
+		super(container, new ResourceLocation(ImmersiveSignals.MODID, "textures/gui/signal_template_small.png"), playerInventory, title, 180, 126);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class SignalControllerScreen extends BaseScreen<SignalControllerContainer
 		onOverrideChanged();
 
 		addButton(new Button(i + 48, j + 41 + 24, 120, 20,
-				new StringTextComponent("Set Override Pattern"),
+				new StringTextComponent("Modify Pattern"),
 				p_onPress_1_ -> {
 					final SignalPatternScreen signalSelectionScreen = new SignalPatternScreen(this, container::getOverridePattern);
 					this.minecraft.displayGuiScreen(signalSelectionScreen);

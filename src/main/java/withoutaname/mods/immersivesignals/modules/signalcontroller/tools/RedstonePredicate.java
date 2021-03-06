@@ -33,6 +33,14 @@ public class RedstonePredicate extends BasePredicate<RedstonePredicate> {
 		return power == getPowerOnSide(world, tile.getPos(), side);
 	}
 
+	public static RedstonePredicate fromInt(int i) {
+		if ((i & 0xf) != 0) {
+			return null;
+		}
+		i = i >>> 4;
+		return new RedstonePredicate(Direction.values()[i & 0xf], i >>> 4);
+	}
+
 	@Override
 	public RedstonePredicate fromNBT(INBT inbt) {
 		if (inbt instanceof CompoundNBT) {
@@ -40,6 +48,12 @@ public class RedstonePredicate extends BasePredicate<RedstonePredicate> {
 			return new RedstonePredicate(Direction.values()[nbt.getInt("side")], nbt.getInt("power"));
 		}
 		return new RedstonePredicate();
+	}
+
+	@Override
+	public int toInt() {
+		int i = side.ordinal() + (power << 4);
+		return i << 4;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
-package withoutaname.mods.immersivesignals.tools;
+package withoutaname.mods.immersivesignals.modules.signalcontroller.tools;
 
 import net.minecraft.nbt.CompoundNBT;
+import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock.SignalMainPattern;
 
 public class SignalPattern {
@@ -45,6 +46,23 @@ public class SignalPattern {
 		this.onChanged = onChanged;
 	}
 
+	public SignalPattern copy() {
+		return new SignalPattern(mainPattern, zs3, zs3v, shortenedBrakingDistance, approachSignalRepeater, zs7, sh1, zs1, markerLight);
+	}
+
+	public static SignalPattern fromInt(int i) {
+		return new SignalPattern(
+				BaseSignalBlock.SignalMainPattern.values()[(i >>> 14) & 0b11],
+				(i >>> 10) & 0b1111,
+				(i >>> 6) & 0b1111,
+				((i >>> 5) & 0b1) == 1,
+				((i >>> 4) & 0b1) == 1,
+				((i >>> 3) & 0b1) == 1,
+				((i >>> 2) & 0b1) == 1,
+				((i >>> 1) & 0b1) == 1,
+				((i) & 0b1) == 1);
+	}
+
 	public static SignalPattern fromNBT(CompoundNBT compoundNBT) {
 		SignalPattern signalPattern = new SignalPattern();
 		signalPattern.setMainPattern(SignalMainPattern.fromString(compoundNBT.getString("main")));
@@ -57,6 +75,20 @@ public class SignalPattern {
 		signalPattern.setZs1(compoundNBT.getBoolean("zs1"));
 		signalPattern.setMarkerLight(compoundNBT.getBoolean("markerLight"));
 		return signalPattern;
+	}
+
+	public int toInt() {
+		int i = 0;
+		i += (mainPattern.ordinal() & 0b11) << 14;
+		i += (zs3 & 0b1111) << 10;
+		i += (zs3v & 0b1111) << 6;
+		i += ((shortenedBrakingDistance ? 1 : 0) & 0b1) << 5;
+		i += ((approachSignalRepeater ? 1 : 0) & 0b1) << 4;
+		i += ((zs7 ? 1 : 0) & 0b1) << 3;
+		i += ((sh1 ? 1 : 0) & 0b1) << 2;
+		i += ((zs1 ? 1 : 0) & 0b1) << 1;
+		i += ((markerLight ? 1 : 0) & 0b1);
+		return i;
 	}
 
 	public CompoundNBT toNBT() {
@@ -226,4 +258,5 @@ public class SignalPattern {
 			onChanged.run();
 		}
 	}
+
 }

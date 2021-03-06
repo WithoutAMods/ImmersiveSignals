@@ -6,7 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerTile;
-import withoutaname.mods.immersivesignals.tools.SignalPattern;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
 public abstract class BaseAdapterTile extends TileEntity {
 

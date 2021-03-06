@@ -2,6 +2,7 @@ package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapt
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -11,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterBlock;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterContainer;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterTile;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.RedstonePredicate;
 
@@ -25,6 +27,11 @@ public class RedstoneAdapterBlock extends PredicateAdapterBlock<RedstonePredicat
 	@Override
 	public boolean canConnectRedstone(BlockState state, IBlockReader world, BlockPos pos, @Nullable Direction side) {
 		return true;
+	}
+
+	@Override
+	protected PredicateAdapterContainer<RedstonePredicate> createContainer(int id, World world, @NotNull BlockPos pos, PlayerEntity player) {
+		return new RedstoneAdapterContainer(id, world, pos, player);
 	}
 
 	@Override

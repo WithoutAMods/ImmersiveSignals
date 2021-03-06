@@ -12,9 +12,8 @@ import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PatternModifyPacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
-import withoutaname.mods.immersivesignals.tools.SignalPattern;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class SignalPatternScreen extends Screen {
@@ -28,7 +27,6 @@ public class SignalPatternScreen extends Screen {
 
 	private final Screen lastScreen;
 	private final Supplier<SignalPattern> patternSupplier;
-	//private final Consumer<Integer> buttonIdConsumer;
 
 	private Button mainNoneButton;
 	private Button mainHp0Button;

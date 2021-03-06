@@ -3,6 +3,7 @@ package withoutaname.mods.immersivesignals.modules.signalcontroller.network;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.BaseSignalPatternContainer;
 
 import java.util.function.Supplier;
 
@@ -40,8 +41,8 @@ public class PatternModifyPacket {
 	public boolean handle(Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
 			final Container container = ctx.get().getSender().openContainer;
-			if (container instanceof IPatternModifyHandler) {
-				((IPatternModifyHandler) container).onPatternModify(this);
+			if (container instanceof BaseSignalPatternContainer) {
+				((BaseSignalPatternContainer) container).onPatternModify(this);
 			}
 		});
 		return true;

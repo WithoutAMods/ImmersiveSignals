@@ -7,8 +7,17 @@ public abstract class BasePredicate<T extends BasePredicate<T>> {
 
 	public abstract boolean test(PredicateAdapterTile<T> tile);
 
+	public static BasePredicate<?> fromInt(int i) {
+		switch (i & 0xf) {
+			case 0:
+				return RedstonePredicate.fromInt(i);
+		}
+		return null;
+	}
+
 	public abstract T fromNBT(INBT inbt);
 
-	public abstract INBT toNBT();
+	public abstract int toInt();
 
+	public abstract INBT toNBT();
 }

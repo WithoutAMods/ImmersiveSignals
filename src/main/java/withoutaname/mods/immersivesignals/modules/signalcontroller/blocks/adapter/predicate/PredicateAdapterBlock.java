@@ -32,12 +32,14 @@ public abstract class PredicateAdapterBlock<T extends BasePredicate<T>> extends 
 				}
 				@Override
 				public Container createMenu(int i, @NotNull PlayerInventory playerInventory, @NotNull PlayerEntity playerEntity) {
-					return new PredicateAdapterContainer<T>(i, world, pos);
+					return createContainer(i, world, pos, player);
 				}
 			};
 			NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, pos);
 		}
 		return ActionResultType.SUCCESS;
 	}
+
+	protected abstract PredicateAdapterContainer<T> createContainer(int id, World world, @NotNull BlockPos pos, PlayerEntity player);
 
 }

@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import withoutaname.mods.immersivesignals.modules.signal.SignalRegistration;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
-import withoutaname.mods.immersivesignals.tools.SignalPattern;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
 public class SignalControllerTile extends TileEntity implements ITickableTileEntity {
 
@@ -32,8 +32,8 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 	}
 
 	public void setDefaultPattern(SignalPattern defaultPattern) {
-		this.defaultPattern = defaultPattern;
-		defaultPattern.setOnChanged(this::updateSignal);
+		this.defaultPattern = defaultPattern.copy();
+		this.defaultPattern.setOnChanged(this::updateSignal);
 		this.updateSignal();
 	}
 

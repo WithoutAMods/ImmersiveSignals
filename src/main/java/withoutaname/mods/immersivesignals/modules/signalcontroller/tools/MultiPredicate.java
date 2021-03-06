@@ -20,8 +20,12 @@ public class MultiPredicate<T extends BasePredicate<T>> {
 		return false;
 	}
 
-	public void addPredicate(T predicate) {
-		predicates.add(predicate);
+	public void addPredicate(BasePredicate<?> predicate) {
+		try {
+			predicates.add((T) predicate);
+		} catch (ClassCastException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public List<T> getPredicates() {

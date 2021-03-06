@@ -12,9 +12,10 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterContainer;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterTile;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.redstone.RedstoneAdapterBlock;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterContainer;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.redstone.RedstoneAdapterContainer;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerContainer;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerTile;
@@ -59,7 +60,7 @@ public class SignalControllerRegistration {
 	public static final RegistryObject<ContainerType<PredicateAdapterContainer<RedstonePredicate>>> REDSTONE_ADAPTER_CONTAINER = CONTAINERS.register("redstone_adapter", () -> IForgeContainerType.create((windowId, inv, data) -> {
 		BlockPos pos = data.readBlockPos();
 		World world = inv.player.getEntityWorld();
-		return new PredicateAdapterContainer<>(windowId, world, pos);
+		return new RedstoneAdapterContainer(windowId, world, pos, inv.player);
 	}));
 
 }

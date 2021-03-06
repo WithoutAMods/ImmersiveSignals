@@ -22,10 +22,15 @@ public class SignalControllerNetworking {
 				"1.0"::equals,
 				"1.0"::equals);
 
-		INSTANCE.messageBuilder(PatternModifyPacket.class, nextID())
+		INSTANCE.messageBuilder(PatternModifyPacket.class, nextID(), NetworkDirection.PLAY_TO_SERVER)
 				.encoder(PatternModifyPacket::toBytes)
 				.decoder(PatternModifyPacket::new)
 				.consumer(PatternModifyPacket::handle)
+				.add();
+		INSTANCE.messageBuilder(OpenMultiPredicateScreenPacket.class, nextID(), NetworkDirection.PLAY_TO_CLIENT)
+				.encoder(OpenMultiPredicateScreenPacket::toBytes)
+				.decoder(OpenMultiPredicateScreenPacket::new)
+				.consumer(OpenMultiPredicateScreenPacket::handle)
 				.add();
 	}
 

@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerTile;
-import withoutaname.mods.immersivesignals.tools.SignalPattern;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
 import java.util.function.Supplier;
 

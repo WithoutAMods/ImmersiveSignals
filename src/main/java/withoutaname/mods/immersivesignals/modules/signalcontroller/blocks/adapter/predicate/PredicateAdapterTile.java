@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.BaseAdapterTile;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.BasePredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.MultiPredicate;
-import withoutaname.mods.immersivesignals.tools.SignalPattern;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
 import java.util.ArrayList;
 import java.util.List;
