@@ -66,7 +66,7 @@ public class SignalControllerContainer extends BaseSignalPatternContainer {
 
 	@Override
 	protected SignalPattern getModifiablePattern() {
-		return overridePattern;
+		return tile.getOverridePattern();
 	}
 
 	@Override
