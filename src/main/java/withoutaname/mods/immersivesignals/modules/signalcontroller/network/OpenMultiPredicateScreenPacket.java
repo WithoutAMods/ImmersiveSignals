@@ -19,7 +19,9 @@ public class OpenMultiPredicateScreenPacket {
 
 	public OpenMultiPredicateScreenPacket(PacketBuffer packetBuffer) {
 		multiPredicate = new MultiPredicate<>();
-		multiPredicate.addPredicate(BasePredicate.fromInt(packetBuffer.readInt()));
+		while (packetBuffer.readableBytes() > 3) {
+			multiPredicate.addPredicate(BasePredicate.fromInt(packetBuffer.readInt()));
+		}
 	}
 
 	public boolean handle(Supplier<NetworkEvent.Context> ctx) {
