@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "immersivesignals:block/redstone_adapter_side",
+    "bottom": "immersivesignals:block/signal_controller_bottom",
+    "top": "immersivesignals:block/redstone_adapter_top"
+  }
+}

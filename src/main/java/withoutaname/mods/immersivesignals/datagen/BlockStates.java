@@ -21,6 +21,12 @@ public class BlockStates extends BlockStateProvider {
 				modLoc("block/signal_controller_top"));
 		simpleBlock(SignalControllerRegistration.SIGNAL_CONTROLLER_BLOCK.get(), signalControllerModel);
 		simpleBlockItem(SignalControllerRegistration.SIGNAL_CONTROLLER_BLOCK.get(), signalControllerModel);
+		BlockModelBuilder redstoneAdapterModel = models().cubeBottomTop("block/redstone_adapter",
+				modLoc("block/redstone_adapter_side"),
+				modLoc("block/signal_controller_bottom"),
+				modLoc("block/redstone_adapter_top"));
+		simpleBlock(SignalControllerRegistration.REDSTONE_ADAPTER_BLOCK.get(), redstoneAdapterModel);
+		simpleBlockItem(SignalControllerRegistration.REDSTONE_ADAPTER_BLOCK.get(), redstoneAdapterModel);
 	}
 
 }
