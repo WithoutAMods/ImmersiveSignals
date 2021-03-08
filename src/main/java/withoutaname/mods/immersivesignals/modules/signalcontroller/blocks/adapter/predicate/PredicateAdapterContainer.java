@@ -1,6 +1,5 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate;
 
-import com.electronwill.nightconfig.core.file.FileNotFoundAction;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -97,7 +96,7 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 				break;
 			case 2:
 				SignalControllerNetworking.sendToClient(
-						new OpenMultiPredicateScreenPacket(tile.predicatePatterns.get(currentPredicatePatternID).getFirst()),
+						new OpenMultiPredicateScreenPacket(tile.predicateInstance.toInt(), tile.predicatePatterns.get(currentPredicatePatternID).getFirst()),
 						(ServerPlayerEntity) player);
 				break;
 			case 3:

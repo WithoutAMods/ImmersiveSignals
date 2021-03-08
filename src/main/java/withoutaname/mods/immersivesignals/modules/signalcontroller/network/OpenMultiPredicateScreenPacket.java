@@ -11,13 +11,16 @@ import java.util.function.Supplier;
 
 public class OpenMultiPredicateScreenPacket {
 
+	private final int predicateType;
 	private final MultiPredicate<?> multiPredicate;
 
-	public OpenMultiPredicateScreenPacket(MultiPredicate<?> multiPredicate) {
+	public OpenMultiPredicateScreenPacket(int predicateType, MultiPredicate<?> multiPredicate) {
+		this.predicateType = predicateType;
 		this.multiPredicate = multiPredicate;
 	}
 
 	public OpenMultiPredicateScreenPacket(PacketBuffer packetBuffer) {
+		this.predicateType = packetBuffer.readByte();
 		multiPredicate = new MultiPredicate<>();
 		while (packetBuffer.readableBytes() > 3) {
 			multiPredicate.addPredicate(BasePredicate.fromInt(packetBuffer.readInt()));
@@ -26,12 +29,13 @@ public class OpenMultiPredicateScreenPacket {
 
 	public boolean handle(Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
-			Minecraft.getInstance().displayGuiScreen(new MultiPredicateScreen(Minecraft.getInstance().currentScreen, multiPredicate));
+			Minecraft.getInstance().displayGuiScreen(new MultiPredicateScreen(Minecraft.getInstance().currentScreen, predicateType, multiPredicate));
 		});
 		return true;
 	}
 
 	public void toBytes(PacketBuffer packetBuffer) {
+		packetBuffer.writeByte(predicateType);
 		for (BasePredicate<?> predicate : multiPredicate.getPredicates()) {
 			packetBuffer.writeInt(predicate.toInt());
 		}

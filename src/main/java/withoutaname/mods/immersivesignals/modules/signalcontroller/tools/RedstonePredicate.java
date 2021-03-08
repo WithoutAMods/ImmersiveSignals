@@ -4,12 +4,17 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.RedstoneWireBlock;
+import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterTile;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.PredicateWidget;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.RedstonePredicateWidget;
+
+import java.util.function.Consumer;
 
 public class RedstonePredicate extends BasePredicate<RedstonePredicate> {
 
@@ -64,10 +69,23 @@ public class RedstonePredicate extends BasePredicate<RedstonePredicate> {
 		return nbt;
 	}
 
+	@Override
+	public PredicateWidget createWidget(Consumer<Widget> buttonConsumer, int x, int y) {
+		return new RedstonePredicateWidget(this, buttonConsumer, x, y);
+	}
+
+	public int getPower() {
+		return power;
+	}
+
 	public void setPower(int power) {
 		if (power >= 0 && power <= 15){
 			this.power = power;
 		}
+	}
+
+	public Direction getSide() {
+		return side;
 	}
 
 	public void setSide(Direction side) {
