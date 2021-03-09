@@ -2,6 +2,7 @@ package withoutaname.mods.immersivesignals.modules.signalcontroller.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.DialogTexts;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.Widget;
@@ -41,6 +42,10 @@ public class MultiPredicateScreen extends Screen {
 		this.lastScreen = lastScreen;
 		this.predicateType = predicateType;
 		this.multiPredicate = multiPredicate;
+	}
+
+	public static void open(int predicateType, MultiPredicate<?> multiPredicate) {
+		Minecraft.getInstance().displayGuiScreen(new MultiPredicateScreen(Minecraft.getInstance().currentScreen, predicateType, multiPredicate));
 	}
 
 	@Override

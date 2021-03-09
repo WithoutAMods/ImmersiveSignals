@@ -10,6 +10,8 @@ import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterTile;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.PredicateWidget;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.RedstonePredicateWidget;
@@ -69,6 +71,7 @@ public class RedstonePredicate extends BasePredicate<RedstonePredicate> {
 		return nbt;
 	}
 
+	@OnlyIn(Dist.CLIENT)
 	@Override
 	public PredicateWidget createWidget(Consumer<Widget> buttonConsumer, int x, int y) {
 		return new RedstonePredicateWidget(this, buttonConsumer, x, y);

@@ -29,7 +29,7 @@ public class OpenMultiPredicateScreenPacket {
 
 	public boolean handle(Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
-			Minecraft.getInstance().displayGuiScreen(new MultiPredicateScreen(Minecraft.getInstance().currentScreen, predicateType, multiPredicate));
+			MultiPredicateScreen.open(predicateType, multiPredicate);
 		});
 		return true;
 	}
