@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "immersivesignals:signal"
+      "immersivesignals:redstone_adapter"
     ]
   },
   "criteria": {
-    "redstone_lamp": {
+    "signal": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:redstone"
+            "item": "immersivesignals:signal"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "immersivesignals:signal"
+        "recipe": "immersivesignals:redstone_adapter"
       }
     }
   },
   "requirements": [
     [
-      "redstone_lamp",
+      "signal",
       "has_the_recipe"
     ]
   ]

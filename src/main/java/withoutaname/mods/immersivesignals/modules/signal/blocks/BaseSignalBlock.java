@@ -6,6 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.IntegerProperty;
@@ -13,6 +14,7 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -40,15 +42,12 @@ public class BaseSignalBlock extends Block{
 				.sound(SoundType.METAL)
 				.hardnessAndResistance(1.5F, 6.0F));
 	}
-	
-	public static void registerBlocks(final RegistryEvent.Register<Block> event) {
-		event.getRegistry().register(new SignalFoundationBlock());
-		event.getRegistry().register(new SignalMainBlock());
-		event.getRegistry().register(new SignalPostBlock());
-		event.getRegistry().register(new SignalZs3Block());
-		event.getRegistry().register(new SignalZs3vBlock());
+
+	@Override
+	public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
+		return new ItemStack(SignalRegistration.SIGNAL_ITEM.get());
 	}
-	
+
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
 		return shape;

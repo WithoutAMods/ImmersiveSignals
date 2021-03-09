@@ -5,9 +5,12 @@ import net.minecraft.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signal.SignalRegistration;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
 
 public class Language extends LanguageProvider {
-	
+
+	public static final String SIGNAL_DE_DE = "Signal";
+	public static final String SIGNAL_EN_US = "Signal";
 	private final String locale;
 
 	public Language(DataGenerator gen, String locale) {
@@ -17,13 +20,15 @@ public class Language extends LanguageProvider {
 
 	@Override
 	protected void addTranslations() {
-		add(SignalRegistration.SIGNAL_FOUNDATION.get().getTranslationKey() + ".name", "Signal", "Signal");
-		add(SignalRegistration.SIGNAL_MAIN.get().getTranslationKey() + ".name", "Signal", "Signal");
-		add(SignalRegistration.SIGNAL_POST.get().getTranslationKey() + ".name", "Signal", "Signal");
-		add(SignalRegistration.SIGNAL_ZS3.get().getTranslationKey() + ".name", "Signal", "Signal");
-		add(SignalRegistration.SIGNAL_ZS3V.get().getTranslationKey() + ".name", "Signal", "Signal");
+		add(SignalRegistration.SIGNAL_FOUNDATION.get().getTranslationKey(), SIGNAL_DE_DE, SIGNAL_EN_US);
+		add(SignalRegistration.SIGNAL_MAIN.get().getTranslationKey(), SIGNAL_DE_DE, SIGNAL_EN_US);
+		add(SignalRegistration.SIGNAL_POST.get().getTranslationKey(), SIGNAL_DE_DE, SIGNAL_EN_US);
+		add(SignalRegistration.SIGNAL_ZS3.get().getTranslationKey(), SIGNAL_DE_DE, SIGNAL_EN_US);
+		add(SignalRegistration.SIGNAL_ZS3V.get().getTranslationKey(), SIGNAL_DE_DE, SIGNAL_EN_US);
+		add(SignalRegistration.SIGNAL_ITEM.get(), SIGNAL_DE_DE, SIGNAL_EN_US);
 
-		add(SignalRegistration.SIGNAL_ITEM.get(), "Signal", "Signal");
+		add(SignalControllerRegistration.SIGNAL_CONTROLLER_ITEM.get(), "Signalsteuerung", "Signal Controller");
+		add(SignalControllerRegistration.REDSTONE_ADAPTER_ITEM.get(), "Redstoneadapter", "Redstone Adapter");
 
 		add("itemGroup.immersivesignals", "Immersive Signals", "Immersive Signals");
 	}
