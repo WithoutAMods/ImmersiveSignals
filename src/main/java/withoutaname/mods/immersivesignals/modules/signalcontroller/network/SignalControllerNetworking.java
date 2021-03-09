@@ -32,6 +32,11 @@ public class SignalControllerNetworking {
 				.decoder(OpenMultiPredicateScreenPacket::new)
 				.consumer(OpenMultiPredicateScreenPacket::handle)
 				.add();
+		INSTANCE.messageBuilder(MultiPredicateModifiedPacket.class, nextID(), NetworkDirection.PLAY_TO_SERVER)
+				.encoder(MultiPredicateModifiedPacket::toBytes)
+				.decoder(MultiPredicateModifiedPacket::new)
+				.consumer(MultiPredicateModifiedPacket::handle)
+				.add();
 	}
 
 	public static void sendToClient(Object packet, ServerPlayerEntity player) {

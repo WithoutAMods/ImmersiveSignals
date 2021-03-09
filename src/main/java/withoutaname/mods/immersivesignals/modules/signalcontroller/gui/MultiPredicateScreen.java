@@ -10,6 +10,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.network.MultiPredicateModifiedPacket;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.BasePredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.MultiPredicate;
 
@@ -152,7 +154,7 @@ public class MultiPredicateScreen extends Screen {
 	}
 
 	private void saveAndClose() {
-		// TODO
+		SignalControllerNetworking.sendToServer(new MultiPredicateModifiedPacket(multiPredicate));
 		closeScreen();
 	}
 

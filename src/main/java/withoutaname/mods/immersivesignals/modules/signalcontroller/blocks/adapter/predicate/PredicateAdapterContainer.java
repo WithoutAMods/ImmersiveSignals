@@ -12,6 +12,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.BaseSignalPatternContainer;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.network.MultiPredicateModifiedPacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.OpenMultiPredicateScreenPacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PatternModifyPacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
@@ -22,7 +23,7 @@ import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalP
 public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseSignalPatternContainer {
 
 	private final PlayerEntity player;
-	private PredicateAdapterTile<?> tile;
+	private PredicateAdapterTile<T> tile;
 
 	protected int predicatePatternsSize;
 	protected int currentPredicatePatternID = 0;
@@ -36,7 +37,7 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 		this.player = player;
 		TileEntity te = world.getTileEntity(pos);
 		if (te instanceof PredicateAdapterTile) {
-			tile = (PredicateAdapterTile<?>) te;
+			tile = (PredicateAdapterTile<T>) te;
 			trackInt(new IntReferenceHolder() {
 				@Override
 				public int get() {
@@ -113,6 +114,11 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 				break;
 		}
 		return false;
+	}
+
+	public void onPredicateModified(MultiPredicateModifiedPacket multiPredicateModifiedPacket) {
+		final MultiPredicate<?> multiPredicate = multiPredicateModifiedPacket.getMultiPredicate();
+		tile.predicatePatterns.set(currentPredicatePatternID, new Pair<>((MultiPredicate<T>) multiPredicate, tile.predicatePatterns.get(currentPredicatePatternID).getSecond()));
 	}
 
 	@Override
