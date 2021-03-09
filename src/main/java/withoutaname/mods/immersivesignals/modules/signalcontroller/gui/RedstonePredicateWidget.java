@@ -81,6 +81,12 @@ public class RedstonePredicateWidget extends PredicateWidget {
 	}
 
 	@Override
+	public boolean mouseReleased(double mouseX, double mouseY, int button) {
+		powerSlider.dragging = false;
+		return super.mouseReleased(mouseX, mouseY, button);
+	}
+
+	@Override
 	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 	}
 }

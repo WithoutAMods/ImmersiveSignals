@@ -139,6 +139,16 @@ public class MultiPredicateScreen extends Screen {
 	}
 
 	@Override
+	public boolean mouseReleased(double mouseX, double mouseY, int button) {
+		if (button == 0) {
+			for (PredicateWidget widget : predicateWidgets) {
+				widget.mouseReleased(mouseX, mouseY, button);
+			}
+		}
+		return super.mouseReleased(mouseX, mouseY, button);
+	}
+
+	@Override
 	public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
 		if (keyCode == 257) {
 			saveAndClose();
