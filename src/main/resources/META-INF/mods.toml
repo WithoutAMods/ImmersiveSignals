@@ -60,6 +60,6 @@ side="BOTH"
 [[dependencies.immersivesignals]]
 modId="withoutalib"
 mandatory=true
-versionRange="[0.1.4,)"
+versionRange="[1.16.5-0.1.4,)"
 ordering="NONE"
 side="BOTH"
