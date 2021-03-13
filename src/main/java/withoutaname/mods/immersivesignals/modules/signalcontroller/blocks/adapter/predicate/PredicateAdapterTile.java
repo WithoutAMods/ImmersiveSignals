@@ -9,7 +9,6 @@ import net.minecraft.tileentity.TileEntityType;
 import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.BaseAdapterTile;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.BasePredicate;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.MultiPredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public class PredicateAdapterTile<T extends BasePredicate<T>> extends BaseAdapte
 
 	public final T predicateInstance;
 
-	protected List<Pair<MultiPredicate<T>, SignalPattern>> predicatePatterns = new ArrayList<>();
+	protected List<Pair<T, SignalPattern>> predicatePatterns = new ArrayList<>();
 
 	public PredicateAdapterTile(TileEntityType<? extends PredicateAdapterTile> tileEntityType, T predicateInstance) {
 		super(tileEntityType);
@@ -28,8 +27,8 @@ public class PredicateAdapterTile<T extends BasePredicate<T>> extends BaseAdapte
 
 	@Override
 	public void update() {
-		for (Pair<MultiPredicate<T>, SignalPattern> predicatePattern : predicatePatterns) {
-			if (predicatePattern.getFirst().test(this)) {
+		for (Pair<T, SignalPattern> predicatePattern : predicatePatterns) {
+			if (predicatePattern.getFirst().test(getWorld(), getPos())) {
 				setPattern(predicatePattern.getSecond());
 				break;
 			}
@@ -46,7 +45,7 @@ public class PredicateAdapterTile<T extends BasePredicate<T>> extends BaseAdapte
 				if (inbt instanceof CompoundNBT) {
 					final CompoundNBT compoundNBT = (CompoundNBT) inbt;
 					predicatePatterns.add(new Pair<>(
-							MultiPredicate.fromNBT(predicateInstance, compoundNBT.get("predicate")),
+							predicateInstance.fromNBT(compoundNBT.get("predicate")),
 							SignalPattern.fromNBT(compoundNBT.getCompound("pattern"))));
 				}
 			}
@@ -57,7 +56,7 @@ public class PredicateAdapterTile<T extends BasePredicate<T>> extends BaseAdapte
 	@NotNull
 	public CompoundNBT write(@NotNull CompoundNBT compound) {
 		final ListNBT predicatePatternsList = new ListNBT();
-		for (Pair<MultiPredicate<T>, SignalPattern> predicatePattern : predicatePatterns) {
+		for (Pair<T, SignalPattern> predicatePattern : predicatePatterns) {
 			final CompoundNBT predicatePatternNBT = new CompoundNBT();
 			predicatePatternNBT.put("predicate", predicatePattern.getFirst().toNBT());
 			predicatePatternNBT.put("pattern", predicatePattern.getSecond().toNBT());

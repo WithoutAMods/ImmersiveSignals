@@ -14,6 +14,7 @@ import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControl
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterContainer;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterTile;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.MultiPredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.RedstonePredicate;
 
 public class RedstoneAdapterBlock extends PredicateAdapterBlock<RedstonePredicate> {
@@ -21,7 +22,7 @@ public class RedstoneAdapterBlock extends PredicateAdapterBlock<RedstonePredicat
 	@Nullable
 	@Override
 	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new PredicateAdapterTile<>(SignalControllerRegistration.REDSTONE_ADAPTER_TILE.get(), new RedstonePredicate());
+		return new PredicateAdapterTile<>(SignalControllerRegistration.REDSTONE_ADAPTER_TILE.get(), new MultiPredicate<>(new RedstonePredicate()));
 	}
 
 	@Override

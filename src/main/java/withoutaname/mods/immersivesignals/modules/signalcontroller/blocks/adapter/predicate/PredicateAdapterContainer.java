@@ -12,18 +12,19 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.BaseSignalPatternContainer;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.network.MultiPredicateModifiedPacket;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.network.OpenMultiPredicateScreenPacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PatternModifyPacket;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PredicatePacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.BasePredicate;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.MultiPredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
 public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseSignalPatternContainer {
 
 	private final PlayerEntity player;
 	private PredicateAdapterTile<T> tile;
+
+	private int predicateID;
+	private Runnable onPredicateIDChanged = () -> {};
 
 	protected int predicatePatternsSize;
 	protected int currentPredicatePatternID = 0;
@@ -38,6 +39,17 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 		TileEntity te = world.getTileEntity(pos);
 		if (te instanceof PredicateAdapterTile) {
 			tile = (PredicateAdapterTile<T>) te;
+			trackInt(new IntReferenceHolder() {
+				@Override
+				public int get() {
+					return tile.predicateInstance.getId();
+				}
+				@Override
+				public void set(int value) {
+					predicateID = value;
+					onPredicateIDChanged.run();
+				}
+			});
 			trackInt(new IntReferenceHolder() {
 				@Override
 				public int get() {
@@ -79,6 +91,9 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 					onCurrentPatternChanged.run();
 				}
 			});
+			if (!world.isRemote) {
+				sendPredicatePacket();
+			}
 		}
 	}
 
@@ -96,11 +111,6 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 				}
 				break;
 			case 2:
-				SignalControllerNetworking.sendToClient(
-						new OpenMultiPredicateScreenPacket(tile.predicateInstance.toInt(), tile.predicatePatterns.get(currentPredicatePatternID).getFirst()),
-						(ServerPlayerEntity) player);
-				break;
-			case 3:
 				if (currentPredicatePatternID >= 0 && currentPredicatePatternID < tile.predicatePatterns.size()) {
 					tile.predicatePatterns.remove(currentPredicatePatternID);
 					if (currentPredicatePatternID >= tile.predicatePatterns.size()) {
@@ -108,22 +118,36 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 					}
 				}
 				break;
-			case 4:
-				tile.predicatePatterns.add(new Pair<>(new MultiPredicate<>(), new SignalPattern()));
+			case 3:
+				tile.predicatePatterns.add(new Pair<>((T) BasePredicate.getInstance(tile.predicateInstance.getId()), new SignalPattern()));
 				currentPredicatePatternID = tile.predicatePatterns.size() - 1;
 				break;
 		}
-		return false;
+		sendPredicatePacket();
+		return true;
 	}
 
-	public void onPredicateModified(MultiPredicateModifiedPacket multiPredicateModifiedPacket) {
-		final MultiPredicate<?> multiPredicate = multiPredicateModifiedPacket.getMultiPredicate();
-		tile.predicatePatterns.set(currentPredicatePatternID, new Pair<>((MultiPredicate<T>) multiPredicate, tile.predicatePatterns.get(currentPredicatePatternID).getSecond()));
+	private void sendPredicatePacket() {
+		if (currentPredicatePatternID >= 0 && currentPredicatePatternID < tile.predicatePatterns.size()) {
+			SignalControllerNetworking.sendToClient(new PredicatePacket(tile.predicatePatterns.get(currentPredicatePatternID).getFirst()), (ServerPlayerEntity) this.player);
+		}
+	}
+
+	public void onPredicateModified(BasePredicate<?> predicate) {
+		tile.predicatePatterns.set(currentPredicatePatternID, new Pair<>((T) predicate, tile.predicatePatterns.get(currentPredicatePatternID).getSecond()));
 	}
 
 	@Override
 	public boolean canInteractWith(@NotNull PlayerEntity playerIn) {
 		return true;
+	}
+
+	public void setOnPredicateIDChanged(Runnable onPredicateIDChanged) {
+		this.onPredicateIDChanged = onPredicateIDChanged;
+	}
+
+	public int getPredicateID() {
+		return predicateID;
 	}
 
 	@OnlyIn(Dist.CLIENT)

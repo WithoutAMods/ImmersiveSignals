@@ -18,24 +18,19 @@ public class SignalControllerNetworking {
 
 	public static void registerMessages() {
 		INSTANCE = NetworkRegistry.newSimpleChannel(new ResourceLocation(ImmersiveSignals.MODID, "immersivesignals"),
-				() -> "1.0",
-				"1.0"::equals,
-				"1.0"::equals);
+				() -> "1.1",
+				"1.1"::equals,
+				"1.1"::equals);
 
 		INSTANCE.messageBuilder(PatternModifyPacket.class, nextID(), NetworkDirection.PLAY_TO_SERVER)
 				.encoder(PatternModifyPacket::toBytes)
 				.decoder(PatternModifyPacket::new)
 				.consumer(PatternModifyPacket::handle)
 				.add();
-		INSTANCE.messageBuilder(OpenMultiPredicateScreenPacket.class, nextID(), NetworkDirection.PLAY_TO_CLIENT)
-				.encoder(OpenMultiPredicateScreenPacket::toBytes)
-				.decoder(OpenMultiPredicateScreenPacket::new)
-				.consumer(OpenMultiPredicateScreenPacket::handle)
-				.add();
-		INSTANCE.messageBuilder(MultiPredicateModifiedPacket.class, nextID(), NetworkDirection.PLAY_TO_SERVER)
-				.encoder(MultiPredicateModifiedPacket::toBytes)
-				.decoder(MultiPredicateModifiedPacket::new)
-				.consumer(MultiPredicateModifiedPacket::handle)
+		INSTANCE.messageBuilder(PredicatePacket.class, nextID())
+				.encoder(PredicatePacket::toBytes)
+				.decoder(PredicatePacket::new)
+				.consumer(PredicatePacket::handle)
 				.add();
 	}
 

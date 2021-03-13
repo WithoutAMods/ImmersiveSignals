@@ -26,7 +26,7 @@ public class RedstonePredicateWidget extends PredicateWidget {
 	private final Slider powerSlider;
 
 	public RedstonePredicateWidget(RedstonePredicate redstonePredicate, Consumer<Widget> buttonConsumer, int x, int y) {
-		super(x, y);
+		super(x, y, StringTextComponent.EMPTY);
 		this.redstonePredicate = redstonePredicate;
 		this.buttonConsumer = buttonConsumer;
 

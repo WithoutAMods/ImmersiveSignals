@@ -7,12 +7,12 @@ import net.minecraft.block.RedstoneWireBlock;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterTile;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.PredicateWidget;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.RedstonePredicateWidget;
 
@@ -34,18 +34,14 @@ public class RedstonePredicate extends BasePredicate<RedstonePredicate> {
 	}
 
 	@Override
-	public boolean test(PredicateAdapterTile<RedstonePredicate> tile) {
-		final World world = tile.getWorld();
-		assert world != null;
-		return power == getPowerOnSide(world, tile.getPos(), side);
+	public boolean test(World world, BlockPos pos) {
+		return power == getPowerOnSide(world, pos, side);
 	}
 
-	public static RedstonePredicate fromInt(int i) {
-		if ((i & 0xf) != 0) {
-			return null;
-		}
-		i = i >>> 4;
-		return new RedstonePredicate(Direction.values()[i & 0xf], i >>> 4);
+	@Override
+	public RedstonePredicate fromBytes(PacketBuffer buffer) {
+		final byte b = buffer.readByte();
+		return new RedstonePredicate(Direction.values()[b >>> 4], b & 0xf);
 	}
 
 	@Override
@@ -58,9 +54,8 @@ public class RedstonePredicate extends BasePredicate<RedstonePredicate> {
 	}
 
 	@Override
-	public int toInt() {
-		int i = side.ordinal() + (power << 4);
-		return i << 4;
+	public void toBytes(PacketBuffer buffer) {
+		buffer.writeByte((side.ordinal() << 4) + power);
 	}
 
 	@Override
@@ -69,6 +64,11 @@ public class RedstonePredicate extends BasePredicate<RedstonePredicate> {
 		nbt.putInt("side", side.ordinal());
 		nbt.putInt("power", power);
 		return nbt;
+	}
+
+	@Override
+	public int getId() {
+		return 0;
 	}
 
 	@OnlyIn(Dist.CLIENT)

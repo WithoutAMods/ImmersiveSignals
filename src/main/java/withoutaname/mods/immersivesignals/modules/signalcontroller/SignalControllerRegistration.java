@@ -19,6 +19,7 @@ import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapte
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerContainer;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerTile;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.MultiPredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.RedstonePredicate;
 import withoutaname.mods.immersivesignals.setup.ModSetup;
 
@@ -51,10 +52,10 @@ public class SignalControllerRegistration {
 
 	public static final RegistryObject<RedstoneAdapterBlock> REDSTONE_ADAPTER_BLOCK = BLOCKS.register("redstone_adapter", RedstoneAdapterBlock::new);
 	public static final RegistryObject<BlockItem> REDSTONE_ADAPTER_ITEM = ITEMS.register("redstone_adapter", () -> new BlockItem(REDSTONE_ADAPTER_BLOCK.get(), ModSetup.defaultItemProperties));
-	public static final RegistryObject<TileEntityType<PredicateAdapterTile<RedstonePredicate>>> REDSTONE_ADAPTER_TILE = TILES.register("redstone_adapter", () -> TileEntityType.Builder.create(new Supplier<PredicateAdapterTile<RedstonePredicate>>() {
+	public static final RegistryObject<TileEntityType<PredicateAdapterTile<MultiPredicate<RedstonePredicate>>>> REDSTONE_ADAPTER_TILE = TILES.register("redstone_adapter", () -> TileEntityType.Builder.create(new Supplier<PredicateAdapterTile<MultiPredicate<RedstonePredicate>>>() {
 		@Override
-		public PredicateAdapterTile<RedstonePredicate> get() {
-			return new PredicateAdapterTile<>(REDSTONE_ADAPTER_TILE.get(), new RedstonePredicate());
+		public PredicateAdapterTile<MultiPredicate<RedstonePredicate>> get() {
+			return new PredicateAdapterTile<>(REDSTONE_ADAPTER_TILE.get(), new MultiPredicate<>(new RedstonePredicate()));
 		}
 	}, REDSTONE_ADAPTER_BLOCK.get()).build(null));
 	public static final RegistryObject<ContainerType<PredicateAdapterContainer<RedstonePredicate>>> REDSTONE_ADAPTER_CONTAINER = CONTAINERS.register("redstone_adapter", () -> IForgeContainerType.create((windowId, inv, data) -> {

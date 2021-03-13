@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.network.MultiPredicateModifiedPacket;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PredicatePacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.BasePredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.MultiPredicate;
@@ -28,7 +28,6 @@ public class MultiPredicateScreen extends Screen {
 	private final int PREDICATES_PER_SIDE = 5;
 
 	private final Screen lastScreen;
-	private final int predicateType;
 	private final MultiPredicate<?> multiPredicate;
 	private final PredicateWidget[] predicateWidgets = new PredicateWidget[PREDICATES_PER_SIDE];
 	private final Button[] removeButtons = new Button[PREDICATES_PER_SIDE];
@@ -37,15 +36,14 @@ public class MultiPredicateScreen extends Screen {
 
 	private int currentPage = 0;
 
-	public MultiPredicateScreen(Screen lastScreen, int predicateType, MultiPredicate<?> multiPredicate) {
+	public MultiPredicateScreen(Screen lastScreen, MultiPredicate<?> multiPredicate) {
 		super(StringTextComponent.EMPTY);
 		this.lastScreen = lastScreen;
-		this.predicateType = predicateType;
 		this.multiPredicate = multiPredicate;
 	}
 
-	public static void open(int predicateType, MultiPredicate<?> multiPredicate) {
-		Minecraft.getInstance().displayGuiScreen(new MultiPredicateScreen(Minecraft.getInstance().currentScreen, predicateType, multiPredicate));
+	public static void open(MultiPredicate<?> multiPredicate) {
+		Minecraft.getInstance().displayGuiScreen(new MultiPredicateScreen(Minecraft.getInstance().currentScreen, multiPredicate));
 	}
 
 	@Override
@@ -72,7 +70,7 @@ public class MultiPredicateScreen extends Screen {
 
 		addButton(new Button(i + 180, j + 12, 20, 20, new StringTextComponent("+"),
 				button -> {
-					final BasePredicate<?> predicate = BasePredicate.fromInt(predicateType);
+					final BasePredicate<?> predicate = BasePredicate.getInstance(multiPredicate.getSubInstance().getId());
 					if (predicate != null) {
 						final int id = multiPredicate.getPredicates().size();
 						multiPredicate.addPredicate(predicate);
@@ -81,10 +79,13 @@ public class MultiPredicateScreen extends Screen {
 					}
 				}));
 
-		for (int k = 0; k < PREDICATES_PER_SIDE; k++) {
-			predicateWidgets[k] = BasePredicate.fromInt(predicateType).createWidget(this::addButton, i + 12, j + 40 + k * 24);
-			addButton(predicateWidgets[k]);
-			removeButtons[k] = createRemoveButton(k);
+		BasePredicate<?> instance = BasePredicate.getInstance(multiPredicate.getSubInstance().getId());
+		if (instance != null) {
+			for (int k = 0; k < PREDICATES_PER_SIDE; k++) {
+				predicateWidgets[k] = instance.createWidget(this::addButton, i + 12, j + 40 + k * 24);
+				addButton(predicateWidgets[k]);
+				removeButtons[k] = createRemoveButton(k);
+			}
 		}
 		updateWidgets();
 
@@ -169,7 +170,7 @@ public class MultiPredicateScreen extends Screen {
 	}
 
 	private void saveAndClose() {
-		SignalControllerNetworking.sendToServer(new MultiPredicateModifiedPacket(multiPredicate));
+		SignalControllerNetworking.sendToServer(new PredicatePacket(multiPredicate));
 		closeScreen();
 	}
 
