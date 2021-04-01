@@ -15,7 +15,7 @@ import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.BaseSi
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PatternModifyPacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PredicatePacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.BasePredicate;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
 public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseSignalPatternContainer {

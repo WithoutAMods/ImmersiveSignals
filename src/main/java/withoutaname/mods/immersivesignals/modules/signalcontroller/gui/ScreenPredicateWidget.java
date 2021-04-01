@@ -1,8 +1,8 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.gui;
 
 import net.minecraft.util.text.StringTextComponent;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.BasePredicate;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.ScreenPredicate;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.ScreenPredicate;
 
 public class ScreenPredicateWidget extends PredicateWidget {
 

@@ -14,8 +14,8 @@ import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControl
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterContainer;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterTile;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.MultiPredicate;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.RedstonePredicate;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.MultiPredicate;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.RedstonePredicate;
 
 public class RedstoneAdapterBlock extends PredicateAdapterBlock<RedstonePredicate> {
 

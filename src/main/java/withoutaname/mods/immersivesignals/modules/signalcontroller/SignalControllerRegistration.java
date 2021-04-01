@@ -19,8 +19,10 @@ import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapte
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerContainer;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerTile;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.MultiPredicate;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.RedstonePredicate;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.sections.SubSectionMarkerTile;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.sections.SubSectionMarkerBlock;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.MultiPredicate;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.RedstonePredicate;
 import withoutaname.mods.immersivesignals.setup.ModSetup;
 
 import java.util.function.Supplier;
@@ -64,4 +66,7 @@ public class SignalControllerRegistration {
 		return new RedstoneAdapterContainer(windowId, world, pos, inv.player);
 	}));
 
+	public static final RegistryObject<SubSectionMarkerBlock> SUB_SECTION_MARKER_BLOCK = BLOCKS.register("sub_section_marker", SubSectionMarkerBlock::new);
+	public static final RegistryObject<BlockItem> SUB_SECTION_MARKER_ITEM = ITEMS.register("sub_section_marker", () -> new BlockItem(SUB_SECTION_MARKER_BLOCK.get(), ModSetup.defaultItemProperties));
+	public static final RegistryObject<TileEntityType<SubSectionMarkerTile>> SUB_SECTION_MARKER_TILE = TILES.register("sub_section_marker", () -> TileEntityType.Builder.create(SubSectionMarkerTile::new, SUB_SECTION_MARKER_BLOCK.get()).build(null));
 }

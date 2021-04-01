@@ -12,7 +12,7 @@ import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.PredicateWidget;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.SignalDisplay;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.SignalPatternScreen;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.BasePredicate;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 import withoutaname.mods.withoutalib.blocks.BaseScreen;
 
 public class PredicateAdapterScreen extends BaseScreen<PredicateAdapterContainer<?>> {

@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.BaseAdapterBlock;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.BasePredicate;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 
 public abstract class PredicateAdapterBlock<T extends BasePredicate<T>> extends BaseAdapterBlock {
 

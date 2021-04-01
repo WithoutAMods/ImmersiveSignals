@@ -5,7 +5,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate.PredicateAdapterContainer;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.RedstonePredicate;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.RedstonePredicate;
 
 public class RedstoneAdapterContainer extends PredicateAdapterContainer<RedstonePredicate> {
 

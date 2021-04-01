@@ -1,4 +1,4 @@
-package withoutaname.mods.immersivesignals.modules.signalcontroller.tools;
+package withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates;
 
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.nbt.INBT;

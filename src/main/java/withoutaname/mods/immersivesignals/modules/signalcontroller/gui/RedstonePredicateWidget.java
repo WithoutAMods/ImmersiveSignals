@@ -6,8 +6,8 @@ import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.fml.client.gui.widget.Slider;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.BasePredicate;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.RedstonePredicate;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.RedstonePredicate;
 
 import java.util.ArrayList;
 import java.util.List;

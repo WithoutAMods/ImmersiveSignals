@@ -13,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PredicatePacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.BasePredicate;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.MultiPredicate;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.MultiPredicate;
 
 public class MultiPredicateScreen extends Screen {
 
