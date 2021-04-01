@@ -42,6 +42,7 @@ public class Line {
 
 	public static Line deserialize(INBT nbt) {
 		// TODO
+		return null;
 	}
 
 	public INBT serialize() {
