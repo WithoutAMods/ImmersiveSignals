@@ -146,11 +146,11 @@ public class SignalPatternScreen extends Screen {
 	@Override
 	public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 		this.renderBackground(matrixStack);
-		this.drawGuiContainerBackgroundLayer(matrixStack);
+		this.drawGuiBackgroundLayer(matrixStack);
 		super.render(matrixStack, mouseX, mouseY, partialTicks);
 	}
 
-	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack) {
+	protected void drawGuiBackgroundLayer(MatrixStack matrixStack) {
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		assert this.minecraft != null;
 		this.minecraft.getTextureManager().bindTexture(GUI_TEXTURE);
