@@ -5,12 +5,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
-import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerTile;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class SignalDisplay extends Widget {
@@ -32,17 +32,17 @@ public class SignalDisplay extends Widget {
 	}
 
 	@Override
-	public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 		final long time = System.currentTimeMillis() / (SignalControllerTile.BLINK_TIME * 50);
 		final SignalPattern pattern = patternSupplier.get();
 
 		if (pattern != null) {
 			if (withZs3) {
-				Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(ImmersiveSignals.MODID, "textures/custom/signal_zs3.png"));
+				Minecraft.getInstance().getTextureManager().bind(new ResourceLocation(ImmersiveSignals.MODID, "textures/custom/signal_zs3.png"));
 				blit(matrixStack, mainX + size, mainY - 9 * size, 6 * size, 8 * size, pattern.getZs3() % 4 * 32, pattern.getZs3() / 4 * 32, 24, 32, 128, 128);
 			}
 
-			Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(ImmersiveSignals.MODID, "textures/custom/signal_main.png"));
+			Minecraft.getInstance().getTextureManager().bind(new ResourceLocation(ImmersiveSignals.MODID, "textures/custom/signal_main.png"));
 			blit(matrixStack, mainX, mainY, 8 * size, 16 * size, 128, 0, 128, 256, 256, 256);
 			if (pattern.getMainPattern() == BaseSignalBlock.SignalMainPattern.HP0) {
 				blit(matrixStack, mainX + 3 * size, mainY + 3 * size, 2 * size, 2 * size, 48, 48, 32, 32, 256, 256);
@@ -67,7 +67,7 @@ public class SignalDisplay extends Widget {
 			}
 
 			if (withZs3v) {
-				Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(ImmersiveSignals.MODID, "textures/custom/signal_zs3v.png"));
+				Minecraft.getInstance().getTextureManager().bind(new ResourceLocation(ImmersiveSignals.MODID, "textures/custom/signal_zs3v.png"));
 				blit(matrixStack, mainX + size, mainY + 17 * size, 6 * size, 8 * size, pattern.getZs3v() % 4 * 32, pattern.getZs3v() / 4 * 32, 24, 32, 128, 128);
 			}
 		}

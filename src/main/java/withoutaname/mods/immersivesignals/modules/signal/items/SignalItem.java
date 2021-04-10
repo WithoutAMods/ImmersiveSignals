@@ -15,25 +15,25 @@ public class SignalItem extends Item {
 
 	public SignalItem() {
 		super(new Item.Properties()
-				.maxStackSize(64)
-				.group(ModSetup.defaultItemGroup));
+				.stacksTo(64)
+				.tab(ModSetup.defaultItemGroup));
 	}
 	
 	@Override
-	public ActionResultType onItemUse(ItemUseContext context) {
-		World world = context.getWorld();
-		if(!world.isRemote) {
-			BlockPos pos = world.getBlockState(context.getPos()).getMaterial().isReplaceable() ? context.getPos() : context.getPos().offset(context.getFace());
-			Direction facing = context.getPlacementHorizontalFacing().getOpposite();
+	public ActionResultType useOn(ItemUseContext context) {
+		World world = context.getLevel();
+		if(!world.isClientSide) {
+			BlockPos pos = world.getBlockState(context.getClickedPos()).getMaterial().isReplaceable() ? context.getClickedPos() : context.getClickedPos().relative(context.getClickedFace());
+			Direction facing = context.getHorizontalDirection().getOpposite();
 			int mainHeight = 5;
 			boolean withZS3 = true;
 			boolean withZSV = true;
 			if (BaseSignalBlock.createSignal(world, pos, facing, mainHeight, withZS3, withZSV)) {
-				context.getItem().shrink(1);
+				context.getItemInHand().shrink(1);
 				return ActionResultType.SUCCESS;
 			}
 		}
-		return super.onItemUse(context);
+		return super.useOn(context);
 	}
 
 }

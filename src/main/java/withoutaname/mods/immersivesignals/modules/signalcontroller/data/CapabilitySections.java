@@ -8,12 +8,11 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import org.jetbrains.annotations.Nullable;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.Line;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.Section;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SubSection;
 
-import javax.swing.*;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;

@@ -6,14 +6,15 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockReader;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 public class SubSectionMarkerBlock extends Block {
 
 	public SubSectionMarkerBlock() {
-		super(Properties.create(Material.IRON)
+		super(Properties.of(Material.METAL)
 				.sound(SoundType.METAL)
-				.hardnessAndResistance(1.5F, 6.0F));
+				.strength(1.5F, 6.0F));
 	}
 
 	@Override

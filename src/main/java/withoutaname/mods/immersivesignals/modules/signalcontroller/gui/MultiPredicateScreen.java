@@ -9,12 +9,13 @@ import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
-import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PredicatePacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.MultiPredicate;
+
+import javax.annotation.Nonnull;
 
 public class MultiPredicateScreen extends Screen {
 
@@ -43,7 +44,7 @@ public class MultiPredicateScreen extends Screen {
 	}
 
 	public static void open(MultiPredicate<?> multiPredicate) {
-		Minecraft.getInstance().displayGuiScreen(new MultiPredicateScreen(Minecraft.getInstance().currentScreen, multiPredicate));
+		Minecraft.getInstance().setScreen(new MultiPredicateScreen(Minecraft.getInstance().screen, multiPredicate));
 	}
 
 	@Override
@@ -90,7 +91,7 @@ public class MultiPredicateScreen extends Screen {
 		updateWidgets();
 
 		addButton(new Button(i + 12, j + 40 + PREDICATES_PER_SIDE * 24 + 4, 92, 20,
-				DialogTexts.GUI_CANCEL, (p_214186_1_) -> closeScreen()));
+				DialogTexts.GUI_CANCEL, (p_214186_1_) -> onClose()));
 		addButton(new Button(i + 12 + 96, j + 40 + PREDICATES_PER_SIDE * 24 + 4, 92, 20,
 				DialogTexts.GUI_DONE, (p_214187_1_) -> saveAndClose()));
 	}
@@ -120,10 +121,10 @@ public class MultiPredicateScreen extends Screen {
 	}
 
 	@Override
-	public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 		this.renderBackground(matrixStack);
 		this.drawGuiContainerBackgroundLayer(matrixStack);
-		Widget.drawCenteredString(matrixStack, minecraft.fontRenderer,
+		Widget.drawCenteredString(matrixStack, minecraft.font,
 				(multiPredicate.getPredicates().size() == 0 ? 0 : currentPage * PREDICATES_PER_SIDE + 1)
 						+ " - " + (currentPage < multiPredicate.getPredicates().size() / PREDICATES_PER_SIDE ? (currentPage + 1) * PREDICATES_PER_SIDE : currentPage * PREDICATES_PER_SIDE + multiPredicate.getPredicates().size() % PREDICATES_PER_SIDE)
 						+ " / " + multiPredicate.getPredicates().size(), this.guiLeft + 94, this.guiTop + 18, 16777215);
@@ -133,7 +134,7 @@ public class MultiPredicateScreen extends Screen {
 	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack) {
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		assert this.minecraft != null;
-		this.minecraft.getTextureManager().bindTexture(GUI_TEXTURE);
+		this.minecraft.getTextureManager().bind(GUI_TEXTURE);
 		int i = this.guiLeft;
 		int j = this.guiTop;
 		this.blit(matrixStack, i, j, 0, 0, this.xSize, this.ySize);
@@ -164,14 +165,14 @@ public class MultiPredicateScreen extends Screen {
 	}
 
 	@Override
-	public void closeScreen() {
+	public void onClose() {
 		assert this.minecraft != null;
-		this.minecraft.displayGuiScreen(lastScreen);
+		this.minecraft.setScreen(lastScreen);
 	}
 
 	private void saveAndClose() {
 		SignalControllerNetworking.sendToServer(new PredicatePacket(multiPredicate));
-		closeScreen();
+		onClose();
 	}
 
 }

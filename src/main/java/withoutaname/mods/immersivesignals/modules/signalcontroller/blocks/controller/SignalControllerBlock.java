@@ -19,14 +19,15 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class SignalControllerBlock extends Block {
 	public SignalControllerBlock() {
-		super(Properties.create(Material.IRON)
+		super(Properties.of(Material.METAL)
 				.sound(SoundType.METAL)
-				.hardnessAndResistance(1.5F, 6.0F));
+				.strength(1.5F, 6.0F));
 	}
 
 	@Nullable
@@ -42,16 +43,16 @@ public class SignalControllerBlock extends Block {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	@NotNull
-	public ActionResultType onBlockActivated(@NotNull BlockState state, World world, @NotNull BlockPos pos, @NotNull PlayerEntity player, @NotNull Hand hand, @NotNull BlockRayTraceResult trace) {
-		if (!world.isRemote) {
+	@Nonnull
+	public ActionResultType use(@Nonnull BlockState state, World world, @Nonnull BlockPos pos, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull BlockRayTraceResult trace) {
+		if (!world.isClientSide) {
 			INamedContainerProvider containerProvider = new INamedContainerProvider() {
 				@Override
 				public ITextComponent getDisplayName() {
 					return new TranslationTextComponent("screen.immersivesignals.signal_controller");
 				}
 				@Override
-				public Container createMenu(int i, @NotNull PlayerInventory playerInventory, @NotNull PlayerEntity playerEntity) {
+				public Container createMenu(int i, @Nonnull PlayerInventory playerInventory, @Nonnull PlayerEntity playerEntity) {
 					return new SignalControllerContainer(i, world, pos);
 				}
 			};

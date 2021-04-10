@@ -17,9 +17,9 @@ public class ClientSetup {
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	public static void init(final FMLClientSetupEvent event) {
-		ScreenManager.registerFactory(SignalControllerRegistration.SIGNAL_CONTROLLER_CONTAINER.get(), SignalControllerScreen::new);
+		ScreenManager.register(SignalControllerRegistration.SIGNAL_CONTROLLER_CONTAINER.get(), SignalControllerScreen::new);
 
-		ScreenManager.registerFactory(SignalControllerRegistration.REDSTONE_ADAPTER_CONTAINER.get(), PredicateAdapterScreen::new);
+		ScreenManager.register(SignalControllerRegistration.REDSTONE_ADAPTER_CONTAINER.get(), PredicateAdapterScreen::new);
 	}
 
 }

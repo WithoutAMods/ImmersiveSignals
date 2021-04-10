@@ -3,10 +3,11 @@ package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapt
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.Nullable;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerTile;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
+
+import javax.annotation.Nullable;
 
 public abstract class BaseAdapterTile extends TileEntity {
 
@@ -16,11 +17,11 @@ public abstract class BaseAdapterTile extends TileEntity {
 
 	@Nullable
 	public BlockPos getControllerBlockPos() {
-		assert world != null;
+		assert level != null;
 		BlockPos blockPos = null;
-		for (int i = 0; world.getBlockState(pos.up(i)).getBlock() instanceof BaseAdapterBlock; i++) {
-			if (world.getBlockState(pos.up(i + 1)).getBlock() == SignalControllerRegistration.SIGNAL_CONTROLLER_BLOCK.get()) {
-				blockPos = pos.up(i +1);
+		for (int i = 0; level.getBlockState(worldPosition.above(i)).getBlock() instanceof BaseAdapterBlock; i++) {
+			if (level.getBlockState(worldPosition.above(i + 1)).getBlock() == SignalControllerRegistration.SIGNAL_CONTROLLER_BLOCK.get()) {
+				blockPos = worldPosition.above(i +1);
 				break;
 			}
 		}
@@ -30,7 +31,7 @@ public abstract class BaseAdapterTile extends TileEntity {
 	public void setPattern(SignalPattern pattern) {
 		BlockPos blockPos = getControllerBlockPos();
 		if (blockPos != null) {
-			final TileEntity te = world.getTileEntity(blockPos);
+			final TileEntity te = level.getBlockEntity(blockPos);
 			if (te instanceof SignalControllerTile) {
 				((SignalControllerTile) te).setDefaultPattern(pattern);
 			}

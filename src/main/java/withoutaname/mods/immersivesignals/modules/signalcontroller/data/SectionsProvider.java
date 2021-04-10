@@ -5,8 +5,9 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class SectionsProvider implements ICapabilitySerializable<CompoundNBT> {
 
@@ -17,9 +18,9 @@ public class SectionsProvider implements ICapabilitySerializable<CompoundNBT> {
 		sectionsOptional.invalidate();
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
 		return sectionsOptional.cast();
 	}
 

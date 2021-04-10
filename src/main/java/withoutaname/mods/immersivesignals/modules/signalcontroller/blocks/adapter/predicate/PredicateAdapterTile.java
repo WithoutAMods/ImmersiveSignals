@@ -6,11 +6,11 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.tileentity.TileEntityType;
-import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.BaseAdapterTile;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class PredicateAdapterTile<T extends BasePredicate<T>> extends BaseAdapte
 	@Override
 	public void update() {
 		for (Pair<T, SignalPattern> predicatePattern : predicatePatterns) {
-			if (predicatePattern.getFirst().test(getWorld(), getPos())) {
+			if (predicatePattern.getFirst().test(getLevel(), getBlockPos())) {
 				setPattern(predicatePattern.getSecond());
 				break;
 			}
@@ -36,8 +36,8 @@ public class PredicateAdapterTile<T extends BasePredicate<T>> extends BaseAdapte
 	}
 
 	@Override
-	public void read(@NotNull BlockState state, @NotNull CompoundNBT nbt) {
-		super.read(state, nbt);
+	public void load(@Nonnull BlockState state, @Nonnull CompoundNBT nbt) {
+		super.load(state, nbt);
 		INBT predicatePatternsList = nbt.get("predicatePatterns");
 		if (predicatePatternsList instanceof ListNBT) {
 			predicatePatterns = new ArrayList<>();
@@ -53,8 +53,8 @@ public class PredicateAdapterTile<T extends BasePredicate<T>> extends BaseAdapte
 	}
 
 	@Override
-	@NotNull
-	public CompoundNBT write(@NotNull CompoundNBT compound) {
+	@Nonnull
+	public CompoundNBT save(@Nonnull CompoundNBT compound) {
 		final ListNBT predicatePatternsList = new ListNBT();
 		for (Pair<T, SignalPattern> predicatePattern : predicatePatterns) {
 			final CompoundNBT predicatePatternNBT = new CompoundNBT();
@@ -63,7 +63,7 @@ public class PredicateAdapterTile<T extends BasePredicate<T>> extends BaseAdapte
 			predicatePatternsList.add(predicatePatternNBT);
 		}
 		compound.put("predicatePatterns", predicatePatternsList);
-		return super.write(compound);
+		return super.save(compound);
 	}
 
 }

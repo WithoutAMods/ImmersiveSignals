@@ -12,13 +12,13 @@ public class SignalZs3vBlock extends BaseSignalBlock {
 
 	public SignalZs3vBlock() {
 		super();
-		this.setDefaultState(this.stateContainer.getBaseState()
-				.with(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH)
-				.with(SIGNAL_NUMBER, 0));
+		this.registerDefaultState(this.stateDefinition.any()
+				.setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH)
+				.setValue(SIGNAL_NUMBER, 0));
 	}
 	
 	@Override
-	protected void fillStateContainer(Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
 		builder.add(BlockStateProperties.HORIZONTAL_FACING, SIGNAL_NUMBER);
 	}
 

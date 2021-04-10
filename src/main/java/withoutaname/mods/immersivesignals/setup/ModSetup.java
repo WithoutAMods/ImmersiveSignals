@@ -16,7 +16,7 @@ public class ModSetup {
 	public static final ItemGroup defaultItemGroup = new ItemGroup("immersivesignals") {
 
 		@Override
-		public ItemStack createIcon() {
+		public ItemStack makeIcon() {
 			return new ItemStack(SignalRegistration.SIGNAL_ITEM.get());
 		}
 
@@ -29,6 +29,6 @@ public class ModSetup {
 		MinecraftForge.EVENT_BUS.addGenericListener(World.class, SectionsEventHandler::onAttachCapabilitiesEvent);
 	}
 
-	public static final Item.Properties defaultItemProperties = new Item.Properties().group(defaultItemGroup);
+	public static final Item.Properties defaultItemProperties = new Item.Properties().tab(defaultItemGroup);
 
 }

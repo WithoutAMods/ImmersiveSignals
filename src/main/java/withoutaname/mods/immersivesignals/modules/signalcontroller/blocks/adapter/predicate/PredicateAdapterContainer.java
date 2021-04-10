@@ -10,13 +10,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.BaseSignalPatternContainer;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PatternModifyPacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PredicatePacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
+
+import javax.annotation.Nonnull;
 
 public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseSignalPatternContainer {
 
@@ -36,10 +37,10 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 	public PredicateAdapterContainer(ContainerType<PredicateAdapterContainer<T>> type, int id, World world, BlockPos pos, PlayerEntity player) {
 		super(type, id);
 		this.player = player;
-		TileEntity te = world.getTileEntity(pos);
+		TileEntity te = world.getBlockEntity(pos);
 		if (te instanceof PredicateAdapterTile) {
 			tile = (PredicateAdapterTile<T>) te;
-			trackInt(new IntReferenceHolder() {
+			addDataSlot(new IntReferenceHolder() {
 				@Override
 				public int get() {
 					return tile.predicateInstance.getId();
@@ -50,7 +51,7 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 					onPredicateIDChanged.run();
 				}
 			});
-			trackInt(new IntReferenceHolder() {
+			addDataSlot(new IntReferenceHolder() {
 				@Override
 				public int get() {
 					return tile.predicatePatterns.size();
@@ -61,7 +62,7 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 					onPredicatePatternsSizeChanged.run();
 				}
 			});
-			trackInt(new IntReferenceHolder() {
+			addDataSlot(new IntReferenceHolder() {
 				@Override
 				public int get() {
 					return currentPredicatePatternID;
@@ -72,7 +73,7 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 					onCurrentPredicatePatternIDChanged.run();
 				}
 			});
-			trackInt(new IntReferenceHolder() {
+			addDataSlot(new IntReferenceHolder() {
 				@Override
 				public int get() {
 					if (tile.predicatePatterns.size() > 0){
@@ -91,14 +92,14 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 					onCurrentPatternChanged.run();
 				}
 			});
-			if (!world.isRemote) {
+			if (!world.isClientSide) {
 				sendPredicatePacket();
 			}
 		}
 	}
 
 	@Override
-	public boolean enchantItem(PlayerEntity playerIn, int id) {
+	public boolean clickMenuButton(PlayerEntity playerIn, int id) {
 		switch (id) {
 			case 0:
 				if (currentPredicatePatternID > 0) {
@@ -138,7 +139,7 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 	}
 
 	@Override
-	public boolean canInteractWith(@NotNull PlayerEntity playerIn) {
+	public boolean stillValid(@Nonnull PlayerEntity playerIn) {
 		return true;
 	}
 

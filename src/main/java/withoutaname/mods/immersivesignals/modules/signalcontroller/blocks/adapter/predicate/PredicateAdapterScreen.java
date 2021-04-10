@@ -7,13 +7,14 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.PredicateWidget;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.SignalDisplay;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.SignalPatternScreen;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 import withoutaname.mods.withoutalib.blocks.BaseScreen;
+
+import javax.annotation.Nonnull;
 
 public class PredicateAdapterScreen extends BaseScreen<PredicateAdapterContainer<?>> {
 
@@ -36,53 +37,53 @@ public class PredicateAdapterScreen extends BaseScreen<PredicateAdapterContainer
 	@Override
 	protected void init() {
 		super.init();
-		int i = this.guiLeft;
-		int j = this.guiTop;
+		int i = this.leftPos;
+		int j = this.topPos;
 
 		addButton(new SignalDisplay(i + 12, j + 39, 3, true, true,
-				container::getCurrentPattern));
+				menu::getCurrentPattern));
 
 		assert minecraft != null;
-		assert minecraft.playerController != null;
+		assert minecraft.gameMode != null;
 
 		preButton = addButton(new Button(i + 48, j + 12, 20, 20, new StringTextComponent("<"),
-				p_onPress_1_ -> minecraft.playerController.sendEnchantPacket(container.windowId, 0)));
+				p_onPress_1_ -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId, 0)));
 
 		nextButton = addButton(new Button(i + 192, j + 12, 20, 20, new StringTextComponent(">"),
-				p_onPress_1_ -> minecraft.playerController.sendEnchantPacket(container.windowId, 1)));
+				p_onPress_1_ -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId, 1)));
 
 		if (predicateWidget != null) {
 			addButton(predicateWidget);
 			updatePredicate();
 		} else {
-			container.setOnPredicateIDChanged(() -> {
-				predicateWidget = addButton(BasePredicate.getInstance(container.getPredicateID()).createWidget(this::addButton, i + 48, j + 41));
-				container.setOnPredicateIDChanged(() -> {});
+			menu.setOnPredicateIDChanged(() -> {
+				predicateWidget = addButton(BasePredicate.getInstance(menu.getPredicateID()).createWidget(this::addButton, i + 48, j + 41));
+				menu.setOnPredicateIDChanged(() -> {});
 				updatePredicate();
 			});
 		}
 
 		modifyPatternButton = addButton(new Button(i + 48, j + 41 + 24, 164, 20, new StringTextComponent("Modify Pattern"),
 				p_onPress_1_ -> {
-					final SignalPatternScreen signalSelectionScreen = new SignalPatternScreen(this, container::getCurrentPattern);
-					this.minecraft.displayGuiScreen(signalSelectionScreen);
-					container.setOnCurrentPatternChanged(signalSelectionScreen::update);
+					final SignalPatternScreen signalSelectionScreen = new SignalPatternScreen(this, menu::getCurrentPattern);
+					this.minecraft.setScreen(signalSelectionScreen);
+					menu.setOnCurrentPatternChanged(signalSelectionScreen::update);
 				}));
 
 		deleteButton = addButton(new Button(i + 48, j + 94, 20, 20, new StringTextComponent("X"),
-				p_onPress_1_ -> minecraft.playerController.sendEnchantPacket(container.windowId, 2)));
+				p_onPress_1_ -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId, 2)));
 
 		addButton(new Button(i + 192, j + 94, 20, 20, new StringTextComponent("+"),
-				p_onPress_1_ -> minecraft.playerController.sendEnchantPacket(container.windowId, 3)));
+				p_onPress_1_ -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId, 3)));
 
-		container.setOnPredicatePatternsSizeChanged(this::updatePredicatePatternIDSelection);
-		container.setOnCurrentPredicatePatternIDChanged(() -> {
-			if (container.getCurrentPredicatePatternID() == -1) {
+		menu.setOnPredicatePatternsSizeChanged(this::updatePredicatePatternIDSelection);
+		menu.setOnCurrentPredicatePatternIDChanged(() -> {
+			if (menu.getCurrentPredicatePatternID() == -1) {
 				predicateWidget.active = false;
 				modifyPatternButton.active = false;
 				deleteButton.active = false;
-				if (!(minecraft.currentScreen == this)) {
-					minecraft.displayGuiScreen(this);
+				if (!(minecraft.screen == this)) {
+					minecraft.setScreen(this);
 				}
 			} else {
 				predicateWidget.active = true;
@@ -103,8 +104,8 @@ public class PredicateAdapterScreen extends BaseScreen<PredicateAdapterContainer
 	}
 
 	private void updatePredicatePatternIDSelection() {
-		preButton.active = container.getCurrentPredicatePatternID() > 0;
-		nextButton.active = container.getCurrentPredicatePatternID() < container.getPredicatePatternsSize() - 1;
+		preButton.active = menu.getCurrentPredicatePatternID() > 0;
+		nextButton.active = menu.getCurrentPredicatePatternID() < menu.getPredicatePatternsSize() - 1;
 	}
 
 	public void setPredicate(BasePredicate<?> predicate) {
@@ -112,17 +113,17 @@ public class PredicateAdapterScreen extends BaseScreen<PredicateAdapterContainer
 	}
 
 	@Override
-	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float partialTicks, int x, int y) {
-		super.drawGuiContainerBackgroundLayer(matrixStack, partialTicks, x, y);
-		Widget.drawCenteredString(matrixStack, minecraft.fontRenderer, (container.getCurrentPredicatePatternID() + 1) + " / " + container.getPredicatePatternsSize(), this.guiLeft + 130, this.guiTop + 18, 16777215);
+	protected void renderBg(MatrixStack matrixStack, float partialTicks, int x, int y) {
+		super.renderBg(matrixStack, partialTicks, x, y);
+		Widget.drawCenteredString(matrixStack, minecraft.font, (menu.getCurrentPredicatePatternID() + 1) + " / " + menu.getPredicatePatternsSize(), this.leftPos + 130, this.topPos + 18, 16777215);
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(@NotNull MatrixStack matrixStack, int x, int y) {}
+	protected void renderLabels(@Nonnull MatrixStack matrixStack, int x, int y) {}
 
 	@Override
-	public void onClose() {
+	public void removed() {
 		nextPredicate = null;
-		super.onClose();
+		super.removed();
 	}
 }

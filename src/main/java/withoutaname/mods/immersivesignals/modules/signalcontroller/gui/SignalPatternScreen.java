@@ -7,13 +7,13 @@ import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.fml.client.gui.widget.Slider;
-import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PatternModifyPacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 public class SignalPatternScreen extends Screen {
@@ -144,7 +144,7 @@ public class SignalPatternScreen extends Screen {
 	}
 
 	@Override
-	public void render(@NotNull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 		this.renderBackground(matrixStack);
 		this.drawGuiBackgroundLayer(matrixStack);
 		super.render(matrixStack, mouseX, mouseY, partialTicks);
@@ -153,7 +153,7 @@ public class SignalPatternScreen extends Screen {
 	protected void drawGuiBackgroundLayer(MatrixStack matrixStack) {
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		assert this.minecraft != null;
-		this.minecraft.getTextureManager().bindTexture(GUI_TEXTURE);
+		this.minecraft.getTextureManager().bind(GUI_TEXTURE);
 		int i = this.guiLeft;
 		int j = this.guiTop;
 		this.blit(matrixStack, i, j, 0, 0, this.xSize, this.ySize);
@@ -165,8 +165,8 @@ public class SignalPatternScreen extends Screen {
 	}
 
 	@Override
-	public void closeScreen() {
+	public void onClose() {
 		assert this.minecraft != null;
-		this.minecraft.displayGuiScreen(lastScreen);
+		this.minecraft.setScreen(lastScreen);
 	}
 }

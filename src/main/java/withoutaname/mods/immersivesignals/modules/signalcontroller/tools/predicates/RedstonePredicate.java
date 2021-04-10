@@ -97,14 +97,14 @@ public class RedstonePredicate extends BasePredicate<RedstonePredicate> {
 
 	private int getPowerOnSide(World world, BlockPos pos, Direction side) {
 		assert world != null;
-		BlockPos blockPos = pos.offset(side);
+		BlockPos blockPos = pos.relative(side);
 		BlockState blockstate = world.getBlockState(blockPos);
 		Block block = blockstate.getBlock();
-		if (blockstate.canProvidePower()) {
+		if (blockstate.isSignalSource()) {
 			if (block == Blocks.REDSTONE_BLOCK) {
 				return 15;
 			} else {
-				return block == Blocks.REDSTONE_WIRE ? blockstate.get(RedstoneWireBlock.POWER) : world.getStrongPower(blockPos, side);
+				return block == Blocks.REDSTONE_WIRE ? blockstate.getValue(RedstoneWireBlock.POWER) : world.getDirectSignal(blockPos, side);
 			}
 		} else {
 			return 0;

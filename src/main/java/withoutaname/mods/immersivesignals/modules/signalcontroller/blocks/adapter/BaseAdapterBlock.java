@@ -6,19 +6,17 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 public abstract class BaseAdapterBlock extends Block {
 
 	public BaseAdapterBlock() {
-		super(Properties.create(Material.IRON)
+		super(Properties.of(Material.METAL)
 				.sound(SoundType.METAL)
-				.hardnessAndResistance(1.5F, 6.0F));
+				.strength(1.5F, 6.0F));
 	}
 
 	@Nullable
@@ -31,7 +29,7 @@ public abstract class BaseAdapterBlock extends Block {
 	}
 
 	public void update(World worldIn, BlockPos pos) {
-		final TileEntity te = worldIn.getTileEntity(pos);
+		final TileEntity te = worldIn.getBlockEntity(pos);
 		if (te instanceof BaseAdapterTile) {
 			((BaseAdapterTile) te).update();
 		}

@@ -7,10 +7,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.BaseSignalPatternContainer;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
+
+import javax.annotation.Nonnull;
 
 public class SignalControllerContainer extends BaseSignalPatternContainer {
 
@@ -25,10 +26,10 @@ public class SignalControllerContainer extends BaseSignalPatternContainer {
 
 	public SignalControllerContainer(int id, World world, BlockPos pos) {
 		super(SignalControllerRegistration.SIGNAL_CONTROLLER_CONTAINER.get(), id);
-		TileEntity te = world.getTileEntity(pos);
+		TileEntity te = world.getBlockEntity(pos);
 		if (te instanceof SignalControllerTile) {
 			tile = (SignalControllerTile) te;
-			trackInt(new IntReferenceHolder() {
+			addDataSlot(new IntReferenceHolder() {
 				@Override
 				public int get() {
 					return tile.getDefaultPattern().toInt();
@@ -39,7 +40,7 @@ public class SignalControllerContainer extends BaseSignalPatternContainer {
 					onDefaultPatternChanged.run();
 				}
 			});
-			trackInt(new IntReferenceHolder() {
+			addDataSlot(new IntReferenceHolder() {
 				@Override
 				public int get() {
 					return tile.isOverride() ? 1 : 0;
@@ -50,7 +51,7 @@ public class SignalControllerContainer extends BaseSignalPatternContainer {
 					onOverrideChanged.run();
 				}
 			});
-			trackInt(new IntReferenceHolder() {
+			addDataSlot(new IntReferenceHolder() {
 				@Override
 				public int get() {
 					return tile.getOverridePattern().toInt();
@@ -70,7 +71,7 @@ public class SignalControllerContainer extends BaseSignalPatternContainer {
 	}
 
 	@Override
-	public boolean enchantItem(@NotNull PlayerEntity playerIn, int id) {
+	public boolean clickMenuButton(@Nonnull PlayerEntity playerIn, int id) {
 		if (id == 0) {
 			tile.setOverride(!tile.isOverride());
 			return true;
@@ -109,7 +110,7 @@ public class SignalControllerContainer extends BaseSignalPatternContainer {
 	}
 
 	@Override
-	public boolean canInteractWith(@NotNull PlayerEntity playerIn) {
+	public boolean stillValid(@Nonnull PlayerEntity playerIn) {
 		return true;
 	}
 

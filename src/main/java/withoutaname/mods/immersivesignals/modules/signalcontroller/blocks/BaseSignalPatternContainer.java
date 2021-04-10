@@ -2,10 +2,11 @@ package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks;
 
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
-import org.jetbrains.annotations.Nullable;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PatternModifyPacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
+
+import javax.annotation.Nullable;
 
 public abstract class BaseSignalPatternContainer extends Container {
 

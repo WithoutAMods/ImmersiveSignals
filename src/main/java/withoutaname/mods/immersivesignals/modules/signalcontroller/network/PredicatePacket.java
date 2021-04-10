@@ -27,7 +27,7 @@ public class PredicatePacket {
 	public boolean handle(Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
 			if (ctx.get().getDirection() == NetworkDirection.PLAY_TO_CLIENT) {
-				Screen currentScreen = Minecraft.getInstance().currentScreen;
+				Screen currentScreen = Minecraft.getInstance().screen;
 				if (currentScreen instanceof PredicateAdapterScreen) {
 					PredicateAdapterScreen screen = (PredicateAdapterScreen) currentScreen;
 					screen.setPredicate(predicate);
@@ -36,7 +36,7 @@ public class PredicatePacket {
 				}
 
 			} else {
-				Container container = ctx.get().getSender().openContainer;
+				Container container = ctx.get().getSender().containerMenu;
 				if (container instanceof PredicateAdapterContainer) {
 					((PredicateAdapterContainer<?>) container).onPredicateModified(predicate);
 				}

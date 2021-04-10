@@ -20,11 +20,11 @@ public class Language extends LanguageProvider {
 
 	@Override
 	protected void addTranslations() {
-		add(SignalRegistration.SIGNAL_FOUNDATION.get().getTranslationKey(), SIGNAL_DE_DE, SIGNAL_EN_US);
-		add(SignalRegistration.SIGNAL_MAIN.get().getTranslationKey(), SIGNAL_DE_DE, SIGNAL_EN_US);
-		add(SignalRegistration.SIGNAL_POST.get().getTranslationKey(), SIGNAL_DE_DE, SIGNAL_EN_US);
-		add(SignalRegistration.SIGNAL_ZS3.get().getTranslationKey(), SIGNAL_DE_DE, SIGNAL_EN_US);
-		add(SignalRegistration.SIGNAL_ZS3V.get().getTranslationKey(), SIGNAL_DE_DE, SIGNAL_EN_US);
+		add(SignalRegistration.SIGNAL_FOUNDATION.get().getDescriptionId(), SIGNAL_DE_DE, SIGNAL_EN_US);
+		add(SignalRegistration.SIGNAL_MAIN.get().getDescriptionId(), SIGNAL_DE_DE, SIGNAL_EN_US);
+		add(SignalRegistration.SIGNAL_POST.get().getDescriptionId(), SIGNAL_DE_DE, SIGNAL_EN_US);
+		add(SignalRegistration.SIGNAL_ZS3.get().getDescriptionId(), SIGNAL_DE_DE, SIGNAL_EN_US);
+		add(SignalRegistration.SIGNAL_ZS3V.get().getDescriptionId(), SIGNAL_DE_DE, SIGNAL_EN_US);
 		add(SignalRegistration.SIGNAL_ITEM.get(), SIGNAL_DE_DE, SIGNAL_EN_US);
 
 		add(SignalControllerRegistration.SIGNAL_CONTROLLER_ITEM.get(), "Signalsteuerung", "Signal Controller");
@@ -45,7 +45,7 @@ public class Language extends LanguageProvider {
 	}
 
 	private void add(Item key, String de_de, String en_us) {
-		add(key.getTranslationKey(), de_de, en_us);
+		add(key.getDescriptionId(), de_de, en_us);
 	}
 
 }

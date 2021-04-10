@@ -21,7 +21,6 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.event.RegistryEvent;
 import withoutaname.mods.immersivesignals.modules.signal.SignalRegistration;
 
 public class BaseSignalBlock extends Block{
@@ -35,12 +34,12 @@ public class BaseSignalBlock extends Block{
 	public static final BooleanProperty SIGNAL_ZS7 = BooleanProperty.create("signal_zs7");
 	
 	public static final IntegerProperty SIGNAL_NUMBER = IntegerProperty.create("signal_number", 0, 15); //0: black; 1-15: x * 10 km/h
-	protected  VoxelShape shape = VoxelShapes.create(.25, 0, .25, .75, 1, .75);
+	protected  VoxelShape shape = VoxelShapes.box(.25, 0, .25, .75, 1, .75);
 
 	public BaseSignalBlock() {
-		super(Properties.create(Material.IRON)
+		super(Properties.of(Material.METAL)
 				.sound(SoundType.METAL)
-				.hardnessAndResistance(1.5F, 6.0F));
+				.strength(1.5F, 6.0F));
 	}
 
 	@Override
@@ -55,71 +54,71 @@ public class BaseSignalBlock extends Block{
 	
 	@Override
 	public void onBlockExploded(BlockState state, World world, BlockPos pos, Explosion explosion) {
-		if(!world.isRemote) {
+		if(!world.isClientSide) {
 			removeSignal(world, pos);
 		}
 		super.onBlockExploded(state, world, pos, explosion);
 	}
 	
 	@Override
-	public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-		if(!worldIn.isRemote) {
+	public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+		if(!worldIn.isClientSide) {
 			removeSignal(worldIn, pos);
 		}
-		super.onBlockHarvested(worldIn, pos, state, player);
+		super.playerWillDestroy(worldIn, pos, state, player);
 	}
 	
 	public static boolean createSignal(World world, BlockPos pos, Direction facing, int mainHeight, boolean withZS3, boolean withZS3V) {
 		boolean enoughSpace = true;
 		int height = (withZS3 ? mainHeight : mainHeight + 1);
 		for(int i = 0; i < height; i++) {
-			if(!world.getBlockState(pos.add(0, i, 0)).getMaterial().isReplaceable()) {
+			if(!world.getBlockState(pos.offset(0, i, 0)).getMaterial().isReplaceable()) {
 				enoughSpace = false;
 				break;
 			}
 		}
 		
 		if(enoughSpace) {
-			world.setBlockState(pos, SignalRegistration.SIGNAL_FOUNDATION.get().getDefaultState()
-					.with(BlockStateProperties.HORIZONTAL_FACING, facing));
+			world.setBlockAndUpdate(pos, SignalRegistration.SIGNAL_FOUNDATION.get().defaultBlockState()
+					.setValue(BlockStateProperties.HORIZONTAL_FACING, facing));
 			
 			int numberOfPosts = (withZS3V ? mainHeight - 3 : mainHeight - 2);
 			for(int i = 0; i < numberOfPosts; i++) {
 				if(i == (numberOfPosts - 1) / 2.0D) { 
-					world.setBlockState(pos.add(0, i + 1, 0), SignalRegistration.SIGNAL_POST.get().getDefaultState()
-							.with(BlockStateProperties.HORIZONTAL_FACING, facing)
-							.with(SIGNAL_MASTSIGN, SignalMastsignMode.MODE_BOTH));
+					world.setBlockAndUpdate(pos.offset(0, i + 1, 0), SignalRegistration.SIGNAL_POST.get().defaultBlockState()
+							.setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
+							.setValue(SIGNAL_MASTSIGN, SignalMastsignMode.MODE_BOTH));
 				} else if(i == (numberOfPosts - 2) / 2.0D) { 
-					world.setBlockState(pos.add(0, i + 1, 0), SignalRegistration.SIGNAL_POST.get().getDefaultState()
-							.with(BlockStateProperties.HORIZONTAL_FACING, facing)
-							.with(SIGNAL_MASTSIGN, SignalMastsignMode.MODE_Y));
+					world.setBlockAndUpdate(pos.offset(0, i + 1, 0), SignalRegistration.SIGNAL_POST.get().defaultBlockState()
+							.setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
+							.setValue(SIGNAL_MASTSIGN, SignalMastsignMode.MODE_Y));
 				} else if(i == (numberOfPosts) / 2.0D) { 
-					world.setBlockState(pos.add(0, i + 1, 0), SignalRegistration.SIGNAL_POST.get().getDefaultState()
-							.with(BlockStateProperties.HORIZONTAL_FACING, facing)
-							.with(SIGNAL_MASTSIGN, SignalMastsignMode.MODE_WRW));
+					world.setBlockAndUpdate(pos.offset(0, i + 1, 0), SignalRegistration.SIGNAL_POST.get().defaultBlockState()
+							.setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
+							.setValue(SIGNAL_MASTSIGN, SignalMastsignMode.MODE_WRW));
 				} else { 
-					world.setBlockState(pos.add(0, i + 1, 0), SignalRegistration.SIGNAL_POST.get().getDefaultState()
-							.with(BlockStateProperties.HORIZONTAL_FACING, facing)
-							.with(SIGNAL_MASTSIGN, SignalMastsignMode.MODE_NONE));
+					world.setBlockAndUpdate(pos.offset(0, i + 1, 0), SignalRegistration.SIGNAL_POST.get().defaultBlockState()
+							.setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
+							.setValue(SIGNAL_MASTSIGN, SignalMastsignMode.MODE_NONE));
 				}
 			}
 			
 			if(withZS3V) {
-				world.setBlockState(pos.add(0, mainHeight - 2, 0), SignalRegistration.SIGNAL_ZS3V.get().getDefaultState()
-						.with(BlockStateProperties.HORIZONTAL_FACING, facing)
-						.with(SIGNAL_NUMBER, 0));
+				world.setBlockAndUpdate(pos.offset(0, mainHeight - 2, 0), SignalRegistration.SIGNAL_ZS3V.get().defaultBlockState()
+						.setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
+						.setValue(SIGNAL_NUMBER, 0));
 			}
-			world.setBlockState(pos.add(0, mainHeight - 1, 0), SignalRegistration.SIGNAL_MAIN.get().getDefaultState()
-					.with(BlockStateProperties.HORIZONTAL_FACING, facing)
-					.with(SIGNAL_MAIN_PATTERN, SignalMainPattern.NONE)
-					.with(SIGNAL_WHITE0, false)
-					.with(SIGNAL_WHITE1, false)
-					.with(SIGNAL_WHITE2, false)
-					.with(SIGNAL_ZS7, false));
+			world.setBlockAndUpdate(pos.offset(0, mainHeight - 1, 0), SignalRegistration.SIGNAL_MAIN.get().defaultBlockState()
+					.setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
+					.setValue(SIGNAL_MAIN_PATTERN, SignalMainPattern.NONE)
+					.setValue(SIGNAL_WHITE0, false)
+					.setValue(SIGNAL_WHITE1, false)
+					.setValue(SIGNAL_WHITE2, false)
+					.setValue(SIGNAL_ZS7, false));
 			if(withZS3V) {
-				world.setBlockState(pos.add(0, mainHeight, 0), SignalRegistration.SIGNAL_ZS3.get().getDefaultState()
-						.with(BlockStateProperties.HORIZONTAL_FACING, facing)
-						.with(SIGNAL_NUMBER, 0));
+				world.setBlockAndUpdate(pos.offset(0, mainHeight, 0), SignalRegistration.SIGNAL_ZS3.get().defaultBlockState()
+						.setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
+						.setValue(SIGNAL_NUMBER, 0));
 			}
 		}
 		
@@ -129,20 +128,20 @@ public class BaseSignalBlock extends Block{
 	public void removeSignal(World world, BlockPos pos) {
 		if(!(world.getBlockState(pos).getBlock() == SignalRegistration.SIGNAL_FOUNDATION.get())) {
 			boolean end;
-			for(int i = 1; world.getBlockState(pos.down(i)).getBlock() instanceof BaseSignalBlock; i++) {
-				end = world.getBlockState(pos.down(i)).getBlock() == SignalRegistration.SIGNAL_FOUNDATION.get();
-				world.setBlockState(pos.down(i), Blocks.AIR.getDefaultState());
+			for(int i = 1; world.getBlockState(pos.below(i)).getBlock() instanceof BaseSignalBlock; i++) {
+				end = world.getBlockState(pos.below(i)).getBlock() == SignalRegistration.SIGNAL_FOUNDATION.get();
+				world.setBlockAndUpdate(pos.below(i), Blocks.AIR.defaultBlockState());
 				if(end) {
 					break;
 				}
 			}
 		}
-		if(!(world.getBlockState(pos.up()).getBlock() == SignalRegistration.SIGNAL_FOUNDATION.get())) {
-			for(int i = 1; world.getBlockState(pos.up(i)).getBlock() instanceof BaseSignalBlock; i++) {
-				if(world.getBlockState(pos.up(i)).getBlock() == SignalRegistration.SIGNAL_FOUNDATION.get()) {
+		if(!(world.getBlockState(pos.above()).getBlock() == SignalRegistration.SIGNAL_FOUNDATION.get())) {
+			for(int i = 1; world.getBlockState(pos.above(i)).getBlock() instanceof BaseSignalBlock; i++) {
+				if(world.getBlockState(pos.above(i)).getBlock() == SignalRegistration.SIGNAL_FOUNDATION.get()) {
 					break;
 				}
-				world.setBlockState(pos.up(i), Blocks.AIR.getDefaultState());
+				world.setBlockAndUpdate(pos.above(i), Blocks.AIR.defaultBlockState());
 			}
 		}
 	}
@@ -165,7 +164,7 @@ public class BaseSignalBlock extends Block{
 		}
 
 		@Override
-		public String getString() {
+		public String getSerializedName() {
 			return name;
 		}
 	}
@@ -200,7 +199,7 @@ public class BaseSignalBlock extends Block{
 		}
 
 		@Override
-		public String getString() {
+		public String getSerializedName() {
 			return name;
 		}
 		

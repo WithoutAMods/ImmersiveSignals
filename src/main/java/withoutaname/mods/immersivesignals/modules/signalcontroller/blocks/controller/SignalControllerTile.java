@@ -5,12 +5,13 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import withoutaname.mods.immersivesignals.modules.signal.SignalRegistration;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class SignalControllerTile extends TileEntity implements ITickableTileEntity {
 
@@ -54,35 +55,35 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 	public void tick() {
 		if (white2Blinking || ks1Blinking) {
 			if (++blinkCounter == BLINK_TIME) {
-				assert world != null;
+				assert level != null;
 				BlockPos posMain = getSignalBlockPos(SignalRegistration.SIGNAL_MAIN.get());
 				if (posMain != null) {
 					if (white2Blinking) {
-						world.setBlockState(posMain,
-								world.getBlockState(posMain)
-										.with(BaseSignalBlock.SIGNAL_WHITE2, true));
+						level.setBlockAndUpdate(posMain,
+								level.getBlockState(posMain)
+										.setValue(BaseSignalBlock.SIGNAL_WHITE2, true));
 
 					}
 					if (ks1Blinking) {
-						world.setBlockState(posMain,
-								world.getBlockState(posMain)
-										.with(BaseSignalBlock.SIGNAL_MAIN_PATTERN, BaseSignalBlock.SignalMainPattern.KS1));
+						level.setBlockAndUpdate(posMain,
+								level.getBlockState(posMain)
+										.setValue(BaseSignalBlock.SIGNAL_MAIN_PATTERN, BaseSignalBlock.SignalMainPattern.KS1));
 					}
 				}
 			} else if (blinkCounter >= BLINK_TIME * 2) {
-				assert world != null;
+				assert level != null;
 				BlockPos posMain = getSignalBlockPos(SignalRegistration.SIGNAL_MAIN.get());
 				if (posMain != null) {
 					if (white2Blinking) {
-						world.setBlockState(posMain,
-								world.getBlockState(posMain)
-										.with(BaseSignalBlock.SIGNAL_WHITE2, false));
+						level.setBlockAndUpdate(posMain,
+								level.getBlockState(posMain)
+										.setValue(BaseSignalBlock.SIGNAL_WHITE2, false));
 
 					}
 					if (ks1Blinking) {
-						world.setBlockState(posMain,
-								world.getBlockState(posMain)
-										.with(BaseSignalBlock.SIGNAL_MAIN_PATTERN, BaseSignalBlock.SignalMainPattern.NONE));
+						level.setBlockAndUpdate(posMain,
+								level.getBlockState(posMain)
+										.setValue(BaseSignalBlock.SIGNAL_MAIN_PATTERN, BaseSignalBlock.SignalMainPattern.NONE));
 					}
 				}
 				blinkCounter = 0;
@@ -91,41 +92,41 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 	}
 
 	protected void updateSignal() {
-		assert world != null;
+		assert level != null;
 		SignalPattern pattern = override ? overridePattern : defaultPattern;
 		BlockPos posZs3 = getSignalBlockPos(SignalRegistration.SIGNAL_ZS3.get());
 		BlockPos posMain = getSignalBlockPos(SignalRegistration.SIGNAL_MAIN.get());
 		BlockPos posZs3v = getSignalBlockPos(SignalRegistration.SIGNAL_ZS3V.get());
 		if (posZs3 != null) {
-			world.setBlockState(posZs3,
-					world.getBlockState(posZs3)
-							.with(BaseSignalBlock.SIGNAL_NUMBER, pattern.getZs3()));
+			level.setBlockAndUpdate(posZs3,
+					level.getBlockState(posZs3)
+							.setValue(BaseSignalBlock.SIGNAL_NUMBER, pattern.getZs3()));
 		}
 		if (posMain != null) {
 			ks1Blinking = pattern.getZs3v() != 0;
 			white2Blinking = pattern.isZs1();
-			world.setBlockState(posMain,
-					world.getBlockState(posMain)
-							.with(BaseSignalBlock.SIGNAL_MAIN_PATTERN, pattern.getZs3v() == 0 ? pattern.getMainPattern() : BaseSignalBlock.SignalMainPattern.NONE)
-							.with(BaseSignalBlock.SIGNAL_WHITE0, pattern.isShortenedBrakingDistance() || pattern.isMarkerLight())
-							.with(BaseSignalBlock.SIGNAL_WHITE1, pattern.isSh1())
-							.with(BaseSignalBlock.SIGNAL_WHITE2, pattern.isApproachSignalRepeater() || pattern.isSh1())
-							.with(BaseSignalBlock.SIGNAL_ZS7, pattern.isZs7()));
+			level.setBlockAndUpdate(posMain,
+					level.getBlockState(posMain)
+							.setValue(BaseSignalBlock.SIGNAL_MAIN_PATTERN, pattern.getZs3v() == 0 ? pattern.getMainPattern() : BaseSignalBlock.SignalMainPattern.NONE)
+							.setValue(BaseSignalBlock.SIGNAL_WHITE0, pattern.isShortenedBrakingDistance() || pattern.isMarkerLight())
+							.setValue(BaseSignalBlock.SIGNAL_WHITE1, pattern.isSh1())
+							.setValue(BaseSignalBlock.SIGNAL_WHITE2, pattern.isApproachSignalRepeater() || pattern.isSh1())
+							.setValue(BaseSignalBlock.SIGNAL_ZS7, pattern.isZs7()));
 		}
 		if (posZs3v != null) {
-			world.setBlockState(posZs3v,
-					world.getBlockState(posZs3v)
-							.with(BaseSignalBlock.SIGNAL_NUMBER, pattern.getZs3v()));
+			level.setBlockAndUpdate(posZs3v,
+					level.getBlockState(posZs3v)
+							.setValue(BaseSignalBlock.SIGNAL_NUMBER, pattern.getZs3v()));
 		}
 	}
 
 	@Nullable
 	public BlockPos getSignalBlockPos(BaseSignalBlock block) {
-		assert world != null;
+		assert level != null;
 		BlockPos blockPos = null;
-		for (int i = 1; world.getBlockState(pos.up(i)).getBlock() instanceof BaseSignalBlock && (world.getBlockState(pos.up(i)).getBlock() != SignalRegistration.SIGNAL_FOUNDATION.get() || i == 1); i++) {
-			if (world.getBlockState(pos.up(i)).getBlock() == block) {
-				blockPos = pos.up(i);
+		for (int i = 1; level.getBlockState(worldPosition.above(i)).getBlock() instanceof BaseSignalBlock && (level.getBlockState(worldPosition.above(i)).getBlock() != SignalRegistration.SIGNAL_FOUNDATION.get() || i == 1); i++) {
+			if (level.getBlockState(worldPosition.above(i)).getBlock() == block) {
+				blockPos = worldPosition.above(i);
 				break;
 			}
 		}
@@ -137,8 +138,8 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 	}
 
 	@Override
-	public void read(@NotNull BlockState state, @NotNull CompoundNBT nbt) {
-		super.read(state, nbt);
+	public void load(@Nonnull BlockState state, @Nonnull CompoundNBT nbt) {
+		super.load(state, nbt);
 		defaultPattern = SignalPattern.fromNBT(nbt.getCompound("defaultPattern"));
 		defaultPattern.setOnChanged(this::updateSignal);
 		override = nbt.getBoolean("override");
@@ -149,14 +150,14 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 	}
 
 	@Override
-	@NotNull
-	public CompoundNBT write(@NotNull CompoundNBT compound) {
+	@Nonnull
+	public CompoundNBT save(@Nonnull CompoundNBT compound) {
 		compound.put("defaultPattern", defaultPattern.toNBT());
 		compound.putBoolean("override", override);
 		compound.put("overridePattern", overridePattern.toNBT());
 		compound.putBoolean("ks1Blinking", ks1Blinking);
 		compound.putBoolean("white2Blinking", white2Blinking);
-		return super.write(compound);
+		return super.save(compound);
 	}
 
 }

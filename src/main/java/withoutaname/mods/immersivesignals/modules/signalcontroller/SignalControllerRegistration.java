@@ -45,16 +45,16 @@ public class SignalControllerRegistration {
 
 	public static final RegistryObject<SignalControllerBlock> SIGNAL_CONTROLLER_BLOCK = BLOCKS.register("signal_controller", SignalControllerBlock::new);
 	public static final RegistryObject<BlockItem> SIGNAL_CONTROLLER_ITEM = ITEMS.register("signal_controller", () -> new BlockItem(SIGNAL_CONTROLLER_BLOCK.get(), ModSetup.defaultItemProperties));
-	public static final RegistryObject<TileEntityType<SignalControllerTile>> SIGNAL_CONTROLLER_TILE = TILES.register("signal_controller", () -> TileEntityType.Builder.create(SignalControllerTile::new, SIGNAL_CONTROLLER_BLOCK.get()).build(null));
+	public static final RegistryObject<TileEntityType<SignalControllerTile>> SIGNAL_CONTROLLER_TILE = TILES.register("signal_controller", () -> TileEntityType.Builder.of(SignalControllerTile::new, SIGNAL_CONTROLLER_BLOCK.get()).build(null));
 	public static final RegistryObject<ContainerType<SignalControllerContainer>> SIGNAL_CONTROLLER_CONTAINER = CONTAINERS.register("signal_controller", () -> IForgeContainerType.create((windowId, inv, data) -> {
 		BlockPos pos = data.readBlockPos();
-		World world = inv.player.getEntityWorld();
+		World world = inv.player.getCommandSenderWorld();
 		return new SignalControllerContainer(windowId, world, pos);
 	}));
 
 	public static final RegistryObject<RedstoneAdapterBlock> REDSTONE_ADAPTER_BLOCK = BLOCKS.register("redstone_adapter", RedstoneAdapterBlock::new);
 	public static final RegistryObject<BlockItem> REDSTONE_ADAPTER_ITEM = ITEMS.register("redstone_adapter", () -> new BlockItem(REDSTONE_ADAPTER_BLOCK.get(), ModSetup.defaultItemProperties));
-	public static final RegistryObject<TileEntityType<PredicateAdapterTile<MultiPredicate<RedstonePredicate>>>> REDSTONE_ADAPTER_TILE = TILES.register("redstone_adapter", () -> TileEntityType.Builder.create(new Supplier<PredicateAdapterTile<MultiPredicate<RedstonePredicate>>>() {
+	public static final RegistryObject<TileEntityType<PredicateAdapterTile<MultiPredicate<RedstonePredicate>>>> REDSTONE_ADAPTER_TILE = TILES.register("redstone_adapter", () -> TileEntityType.Builder.of(new Supplier<PredicateAdapterTile<MultiPredicate<RedstonePredicate>>>() {
 		@Override
 		public PredicateAdapterTile<MultiPredicate<RedstonePredicate>> get() {
 			return new PredicateAdapterTile<>(REDSTONE_ADAPTER_TILE.get(), new MultiPredicate<>(new RedstonePredicate()));
@@ -62,11 +62,11 @@ public class SignalControllerRegistration {
 	}, REDSTONE_ADAPTER_BLOCK.get()).build(null));
 	public static final RegistryObject<ContainerType<PredicateAdapterContainer<RedstonePredicate>>> REDSTONE_ADAPTER_CONTAINER = CONTAINERS.register("redstone_adapter", () -> IForgeContainerType.create((windowId, inv, data) -> {
 		BlockPos pos = data.readBlockPos();
-		World world = inv.player.getEntityWorld();
+		World world = inv.player.getCommandSenderWorld();
 		return new RedstoneAdapterContainer(windowId, world, pos, inv.player);
 	}));
 
 	public static final RegistryObject<SubSectionMarkerBlock> SUB_SECTION_MARKER_BLOCK = BLOCKS.register("sub_section_marker", SubSectionMarkerBlock::new);
 	public static final RegistryObject<BlockItem> SUB_SECTION_MARKER_ITEM = ITEMS.register("sub_section_marker", () -> new BlockItem(SUB_SECTION_MARKER_BLOCK.get(), ModSetup.defaultItemProperties));
-	public static final RegistryObject<TileEntityType<SubSectionMarkerTile>> SUB_SECTION_MARKER_TILE = TILES.register("sub_section_marker", () -> TileEntityType.Builder.create(SubSectionMarkerTile::new, SUB_SECTION_MARKER_BLOCK.get()).build(null));
+	public static final RegistryObject<TileEntityType<SubSectionMarkerTile>> SUB_SECTION_MARKER_TILE = TILES.register("sub_section_marker", () -> TileEntityType.Builder.of(SubSectionMarkerTile::new, SUB_SECTION_MARKER_BLOCK.get()).build(null));
 }

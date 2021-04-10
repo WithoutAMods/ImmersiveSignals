@@ -6,11 +6,12 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import org.jetbrains.annotations.NotNull;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.SignalDisplay;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.SignalPatternScreen;
 import withoutaname.mods.withoutalib.blocks.BaseScreen;
+
+import javax.annotation.Nonnull;
 
 public class SignalControllerScreen extends BaseScreen<SignalControllerContainer> {
 
@@ -23,35 +24,35 @@ public class SignalControllerScreen extends BaseScreen<SignalControllerContainer
 	@Override
 	protected void init() {
 		super.init();
-		int i = this.guiLeft;
-		int j = this.guiTop;
+		int i = this.leftPos;
+		int j = this.topPos;
 		final StringTextComponent title = new StringTextComponent("");
 
 		addButton(new SignalDisplay(i + 12, j + 39, 3, true, true,
-				() -> container.isOverride() ? container.getOverridePattern() : container.getDefaultPattern()));
+				() -> menu.isOverride() ? menu.getOverridePattern() : menu.getDefaultPattern()));
 
 		assert minecraft != null;
-		assert minecraft.playerController != null;
+		assert minecraft.gameMode != null;
 		overrideButton = addButton(new Button(i + 48, j + 41, 164, 20, title,
-				p_onPress_1_ -> minecraft.playerController.sendEnchantPacket(container.windowId, 0)));
+				p_onPress_1_ -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId, 0)));
 
-		container.setOnOverrideChanged(this::onOverrideChanged);
+		menu.setOnOverrideChanged(this::onOverrideChanged);
 		onOverrideChanged();
 
 		addButton(new Button(i + 48, j + 41 + 24, 164, 20,
 				new StringTextComponent("Modify Pattern"),
 				p_onPress_1_ -> {
-					final SignalPatternScreen signalSelectionScreen = new SignalPatternScreen(this, container::getOverridePattern);
-					this.minecraft.displayGuiScreen(signalSelectionScreen);
-					container.setOnOverridePatternChanged(signalSelectionScreen::update);
+					final SignalPatternScreen signalSelectionScreen = new SignalPatternScreen(this, menu::getOverridePattern);
+					this.minecraft.setScreen(signalSelectionScreen);
+					menu.setOnOverridePatternChanged(signalSelectionScreen::update);
 				}));
 	}
 
 	private void onOverrideChanged() {
-		overrideButton.setMessage(new StringTextComponent("Override Pattern: " + (container.isOverride() ? "Yes" : "No")));
+		overrideButton.setMessage(new StringTextComponent("Override Pattern: " + (menu.isOverride() ? "Yes" : "No")));
 	}
 
 	@Override
-	protected void drawGuiContainerForegroundLayer(@NotNull MatrixStack matrixStack, int x, int y) {}
+	protected void renderLabels(@Nonnull MatrixStack matrixStack, int x, int y) {}
 
 }

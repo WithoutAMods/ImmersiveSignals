@@ -40,7 +40,7 @@ public class PatternModifyPacket {
 
 	public boolean handle(Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
-			final Container container = ctx.get().getSender().openContainer;
+			final Container container = ctx.get().getSender().containerMenu;
 			if (container instanceof BaseSignalPatternContainer) {
 				((BaseSignalPatternContainer) container).onPatternModify(this);
 			}

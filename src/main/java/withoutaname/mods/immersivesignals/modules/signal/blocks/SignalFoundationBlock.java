@@ -12,12 +12,12 @@ public class SignalFoundationBlock extends BaseSignalBlock {
 
 	public SignalFoundationBlock() {
 		super();
-		this.setDefaultState(this.stateContainer.getBaseState()
-				.with(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH));
+		this.registerDefaultState(this.stateDefinition.any()
+				.setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH));
 	}
 	
 	@Override
-	protected void fillStateContainer(Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
 		builder.add(BlockStateProperties.HORIZONTAL_FACING);
 	}
 
