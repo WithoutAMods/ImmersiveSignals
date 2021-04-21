@@ -5,13 +5,13 @@ import net.minecraft.block.BlockState;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
-
-import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock.SignalMainPattern;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 
 public class SignalMainBlock extends BaseSignalBlock {
-
+	
 	public static final String REGISTRY_NAME = "signal_main";
-
+	
 	public SignalMainBlock() {
 		super();
 		this.registerDefaultState(this.stateDefinition.any()
@@ -27,5 +27,11 @@ public class SignalMainBlock extends BaseSignalBlock {
 	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
 		builder.add(BlockStateProperties.HORIZONTAL_FACING, SIGNAL_MAIN_PATTERN, SIGNAL_WHITE0, SIGNAL_WHITE1, SIGNAL_WHITE2, SIGNAL_ZS7);
 	}
-
+	
+	@Override
+	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+		return state.getValue(SIGNAL_MAIN_PATTERN) != SignalMainPattern.NONE || state.getValue(SIGNAL_WHITE0)
+				|| state.getValue(SIGNAL_WHITE1) || state.getValue(SIGNAL_WHITE2) || state.getValue(SIGNAL_ZS7) ? 10 : 0;
+	}
+	
 }
