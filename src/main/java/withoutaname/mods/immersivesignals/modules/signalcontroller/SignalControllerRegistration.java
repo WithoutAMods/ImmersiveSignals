@@ -19,8 +19,6 @@ import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapte
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerContainer;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerTile;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.sections.SubSectionMarkerTile;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.sections.SubSectionMarkerBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.MultiPredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.RedstonePredicate;
 import withoutaname.mods.immersivesignals.setup.ModSetup;
