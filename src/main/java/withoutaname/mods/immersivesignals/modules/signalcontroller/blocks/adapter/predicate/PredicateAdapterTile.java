@@ -7,8 +7,8 @@ import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.tileentity.TileEntityType;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.BaseAdapterTile;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

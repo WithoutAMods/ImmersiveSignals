@@ -2,6 +2,7 @@ package withoutaname.mods.immersivesignals.modules.signalcontroller.gui;
 
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.util.text.ITextComponent;
+
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 
 public class PredicateWidget extends Widget {
