@@ -21,6 +21,9 @@ repositories {
         name 'tterrag maven'
         url "https://maven.tterrag.com/"
     }
+    maven { // WithoutALib
+        url "https://mineplay.link/maven/"
+    }
 }
 
 version = "${immersivesignals_version}"
@@ -81,16 +84,12 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
 
-    compile fg.deobf(project.dependencies.create("mcjty.theoneprobe:TheOneProbe-${top_version}") {
-        transitive = false
-    })
+    compile fg.deobf("mcjty.theoneprobe:TheOneProbe-${top_version}")
 
     if (findProject(':WithoutALib') != null) {
         compile project(':WithoutALib')
     } else {
-        compile fg.deobf (project.dependencies.create("withoutaname.mods.withoutalib:withoutalib:${withoutalib_version}") {
-            transitive = false
-        })
+        compile fg.deobf("withoutaname.mods.withoutalib:WithoutALib:${withoutalib_version}")
     }
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
@@ -117,13 +116,10 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "examplemod",
-            "Specification-Vendor": "examplemodsareus",
-            "Specification-Version": "1", // We are version 1 of ourselves
-            "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"examplemodsareus",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Specification-Version": "1", // We are version 1 of ourselves
+                "Implementation-Title": project.name,
+                "Implementation-Version": "${version}",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
@@ -137,15 +133,26 @@ def reobfArtifact = artifacts.add('default', reobfFile) {
     type 'jar'
     builtBy 'reobfJar'
 }
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact reobfArtifact
+            pom {
+                name = "${group}:${archivesBaseName}"
+                url = 'https://github.com/WithoutAMods/ImmersiveSignals'
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+            }
         }
     }
     repositories {
-        maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+        mavenLocal {
+            url "file:///${project.projectDir}/../mcmodsrepo"
         }
     }
 }
