@@ -124,6 +124,11 @@ jar {
     }
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 // Example configuration to allow publishing using the maven-publish task
 // we define a custom artifact that is sourced from the reobfJar output task
 // and then declare that to be published
@@ -134,10 +139,24 @@ def reobfArtifact = artifacts.add('default', reobfFile) {
     builtBy 'reobfJar'
 }
 
+def sourcesFile = file("$buildDir/libs/$archivesBaseName-$version-sources.jar")
+def sourcesArtifact = artifacts.add('default', sourcesFile) {
+    type 'jar'
+    builtBy 'sourcesJar'
+}
+
+def javadocFile = file("$buildDir/libs/$archivesBaseName-$version-javadoc.jar")
+def javadocArtifact = artifacts.add('default', javadocFile) {
+    type 'jar'
+    builtBy 'javadocJar'
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact reobfArtifact
+            artifact sourcesArtifact
+            artifact javadocArtifact
             pom {
                 name = "${group}:${archivesBaseName}"
                 url = 'https://github.com/WithoutAMods/ImmersiveSignals'
