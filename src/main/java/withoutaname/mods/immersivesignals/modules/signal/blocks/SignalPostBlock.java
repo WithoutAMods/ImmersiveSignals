@@ -6,12 +6,10 @@ import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 
-import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock.SignalMastsignMode;
-
 public class SignalPostBlock extends BaseSignalBlock {
-
+	
 	public static final String REGISTRY_NAME = "signal_post";
-
+	
 	public SignalPostBlock() {
 		super();
 		this.registerDefaultState(this.stateDefinition.any()
@@ -23,5 +21,5 @@ public class SignalPostBlock extends BaseSignalBlock {
 	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
 		builder.add(BlockStateProperties.HORIZONTAL_FACING, SIGNAL_MASTSIGN);
 	}
-
+	
 }

@@ -1,25 +1,26 @@
 package withoutaname.mods.immersivesignals.datagen;
 
+import java.util.function.Consumer;
+import javax.annotation.Nonnull;
+
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
-import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.item.Items;
+
 import withoutaname.mods.immersivesignals.modules.signal.SignalRegistration;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
 
-import java.util.function.Consumer;
-
-public class Recipes extends RecipeProvider{
-
+public class Recipes extends RecipeProvider {
+	
 	public Recipes(DataGenerator generatorIn) {
 		super(generatorIn);
 	}
 	
 	@Override
-	protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
+	protected void buildShapelessRecipes(@Nonnull Consumer<IFinishedRecipe> consumer) {
 		ShapedRecipeBuilder.shaped(SignalRegistration.SIGNAL_ITEM.get())
 				.pattern("RLR")
 				.pattern(" I ")
@@ -29,7 +30,7 @@ public class Recipes extends RecipeProvider{
 				.define('I', Items.IRON_INGOT)
 				.unlockedBy("redstone_lamp", InventoryChangeTrigger.Instance.hasItems(Items.REDSTONE))
 				.save(consumer);
-
+		
 		ShapedRecipeBuilder.shaped(SignalControllerRegistration.SIGNAL_CONTROLLER_ITEM.get())
 				.pattern("RCR")
 				.pattern("STS")
@@ -51,5 +52,5 @@ public class Recipes extends RecipeProvider{
 				.unlockedBy("signal", InventoryChangeTrigger.Instance.hasItems(SignalRegistration.SIGNAL_ITEM.get()))
 				.save(consumer);
 	}
-
+	
 }

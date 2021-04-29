@@ -1,5 +1,8 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates;
 
+import java.util.function.Consumer;
+import javax.annotation.Nullable;
+
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.nbt.INBT;
 import net.minecraft.network.PacketBuffer;
@@ -8,12 +11,12 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.PredicateWidget;
 
-import java.util.function.Consumer;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.PredicateWidget;
 
 public abstract class BasePredicate<T extends BasePredicate<T>> {
 
+	@Nullable
 	public static BasePredicate<?> getInstance(int id) {
 		switch (id & 0xf) {
 			case 0:

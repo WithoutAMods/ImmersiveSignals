@@ -1,56 +1,57 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+
 import withoutaname.mods.immersivesignals.modules.signal.SignalRegistration;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 public class SignalControllerTile extends TileEntity implements ITickableTileEntity {
-
+	
 	private SignalPattern defaultPattern = new SignalPattern(this::updateSignal);
 	private boolean override = false;
 	private SignalPattern overridePattern = new SignalPattern(this::updateSignal);
-
+	
 	public static final int BLINK_TIME = 15; // in ticks
 	private boolean white2Blinking;
 	private boolean ks1Blinking;
 	private int blinkCounter = 0;
-
+	
 	public SignalControllerTile() {
 		super(SignalControllerRegistration.SIGNAL_CONTROLLER_TILE.get());
 	}
-
+	
 	public SignalPattern getDefaultPattern() {
 		return defaultPattern;
 	}
-
-	public void setDefaultPattern(SignalPattern defaultPattern) {
+	
+	public void setDefaultPattern(@Nonnull SignalPattern defaultPattern) {
 		this.defaultPattern = defaultPattern.copy();
 		this.defaultPattern.setOnChanged(this::updateSignal);
 		this.updateSignal();
 	}
-
+	
 	public boolean isOverride() {
 		return override;
 	}
-
+	
 	public void setOverride(boolean override) {
 		this.override = override;
 		this.updateSignal();
 	}
-
+	
 	public SignalPattern getOverridePattern() {
 		return overridePattern;
 	}
-
+	
 	@Override
 	public void tick() {
 		if (white2Blinking || ks1Blinking) {
@@ -62,7 +63,7 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 						level.setBlockAndUpdate(posMain,
 								level.getBlockState(posMain)
 										.setValue(BaseSignalBlock.SIGNAL_WHITE2, true));
-
+						
 					}
 					if (ks1Blinking) {
 						level.setBlockAndUpdate(posMain,
@@ -78,7 +79,7 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 						level.setBlockAndUpdate(posMain,
 								level.getBlockState(posMain)
 										.setValue(BaseSignalBlock.SIGNAL_WHITE2, false));
-
+						
 					}
 					if (ks1Blinking) {
 						level.setBlockAndUpdate(posMain,
@@ -90,7 +91,7 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 			}
 		}
 	}
-
+	
 	protected void updateSignal() {
 		assert level != null;
 		SignalPattern pattern = override ? overridePattern : defaultPattern;
@@ -119,7 +120,7 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 							.setValue(BaseSignalBlock.SIGNAL_NUMBER, pattern.getZs3v()));
 		}
 	}
-
+	
 	@Nullable
 	public BlockPos getSignalBlockPos(BaseSignalBlock block) {
 		assert level != null;
@@ -132,11 +133,11 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 		}
 		return blockPos;
 	}
-
+	
 	public boolean hasSignalBlock(BaseSignalBlock block) {
 		return getSignalBlockPos(block) != null;
 	}
-
+	
 	@Override
 	public void load(@Nonnull BlockState state, @Nonnull CompoundNBT nbt) {
 		super.load(state, nbt);
@@ -148,7 +149,7 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 		ks1Blinking = nbt.getBoolean("ks1Blinking");
 		white2Blinking = nbt.getBoolean("white2Blinking");
 	}
-
+	
 	@Override
 	@Nonnull
 	public CompoundNBT save(@Nonnull CompoundNBT compound) {
@@ -159,5 +160,5 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 		compound.putBoolean("white2Blinking", white2Blinking);
 		return super.save(compound);
 	}
-
+	
 }

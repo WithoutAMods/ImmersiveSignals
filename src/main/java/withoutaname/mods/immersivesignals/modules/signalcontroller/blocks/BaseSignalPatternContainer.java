@@ -1,22 +1,24 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
+
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PatternModifyPacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
-import javax.annotation.Nullable;
-
 public abstract class BaseSignalPatternContainer extends Container {
-
+	
 	protected BaseSignalPatternContainer(@Nullable ContainerType<?> type, int id) {
 		super(type, id);
 	}
-
+	
 	protected abstract SignalPattern getModifiablePattern();
-
-	public void onPatternModify(PatternModifyPacket packet) {
+	
+	public void onPatternModify(@Nonnull PatternModifyPacket packet) {
 		switch (packet.getButtonID()) {
 			case 0:
 				getModifiablePattern().setMainPattern(BaseSignalBlock.SignalMainPattern.values()[packet.getValue()]);
@@ -47,5 +49,5 @@ public abstract class BaseSignalPatternContainer extends Container {
 				break;
 		}
 	}
-
+	
 }

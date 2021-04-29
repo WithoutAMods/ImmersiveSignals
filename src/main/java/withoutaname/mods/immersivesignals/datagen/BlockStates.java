@@ -4,15 +4,16 @@ import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
 
 public class BlockStates extends BlockStateProvider {
-
+	
 	public BlockStates(DataGenerator gen, ExistingFileHelper exFileHelper) {
 		super(gen, ImmersiveSignals.MODID, exFileHelper);
 	}
-
+	
 	@Override
 	protected void registerStatesAndModels() {
 		BlockModelBuilder signalControllerModel = models().cubeBottomTop("block/signal_controller",
@@ -28,5 +29,5 @@ public class BlockStates extends BlockStateProvider {
 		simpleBlock(SignalControllerRegistration.REDSTONE_ADAPTER_BLOCK.get(), redstoneAdapterModel);
 		simpleBlockItem(SignalControllerRegistration.REDSTONE_ADAPTER_BLOCK.get(), redstoneAdapterModel);
 	}
-
+	
 }

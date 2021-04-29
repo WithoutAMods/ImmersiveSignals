@@ -1,5 +1,8 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.gui;
 
+import java.util.function.Supplier;
+import javax.annotation.Nonnull;
+
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.Screen;
@@ -7,27 +10,25 @@ import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.fml.client.gui.widget.Slider;
+
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PatternModifyPacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
-import javax.annotation.Nonnull;
-import java.util.function.Supplier;
-
 public class SignalPatternScreen extends Screen {
-
+	
 	protected final ResourceLocation GUI_TEXTURE = new ResourceLocation(ImmersiveSignals.MODID, "textures/gui/signal_template.png");
-
+	
+	private final Screen lastScreen;
+	private final Supplier<SignalPattern> patternSupplier;
+	
 	private final int xSize = 256;
 	private final int ySize = 164;
 	private int guiLeft;
 	private int guiTop;
-
-	private final Screen lastScreen;
-	private final Supplier<SignalPattern> patternSupplier;
-
+	
 	private Button mainNoneButton;
 	private Button mainHp0Button;
 	private Button mainKs1Button;
@@ -40,19 +41,19 @@ public class SignalPatternScreen extends Screen {
 	private Button sh1Button;
 	private Button zs1Button;
 	private Button markerLightButton;
-
+	
 	public SignalPatternScreen(Screen lastScreen, Supplier<SignalPattern> patternSupplier) {
 		super(StringTextComponent.EMPTY);
 		this.lastScreen = lastScreen;
 		this.patternSupplier = patternSupplier;
 	}
-
+	
 	@Override
 	protected void init() {
 		super.init();
 		this.guiLeft = (this.width - this.xSize) / 2;
 		this.guiTop = (this.height - this.ySize) / 2;
-
+		
 		addButton(new SignalDisplay(this.guiLeft + 8, this.guiTop + 50, 4, true, true, patternSupplier));
 		
 		int i = this.guiLeft + 48;
@@ -61,12 +62,12 @@ public class SignalPatternScreen extends Screen {
 		final int split2Width = (width - 4) / 2;
 		final int split3Width = (width - 2 * 4) / 3;
 		final int split4Width = (width - 3 * 4) / 4;
-
+		
 		mainNoneButton = addButton(new Button(i, j, split4Width, 20, new StringTextComponent("None"),
 				p_onPress_1_ -> sendPacket(0, 0)));
 		mainHp0Button = addButton(new Button(i + split4Width + 4, j, split4Width, 20, new StringTextComponent("Hp0"),
 				p_onPress_1_ -> sendPacket(0, 1)));
-		mainKs1Button = addButton(new Button(i +  2 * (split4Width + 4), j, split4Width, 20, new StringTextComponent("Ks1"),
+		mainKs1Button = addButton(new Button(i + 2 * (split4Width + 4), j, split4Width, 20, new StringTextComponent("Ks1"),
 				p_onPress_1_ -> sendPacket(0, 2)));
 		mainKs2Button = addButton(new Button(i + 3 * (split4Width + 4), j, split4Width, 20, new StringTextComponent("Ks2"),
 				p_onPress_1_ -> sendPacket(0, 3)));
@@ -91,11 +92,11 @@ public class SignalPatternScreen extends Screen {
 		
 		this.update();
 	}
-
+	
 	private void sendPacket(int buttonID) {
 		sendPacket(buttonID, 0);
 	}
-
+	
 	private void sendPacket(int buttonID, int value) {
 		SignalControllerNetworking.sendToServer(new PatternModifyPacket(buttonID, value));
 	}
@@ -133,7 +134,7 @@ public class SignalPatternScreen extends Screen {
 		markerLightButton.setMessage(new StringTextComponent(
 				"Marker: " + (pattern.isMarkerLight() ? "Yes" : "No")));
 	}
-
+	
 	@Override
 	public boolean mouseReleased(double mouseX, double mouseY, int button) {
 		if (button == 0) {
@@ -142,14 +143,14 @@ public class SignalPatternScreen extends Screen {
 		}
 		return super.mouseReleased(mouseX, mouseY, button);
 	}
-
+	
 	@Override
 	public void render(@Nonnull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 		this.renderBackground(matrixStack);
 		this.drawGuiBackgroundLayer(matrixStack);
 		super.render(matrixStack, mouseX, mouseY, partialTicks);
 	}
-
+	
 	protected void drawGuiBackgroundLayer(MatrixStack matrixStack) {
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		assert this.minecraft != null;
@@ -158,15 +159,16 @@ public class SignalPatternScreen extends Screen {
 		int j = this.guiTop;
 		this.blit(matrixStack, i, j, 0, 0, this.xSize, this.ySize);
 	}
-
+	
 	@Override
 	public boolean isPauseScreen() {
 		return false;
 	}
-
+	
 	@Override
 	public void onClose() {
 		assert this.minecraft != null;
 		this.minecraft.setScreen(lastScreen);
 	}
+	
 }

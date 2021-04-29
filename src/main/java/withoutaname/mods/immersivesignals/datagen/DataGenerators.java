@@ -1,5 +1,7 @@
 package withoutaname.mods.immersivesignals.datagen;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -9,7 +11,7 @@ import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 public class DataGenerators {
 	
 	@SubscribeEvent
-	public static void gatherData(GatherDataEvent event) {
+	public static void gatherData(@Nonnull GatherDataEvent event) {
 		DataGenerator generator = event.getGenerator();
 		generator.addProvider(new BlockStates(generator, event.getExistingFileHelper()));
 		generator.addProvider(new Recipes(generator));
@@ -17,5 +19,5 @@ public class DataGenerators {
 		generator.addProvider(new Language(generator, "de_de"));
 		generator.addProvider(new LootTables(generator));
 	}
-
+	
 }

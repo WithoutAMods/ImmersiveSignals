@@ -1,30 +1,31 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Nonnull;
+
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.tileentity.TileEntityType;
+
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.BaseAdapterTile;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
-
 public class PredicateAdapterTile<T extends BasePredicate<T>> extends BaseAdapterTile {
-
+	
 	public final T predicateInstance;
-
+	
 	protected List<Pair<T, SignalPattern>> predicatePatterns = new ArrayList<>();
-
+	
 	public PredicateAdapterTile(TileEntityType<? extends PredicateAdapterTile> tileEntityType, T predicateInstance) {
 		super(tileEntityType);
 		this.predicateInstance = predicateInstance;
 	}
-
+	
 	@Override
 	public void update() {
 		for (Pair<T, SignalPattern> predicatePattern : predicatePatterns) {
@@ -34,7 +35,7 @@ public class PredicateAdapterTile<T extends BasePredicate<T>> extends BaseAdapte
 			}
 		}
 	}
-
+	
 	@Override
 	public void load(@Nonnull BlockState state, @Nonnull CompoundNBT nbt) {
 		super.load(state, nbt);
@@ -51,7 +52,7 @@ public class PredicateAdapterTile<T extends BasePredicate<T>> extends BaseAdapte
 			}
 		}
 	}
-
+	
 	@Override
 	@Nonnull
 	public CompoundNBT save(@Nonnull CompoundNBT compound) {
@@ -65,5 +66,5 @@ public class PredicateAdapterTile<T extends BasePredicate<T>> extends BaseAdapte
 		compound.put("predicatePatterns", predicatePatternsList);
 		return super.save(compound);
 	}
-
+	
 }
