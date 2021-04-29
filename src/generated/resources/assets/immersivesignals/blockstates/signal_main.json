@@ -1,0 +1,1236 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "rotation": "0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main"
+      }
+    },
+    {
+      "when": {
+        "rotation": "0",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0"
+      }
+    },
+    {
+      "when": {
+        "rotation": "0",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1"
+      }
+    },
+    {
+      "when": {
+        "rotation": "0",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2"
+      }
+    },
+    {
+      "when": {
+        "rotation": "0",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0"
+      }
+    },
+    {
+      "when": {
+        "rotation": "0",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1"
+      }
+    },
+    {
+      "when": {
+        "rotation": "0",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2"
+      }
+    },
+    {
+      "when": {
+        "rotation": "0",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7"
+      }
+    },
+    {
+      "when": {
+        "rotation": "1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_1"
+      }
+    },
+    {
+      "when": {
+        "rotation": "1",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0_1"
+      }
+    },
+    {
+      "when": {
+        "rotation": "1",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1_1"
+      }
+    },
+    {
+      "when": {
+        "rotation": "1",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2_1"
+      }
+    },
+    {
+      "when": {
+        "rotation": "1",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0_1"
+      }
+    },
+    {
+      "when": {
+        "rotation": "1",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1_1"
+      }
+    },
+    {
+      "when": {
+        "rotation": "1",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2_1"
+      }
+    },
+    {
+      "when": {
+        "rotation": "1",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7_1"
+      }
+    },
+    {
+      "when": {
+        "rotation": "2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_2"
+      }
+    },
+    {
+      "when": {
+        "rotation": "2",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0_2"
+      }
+    },
+    {
+      "when": {
+        "rotation": "2",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1_2"
+      }
+    },
+    {
+      "when": {
+        "rotation": "2",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2_2"
+      }
+    },
+    {
+      "when": {
+        "rotation": "2",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0_2"
+      }
+    },
+    {
+      "when": {
+        "rotation": "2",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1_2"
+      }
+    },
+    {
+      "when": {
+        "rotation": "2",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2_2"
+      }
+    },
+    {
+      "when": {
+        "rotation": "2",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7_2"
+      }
+    },
+    {
+      "when": {
+        "rotation": "3"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_3"
+      }
+    },
+    {
+      "when": {
+        "rotation": "3",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0_3"
+      }
+    },
+    {
+      "when": {
+        "rotation": "3",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1_3"
+      }
+    },
+    {
+      "when": {
+        "rotation": "3",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2_3"
+      }
+    },
+    {
+      "when": {
+        "rotation": "3",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0_3"
+      }
+    },
+    {
+      "when": {
+        "rotation": "3",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1_3"
+      }
+    },
+    {
+      "when": {
+        "rotation": "3",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2_3"
+      }
+    },
+    {
+      "when": {
+        "rotation": "3",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7_3"
+      }
+    },
+    {
+      "when": {
+        "rotation": "4"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "4",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "4",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "4",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "4",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "4",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "4",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "4",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "5"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "5",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "5",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "5",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "5",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "5",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "5",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "5",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7_1",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "6"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "6",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "6",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "6",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "6",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "6",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "6",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "6",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7_2",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "7"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "7",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "7",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "7",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "7",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "7",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "7",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "7",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7_3",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "rotation": "8"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "8",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "8",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "8",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "8",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "8",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "8",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "8",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "9"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "9",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "9",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "9",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "9",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "9",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "9",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "9",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7_1",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "10"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "10",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "10",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "10",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "10",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "10",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "10",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "10",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7_2",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "11"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "11",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "11",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "11",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "11",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "11",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "11",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "11",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7_3",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "rotation": "12"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "12",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "12",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "12",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "12",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "12",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "12",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "12",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "13"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "13",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "13",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "13",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "13",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "13",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "13",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "13",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7_1",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "14"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "14",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "14",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "14",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "14",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "14",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "14",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "14",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7_2",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "15"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "15",
+        "signal_pattern": "hp0"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_hp0_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "15",
+        "signal_pattern": "ks1"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks1_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "15",
+        "signal_pattern": "ks2"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_ks2_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "15",
+        "signal_white0": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white0_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "15",
+        "signal_white1": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white1_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "15",
+        "signal_white2": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_white2_3",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "rotation": "15",
+        "signal_zs7": "true"
+      },
+      "apply": {
+        "model": "immersivesignals:block/signal_main_zs7_3",
+        "y": 270
+      }
+    }
+  ]
+}

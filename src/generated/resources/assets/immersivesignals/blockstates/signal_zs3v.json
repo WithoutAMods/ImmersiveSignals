@@ -1,0 +1,964 @@
+{
+  "variants": {
+    "rotation=0,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0"
+    },
+    "rotation=1,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0_1"
+    },
+    "rotation=2,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0_2"
+    },
+    "rotation=3,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0_3"
+    },
+    "rotation=4,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0",
+      "y": 90
+    },
+    "rotation=5,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0",
+      "y": 180
+    },
+    "rotation=9,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0",
+      "y": 270
+    },
+    "rotation=13,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=0": {
+      "model": "immersivesignals:block/signal_zs3v_0_3",
+      "y": 270
+    },
+    "rotation=0,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1"
+    },
+    "rotation=1,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1_1"
+    },
+    "rotation=2,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1_2"
+    },
+    "rotation=3,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1_3"
+    },
+    "rotation=4,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1",
+      "y": 90
+    },
+    "rotation=5,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1",
+      "y": 180
+    },
+    "rotation=9,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1",
+      "y": 270
+    },
+    "rotation=13,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=1": {
+      "model": "immersivesignals:block/signal_zs3v_1_3",
+      "y": 270
+    },
+    "rotation=0,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2"
+    },
+    "rotation=1,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2_1"
+    },
+    "rotation=2,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2_2"
+    },
+    "rotation=3,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2_3"
+    },
+    "rotation=4,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2",
+      "y": 90
+    },
+    "rotation=5,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2",
+      "y": 180
+    },
+    "rotation=9,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2",
+      "y": 270
+    },
+    "rotation=13,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=2": {
+      "model": "immersivesignals:block/signal_zs3v_2_3",
+      "y": 270
+    },
+    "rotation=0,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3"
+    },
+    "rotation=1,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3_1"
+    },
+    "rotation=2,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3_2"
+    },
+    "rotation=3,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3_3"
+    },
+    "rotation=4,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3",
+      "y": 90
+    },
+    "rotation=5,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3",
+      "y": 180
+    },
+    "rotation=9,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3",
+      "y": 270
+    },
+    "rotation=13,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=3": {
+      "model": "immersivesignals:block/signal_zs3v_3_3",
+      "y": 270
+    },
+    "rotation=0,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4"
+    },
+    "rotation=1,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4_1"
+    },
+    "rotation=2,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4_2"
+    },
+    "rotation=3,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4_3"
+    },
+    "rotation=4,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4",
+      "y": 90
+    },
+    "rotation=5,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4",
+      "y": 180
+    },
+    "rotation=9,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4",
+      "y": 270
+    },
+    "rotation=13,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=4": {
+      "model": "immersivesignals:block/signal_zs3v_4_3",
+      "y": 270
+    },
+    "rotation=0,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5"
+    },
+    "rotation=1,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5_1"
+    },
+    "rotation=2,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5_2"
+    },
+    "rotation=3,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5_3"
+    },
+    "rotation=4,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5",
+      "y": 90
+    },
+    "rotation=5,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5",
+      "y": 180
+    },
+    "rotation=9,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5",
+      "y": 270
+    },
+    "rotation=13,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=5": {
+      "model": "immersivesignals:block/signal_zs3v_5_3",
+      "y": 270
+    },
+    "rotation=0,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6"
+    },
+    "rotation=1,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6_1"
+    },
+    "rotation=2,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6_2"
+    },
+    "rotation=3,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6_3"
+    },
+    "rotation=4,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6",
+      "y": 90
+    },
+    "rotation=5,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6",
+      "y": 180
+    },
+    "rotation=9,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6",
+      "y": 270
+    },
+    "rotation=13,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=6": {
+      "model": "immersivesignals:block/signal_zs3v_6_3",
+      "y": 270
+    },
+    "rotation=0,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7"
+    },
+    "rotation=1,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7_1"
+    },
+    "rotation=2,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7_2"
+    },
+    "rotation=3,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7_3"
+    },
+    "rotation=4,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7",
+      "y": 90
+    },
+    "rotation=5,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7",
+      "y": 180
+    },
+    "rotation=9,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7",
+      "y": 270
+    },
+    "rotation=13,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=7": {
+      "model": "immersivesignals:block/signal_zs3v_7_3",
+      "y": 270
+    },
+    "rotation=0,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8"
+    },
+    "rotation=1,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8_1"
+    },
+    "rotation=2,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8_2"
+    },
+    "rotation=3,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8_3"
+    },
+    "rotation=4,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8",
+      "y": 90
+    },
+    "rotation=5,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8",
+      "y": 180
+    },
+    "rotation=9,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8",
+      "y": 270
+    },
+    "rotation=13,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=8": {
+      "model": "immersivesignals:block/signal_zs3v_8_3",
+      "y": 270
+    },
+    "rotation=0,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9"
+    },
+    "rotation=1,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9_1"
+    },
+    "rotation=2,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9_2"
+    },
+    "rotation=3,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9_3"
+    },
+    "rotation=4,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9",
+      "y": 90
+    },
+    "rotation=5,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9",
+      "y": 180
+    },
+    "rotation=9,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9",
+      "y": 270
+    },
+    "rotation=13,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=9": {
+      "model": "immersivesignals:block/signal_zs3v_9_3",
+      "y": 270
+    },
+    "rotation=0,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10"
+    },
+    "rotation=1,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10_1"
+    },
+    "rotation=2,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10_2"
+    },
+    "rotation=3,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10_3"
+    },
+    "rotation=4,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10",
+      "y": 90
+    },
+    "rotation=5,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10",
+      "y": 180
+    },
+    "rotation=9,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10",
+      "y": 270
+    },
+    "rotation=13,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=10": {
+      "model": "immersivesignals:block/signal_zs3v_10_3",
+      "y": 270
+    },
+    "rotation=0,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11"
+    },
+    "rotation=1,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11_1"
+    },
+    "rotation=2,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11_2"
+    },
+    "rotation=3,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11_3"
+    },
+    "rotation=4,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11",
+      "y": 90
+    },
+    "rotation=5,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11",
+      "y": 180
+    },
+    "rotation=9,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11",
+      "y": 270
+    },
+    "rotation=13,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=11": {
+      "model": "immersivesignals:block/signal_zs3v_11_3",
+      "y": 270
+    },
+    "rotation=0,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12"
+    },
+    "rotation=1,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12_1"
+    },
+    "rotation=2,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12_2"
+    },
+    "rotation=3,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12_3"
+    },
+    "rotation=4,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12",
+      "y": 90
+    },
+    "rotation=5,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12",
+      "y": 180
+    },
+    "rotation=9,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12",
+      "y": 270
+    },
+    "rotation=13,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=12": {
+      "model": "immersivesignals:block/signal_zs3v_12_3",
+      "y": 270
+    },
+    "rotation=0,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13"
+    },
+    "rotation=1,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13_1"
+    },
+    "rotation=2,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13_2"
+    },
+    "rotation=3,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13_3"
+    },
+    "rotation=4,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13",
+      "y": 90
+    },
+    "rotation=5,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13",
+      "y": 180
+    },
+    "rotation=9,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13",
+      "y": 270
+    },
+    "rotation=13,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=13": {
+      "model": "immersivesignals:block/signal_zs3v_13_3",
+      "y": 270
+    },
+    "rotation=0,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14"
+    },
+    "rotation=1,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14_1"
+    },
+    "rotation=2,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14_2"
+    },
+    "rotation=3,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14_3"
+    },
+    "rotation=4,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14",
+      "y": 90
+    },
+    "rotation=5,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14",
+      "y": 180
+    },
+    "rotation=9,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14",
+      "y": 270
+    },
+    "rotation=13,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=14": {
+      "model": "immersivesignals:block/signal_zs3v_14_3",
+      "y": 270
+    },
+    "rotation=0,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15"
+    },
+    "rotation=1,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15_1"
+    },
+    "rotation=2,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15_2"
+    },
+    "rotation=3,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15_3"
+    },
+    "rotation=4,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15",
+      "y": 90
+    },
+    "rotation=5,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15_1",
+      "y": 90
+    },
+    "rotation=6,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15_2",
+      "y": 90
+    },
+    "rotation=7,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15_3",
+      "y": 90
+    },
+    "rotation=8,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15",
+      "y": 180
+    },
+    "rotation=9,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15_1",
+      "y": 180
+    },
+    "rotation=10,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15_2",
+      "y": 180
+    },
+    "rotation=11,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15_3",
+      "y": 180
+    },
+    "rotation=12,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15",
+      "y": 270
+    },
+    "rotation=13,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15_1",
+      "y": 270
+    },
+    "rotation=14,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15_2",
+      "y": 270
+    },
+    "rotation=15,signal_number=15": {
+      "model": "immersivesignals:block/signal_zs3v_15_3",
+      "y": 270
+    }
+  }
+}
