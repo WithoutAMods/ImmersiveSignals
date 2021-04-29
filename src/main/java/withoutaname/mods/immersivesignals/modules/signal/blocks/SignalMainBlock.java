@@ -3,8 +3,6 @@ package withoutaname.mods.immersivesignals.modules.signal.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.StateContainer.Builder;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
@@ -15,7 +13,7 @@ public class SignalMainBlock extends BaseSignalBlock {
 	public SignalMainBlock() {
 		super();
 		this.registerDefaultState(this.stateDefinition.any()
-				.setValue(BlockStateProperties.HORIZONTAL_FACING, Direction.NORTH)
+				.setValue(ROTATION, 0)
 				.setValue(SIGNAL_MAIN_PATTERN, SignalMainPattern.NONE)
 				.setValue(SIGNAL_WHITE0, false)
 				.setValue(SIGNAL_WHITE1, false)
@@ -25,7 +23,7 @@ public class SignalMainBlock extends BaseSignalBlock {
 	
 	@Override
 	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
-		builder.add(BlockStateProperties.HORIZONTAL_FACING, SIGNAL_MAIN_PATTERN, SIGNAL_WHITE0, SIGNAL_WHITE1, SIGNAL_WHITE2, SIGNAL_ZS7);
+		builder.add(ROTATION, SIGNAL_MAIN_PATTERN, SIGNAL_WHITE0, SIGNAL_WHITE1, SIGNAL_WHITE2, SIGNAL_ZS7);
 	}
 	
 	@Override

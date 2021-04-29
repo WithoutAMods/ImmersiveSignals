@@ -28,6 +28,8 @@ import withoutaname.mods.immersivesignals.modules.signal.SignalRegistration;
 
 public class BaseSignalBlock extends Block {
 	
+	public static final IntegerProperty ROTATION = BlockStateProperties.ROTATION_16;
+	
 	public static final EnumProperty<SignalMastsignMode> SIGNAL_MASTSIGN = EnumProperty.create("mastsign", SignalMastsignMode.class);
 	
 	public static final EnumProperty<SignalMainPattern> SIGNAL_MAIN_PATTERN = EnumProperty.create("signal_pattern", SignalMainPattern.class);
