@@ -7,7 +7,7 @@
 		{
 			"from": [7, 0, 7],
 			"to": [9, 16, 9],
-			"rotation": {"angle": 22.5, "axis": "y", "origin": [8, 8, 8]},
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [8, 8, 8]},
 			"faces": {
 				"north": {"uv": [0, 0, 2, 16], "texture": "#particle"},
 				"east": {"uv": [0, 0, 2, 16], "texture": "#particle"},
