@@ -13,7 +13,6 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -27,6 +26,8 @@ import net.minecraft.world.World;
 import withoutaname.mods.immersivesignals.modules.signal.SignalRegistration;
 
 public class BaseSignalBlock extends Block {
+	
+	public static final IntegerProperty ROTATION = BlockStateProperties.ROTATION_16;
 	
 	public static final EnumProperty<SignalMastsignMode> SIGNAL_MASTSIGN = EnumProperty.create("mastsign", SignalMastsignMode.class);
 	
@@ -45,7 +46,7 @@ public class BaseSignalBlock extends Block {
 				.strength(1.5F, 6.0F));
 	}
 	
-	public static boolean createSignal(World world, BlockPos pos, Direction facing, int mainHeight, boolean withZS3, boolean withZS3V) {
+	public static boolean createSignal(World world, BlockPos pos, int rotation, int mainHeight, boolean withZS3, boolean withZS3V) {
 		boolean enoughSpace = true;
 		int height = (withZS3 ? mainHeight : mainHeight + 1);
 		for (int i = 0; i < height; i++) {
@@ -57,36 +58,36 @@ public class BaseSignalBlock extends Block {
 		
 		if (enoughSpace) {
 			world.setBlockAndUpdate(pos, SignalRegistration.SIGNAL_FOUNDATION.get().defaultBlockState()
-					.setValue(BlockStateProperties.HORIZONTAL_FACING, facing));
+					.setValue(ROTATION, rotation));
 			
 			int numberOfPosts = (withZS3V ? mainHeight - 3 : mainHeight - 2);
 			for (int i = 0; i < numberOfPosts; i++) {
 				if (i == (numberOfPosts - 1) / 2.0D) {
 					world.setBlockAndUpdate(pos.offset(0, i + 1, 0), SignalRegistration.SIGNAL_POST.get().defaultBlockState()
-							.setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
+							.setValue(ROTATION, rotation)
 							.setValue(SIGNAL_MASTSIGN, SignalMastsignMode.MODE_BOTH));
 				} else if (i == (numberOfPosts - 2) / 2.0D) {
 					world.setBlockAndUpdate(pos.offset(0, i + 1, 0), SignalRegistration.SIGNAL_POST.get().defaultBlockState()
-							.setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
+							.setValue(ROTATION, rotation)
 							.setValue(SIGNAL_MASTSIGN, SignalMastsignMode.MODE_Y));
 				} else if (i == (numberOfPosts) / 2.0D) {
 					world.setBlockAndUpdate(pos.offset(0, i + 1, 0), SignalRegistration.SIGNAL_POST.get().defaultBlockState()
-							.setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
+							.setValue(ROTATION, rotation)
 							.setValue(SIGNAL_MASTSIGN, SignalMastsignMode.MODE_WRW));
 				} else {
 					world.setBlockAndUpdate(pos.offset(0, i + 1, 0), SignalRegistration.SIGNAL_POST.get().defaultBlockState()
-							.setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
+							.setValue(ROTATION, rotation)
 							.setValue(SIGNAL_MASTSIGN, SignalMastsignMode.MODE_NONE));
 				}
 			}
 			
 			if (withZS3V) {
 				world.setBlockAndUpdate(pos.offset(0, mainHeight - 2, 0), SignalRegistration.SIGNAL_ZS3V.get().defaultBlockState()
-						.setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
+						.setValue(ROTATION, rotation)
 						.setValue(SIGNAL_NUMBER, 0));
 			}
 			world.setBlockAndUpdate(pos.offset(0, mainHeight - 1, 0), SignalRegistration.SIGNAL_MAIN.get().defaultBlockState()
-					.setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
+					.setValue(ROTATION, rotation)
 					.setValue(SIGNAL_MAIN_PATTERN, SignalMainPattern.NONE)
 					.setValue(SIGNAL_WHITE0, false)
 					.setValue(SIGNAL_WHITE1, false)
@@ -94,7 +95,7 @@ public class BaseSignalBlock extends Block {
 					.setValue(SIGNAL_ZS7, false));
 			if (withZS3V) {
 				world.setBlockAndUpdate(pos.offset(0, mainHeight, 0), SignalRegistration.SIGNAL_ZS3.get().defaultBlockState()
-						.setValue(BlockStateProperties.HORIZONTAL_FACING, facing)
+						.setValue(ROTATION, rotation)
 						.setValue(SIGNAL_NUMBER, 0));
 			}
 		}
