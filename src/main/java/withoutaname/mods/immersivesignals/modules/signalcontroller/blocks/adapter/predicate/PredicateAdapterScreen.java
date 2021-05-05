@@ -9,8 +9,10 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
+import withoutaname.mods.immersivesignals.datagen.Language;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.PredicateWidget;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.SignalDisplay;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.SignalPatternScreen;
@@ -64,7 +66,7 @@ public class PredicateAdapterScreen extends BaseScreen<PredicateAdapterContainer
 			});
 		}
 		
-		modifyPatternButton = addButton(new Button(i + 48, j + 41 + 24, 164, 20, new StringTextComponent("Modify Pattern"),
+		modifyPatternButton = addButton(new Button(i + 48, j + 41 + 24, 164, 20, new TranslationTextComponent(Language.SCREEN + ".signal_pattern"),
 				p_onPress_1_ -> {
 					final SignalPatternScreen signalSelectionScreen = new SignalPatternScreen(this, menu::getCurrentPattern);
 					this.minecraft.setScreen(signalSelectionScreen);

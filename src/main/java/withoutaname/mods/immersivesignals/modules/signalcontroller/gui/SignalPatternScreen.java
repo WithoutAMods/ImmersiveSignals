@@ -9,9 +9,11 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.client.gui.widget.Slider;
 
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
+import withoutaname.mods.immersivesignals.datagen.Language;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PatternModifyPacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
@@ -41,6 +43,7 @@ public class SignalPatternScreen extends Screen {
 	private Button sh1Button;
 	private Button zs1Button;
 	private Button markerLightButton;
+	private static final String SIGNAL_PATTERN = Language.SCREEN + ".signal_pattern.";
 	
 	public SignalPatternScreen(Screen lastScreen, Supplier<SignalPattern> patternSupplier) {
 		super(StringTextComponent.EMPTY);
@@ -63,13 +66,14 @@ public class SignalPatternScreen extends Screen {
 		final int split3Width = (width - 2 * 4) / 3;
 		final int split4Width = (width - 3 * 4) / 4;
 		
-		mainNoneButton = addButton(new Button(i, j, split4Width, 20, new StringTextComponent("None"),
+		String s = Language.SCREEN + ".signal_pattern";
+		mainNoneButton = addButton(new Button(i, j, split4Width, 20, new TranslationTextComponent(s + ".main.none"),
 				p_onPress_1_ -> sendPacket(0, 0)));
-		mainHp0Button = addButton(new Button(i + split4Width + 4, j, split4Width, 20, new StringTextComponent("Hp0"),
+		mainHp0Button = addButton(new Button(i + split4Width + 4, j, split4Width, 20, new TranslationTextComponent(s + ".main.hp0"),
 				p_onPress_1_ -> sendPacket(0, 1)));
-		mainKs1Button = addButton(new Button(i + 2 * (split4Width + 4), j, split4Width, 20, new StringTextComponent("Ks1"),
+		mainKs1Button = addButton(new Button(i + 2 * (split4Width + 4), j, split4Width, 20, new TranslationTextComponent(s + ".main.ks1"),
 				p_onPress_1_ -> sendPacket(0, 2)));
-		mainKs2Button = addButton(new Button(i + 3 * (split4Width + 4), j, split4Width, 20, new StringTextComponent("Ks2"),
+		mainKs2Button = addButton(new Button(i + 3 * (split4Width + 4), j, split4Width, 20, new TranslationTextComponent(s + ".main.ks2"),
 				p_onPress_1_ -> sendPacket(0, 3)));
 		zs3Button = addButton(new Slider(i, j + 24, split2Width, 20, title, title,
 				0, 15, patternSupplier.get().getZs3(), false, false, p_onPress_1_ -> {},
@@ -107,32 +111,31 @@ public class SignalPatternScreen extends Screen {
 		mainHp0Button.active = pattern.getMainPattern() != BaseSignalBlock.SignalMainPattern.HP0;
 		mainKs1Button.active = pattern.getMainPattern() != BaseSignalBlock.SignalMainPattern.KS1;
 		mainKs2Button.active = pattern.getMainPattern() != BaseSignalBlock.SignalMainPattern.KS2;
-		zs3Button.active = pattern.isZs3Possible();
-		zs3Button.setValue(pattern.getZs3());
-		zs3Button.setMessage(new StringTextComponent(
-				"Zs3: " + (pattern.getZs3() == 0 ? "No" : pattern.getZs3())));
-		zs3vButton.active = pattern.isZs3vPossible();
-		zs3vButton.setValue(pattern.getZs3v());
-		zs3vButton.setMessage(new StringTextComponent(
-				"Zs3v: " + (pattern.getZs3v() == 0 ? "No" : pattern.getZs3v())));
-		shortenedBrakingDistanceButton.active = pattern.isShortenedBrakingDistancePossible();
-		shortenedBrakingDistanceButton.setMessage(new StringTextComponent(
-				"Shorter Distance: " + (pattern.isShortenedBrakingDistance() ? "Yes" : "No")));
-		approachSignalRepeaterButton.active = pattern.isApproachSignalRepeaterPossible();
-		approachSignalRepeaterButton.setMessage(new StringTextComponent(
-				"Signal Repeater: " + (pattern.isApproachSignalRepeater() ? "Yes" : "No")));
-		zs7Button.active = pattern.isZs7Possible();
-		zs7Button.setMessage(new StringTextComponent(
-				"Zs7: " + (pattern.isZs7() ? "Yes" : "No")));
-		sh1Button.active = pattern.isSh1Possible();
-		sh1Button.setMessage(new StringTextComponent(
-				"Sh1: " + (pattern.isSh1() ? "Yes" : "No")));
-		zs1Button.active = pattern.isZs1Possible();
-		zs1Button.setMessage(new StringTextComponent(
-				"Zs1: " + (pattern.isZs1() ? "Yes" : "No")));
-		markerLightButton.active = pattern.isMarkerLightPossible();
-		markerLightButton.setMessage(new StringTextComponent(
-				"Marker: " + (pattern.isMarkerLight() ? "Yes" : "No")));
+		update(zs3Button, "zs3", pattern.isZs3Possible(), pattern.getZs3());
+		update(zs3vButton, "zs3v", pattern.isZs3vPossible(), pattern.getZs3v());
+		update(shortenedBrakingDistanceButton, "shorterDistance", pattern.isShortenedBrakingDistancePossible(), pattern.isShortenedBrakingDistance());
+		update(approachSignalRepeaterButton, "signalRepeater", pattern.isApproachSignalRepeaterPossible(), pattern.isApproachSignalRepeater());
+		update(zs7Button, "zs7", pattern.isZs7Possible(), pattern.isZs7());
+		update(sh1Button, "sh1", pattern.isSh1Possible(), pattern.isSh1());
+		update(zs1Button, "zs1", pattern.isZs1Possible(), pattern.isZs1());
+		update(markerLightButton, "marker", pattern.isMarkerLightPossible(), pattern.isMarkerLight());
+	}
+	
+	private void update(@Nonnull Slider slider, @Nonnull String key, boolean possible, int value) {
+		slider.active = possible;
+		slider.setValue(value);
+		slider.setMessage(new TranslationTextComponent(SIGNAL_PATTERN + key)
+				.append(": ")
+				.append(value == 0 ?
+						new TranslationTextComponent(SIGNAL_PATTERN + "off") :
+						new StringTextComponent(String.valueOf(value))));
+	}
+	
+	private void update(@Nonnull Button button, @Nonnull String key, boolean possible, boolean on) {
+		button.active = possible;
+		button.setMessage(new TranslationTextComponent(SIGNAL_PATTERN + key)
+				.append(": ")
+				.append(new TranslationTextComponent(SIGNAL_PATTERN + (on ? "on" : "off"))));
 	}
 	
 	@Override

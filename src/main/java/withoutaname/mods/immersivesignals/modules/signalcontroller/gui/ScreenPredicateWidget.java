@@ -1,7 +1,8 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.gui;
 
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
+import withoutaname.mods.immersivesignals.datagen.Language;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.ScreenPredicate;
 
@@ -10,7 +11,7 @@ public class ScreenPredicateWidget extends PredicateWidget {
 	private ScreenPredicate<?> predicate;
 	
 	public ScreenPredicateWidget(ScreenPredicate<?> predicate, int x, int y) {
-		super(x, y, new StringTextComponent("Modify Predicate"));
+		super(x, y, new TranslationTextComponent(Language.SCREEN + ".screen_predicate"));
 		this.predicate = predicate;
 	}
 	

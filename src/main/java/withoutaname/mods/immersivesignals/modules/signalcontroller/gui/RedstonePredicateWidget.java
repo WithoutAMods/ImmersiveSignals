@@ -10,8 +10,10 @@ import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.client.gui.widget.Slider;
 
+import withoutaname.mods.immersivesignals.datagen.Language;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.RedstonePredicate;
 
@@ -32,13 +34,14 @@ public class RedstonePredicateWidget extends PredicateWidget {
 		this.redstonePredicate = redstonePredicate;
 		this.buttonConsumer = buttonConsumer;
 		
-		northButton = addButton(new Button(x, y, 20, 20, new StringTextComponent("N"), p_onPress_1_ -> setSide(Direction.NORTH)));
-		eastButton = addButton(new Button(x + 20, y, 20, 20, new StringTextComponent("E"), p_onPress_1_ -> setSide(Direction.EAST)));
-		southButton = addButton(new Button(x + 40, y, 20, 20, new StringTextComponent("S"), p_onPress_1_ -> setSide(Direction.SOUTH)));
-		westButton = addButton(new Button(x + 60, y, 20, 20, new StringTextComponent("W"), p_onPress_1_ -> setSide(Direction.WEST)));
+		String s = Language.SCREEN + ".redstone_predicate.";
+		northButton = addButton(new Button(x, y, 20, 20, new TranslationTextComponent(s + "north"), p_onPress_1_ -> setSide(Direction.NORTH)));
+		eastButton = addButton(new Button(x + 20, y, 20, 20, new TranslationTextComponent(s + "east"), p_onPress_1_ -> setSide(Direction.EAST)));
+		southButton = addButton(new Button(x + 40, y, 20, 20, new TranslationTextComponent(s + "south"), p_onPress_1_ -> setSide(Direction.SOUTH)));
+		westButton = addButton(new Button(x + 60, y, 20, 20, new TranslationTextComponent(s + "west"), p_onPress_1_ -> setSide(Direction.WEST)));
 		updateButtons();
 		
-		powerSlider = (Slider) addButton(new Slider(x + 84, y, 80, 20, new StringTextComponent("Power: "), StringTextComponent.EMPTY,
+		powerSlider = (Slider) addButton(new Slider(x + 84, y, 80, 20, new TranslationTextComponent(s + "power").append(": "), StringTextComponent.EMPTY,
 				0, 15, redstonePredicate.getPower(), false, true,
 				button -> {}, slider -> getRedstonePredicate().setPower(slider.getValueInt())));
 	}
