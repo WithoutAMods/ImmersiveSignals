@@ -33,7 +33,7 @@ displayURL="https://github.com/WithoutAName25/ImmersiveSignals" #optional
 authors="WithoutAName" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-Description
+Signals for Immersive Railroading or other train mods
 '''
 
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
