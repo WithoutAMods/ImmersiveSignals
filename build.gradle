@@ -26,7 +26,7 @@ repositories {
     }
 }
 
-version = "${immersivesignals_version}"
+version = "${minecraft_version}-${immersivesignals_version}"
 group = 'withoutaname.mods.immersivesignals' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'ImmersiveSignals'
 
