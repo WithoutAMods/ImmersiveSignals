@@ -1,14 +1,14 @@
 modLoader="javafml"
 loaderVersion="${loader_version_range}"
 license="MIT License"
-issueTrackerURL="https://github.com/WithoutAMods/${mod_github}/issues"
+issueTrackerURL="https://github.com/WithoutAMods/${mod_base_name}/issues"
 
 [[mods]]
     modId="${mod_id}"
     version="${minecraft_version}-${mod_version}"
     displayName="${mod_name}"
     #updateJSONURL="https://change.me.example.invalid/updates.json"
-    displayURL="https://github.com/WithoutAMods/${mod_github}"
+    displayURL="https://github.com/WithoutAMods/${mod_base_name}"
     #logoFile="examplemod.png"
     #credits=""
     authors="${mod_authors}"

@@ -29,7 +29,7 @@ repositories {
 
 version = "${minecraft_version}-${mod_version}"
 group = "${mod_base_package}.${mod_id}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = mod_id
+archivesBaseName = mod_base_name
 
 // Mojang ships Java 16 to end users in 1.17+ instead of Java 8 in 1.16 or lower, so your mod should target Java 16.
 java.toolchain.languageVersion = JavaLanguageVersion.of(16)
@@ -183,10 +183,10 @@ dependencies {
 
 def resource_targets = ["META-INF/mods.toml", "pack.mcmeta"]
 def into_targets = ["$projectDir/out/production/resources/", "$projectDir/out/production/${project.name}.main/", "$projectDir/bin/main/"]
-def properties = [mod_id: mod_id, mod_name: mod_name, mod_github: mod_github,
-        mod_version: mod_version, mod_authors: mod_authors, mod_description: mod_description, minecraft_version: minecraft_version,
-        minecraft_version_range: minecraft_version_range, forge_version_range: forge_version_range,
-        loader_version_range: loader_version_range, withoutalib_version: withoutalib_version]
+def properties = [mod_id                 : mod_id, mod_name: mod_name, mod_base_name: mod_base_name,
+                  mod_version            : mod_version, mod_authors: mod_authors, mod_description: mod_description, minecraft_version: minecraft_version,
+                  minecraft_version_range: minecraft_version_range, forge_version_range: forge_version_range,
+                  loader_version_range   : loader_version_range, withoutalib_version: withoutalib_version]
 processResources {
     duplicatesStrategy = 'INCLUDE'
     inputs.properties properties
@@ -265,7 +265,7 @@ publishing {
             artifact javadocArtifact
             pom {
                 name = "${group}:${archivesBaseName}"
-                url = "https://github.com/WithoutAMods/${mod_github}"
+                url = "https://github.com/WithoutAMods/${mod_base_name}"
                 licenses {
                     license {
                         name = 'MIT License'
