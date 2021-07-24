@@ -184,7 +184,7 @@ dependencies {
 def resource_targets = ["META-INF/mods.toml", "pack.mcmeta"]
 def into_targets = ["$projectDir/out/production/resources/", "$projectDir/out/production/${project.name}.main/", "$projectDir/bin/main/"]
 def properties = [mod_id: mod_id, mod_name: mod_name, mod_github: mod_github,
-        mod_version: mod_version, mod_authors: mod_authors, mod_description: mod_description,
+        mod_version: mod_version, mod_authors: mod_authors, mod_description: mod_description, minecraft_version: minecraft_version,
         minecraft_version_range: minecraft_version_range, forge_version_range: forge_version_range,
         loader_version_range: loader_version_range, withoutalib_version: withoutalib_version]
 processResources {

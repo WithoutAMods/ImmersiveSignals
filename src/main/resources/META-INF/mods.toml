@@ -5,7 +5,7 @@ issueTrackerURL="https://github.com/WithoutAMods/${mod_github}/issues"
 
 [[mods]]
     modId="${mod_id}"
-    version="${mod_version}"
+    version="${minecraft_version}-${mod_version}"
     displayName="${mod_name}"
     #updateJSONURL="https://change.me.example.invalid/updates.json"
     displayURL="https://github.com/WithoutAMods/${mod_github}"
