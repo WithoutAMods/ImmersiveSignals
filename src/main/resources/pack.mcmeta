@@ -1,6 +1,6 @@
 {
     "pack": {
-        "description": "immersivesignals resources",
-        "pack_format": 6
+        "description": "${mod_id} resources",
+        "pack_format": 7
     }
 }
