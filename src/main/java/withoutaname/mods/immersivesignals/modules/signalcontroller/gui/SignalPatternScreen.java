@@ -11,13 +11,13 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.fmlclient.gui.widget.Slider;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.datagen.Language;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PatternModifyPacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
+import withoutaname.mods.withoutalib.gui.Slider;
 
 public class SignalPatternScreen extends Screen {
 	
@@ -75,12 +75,12 @@ public class SignalPatternScreen extends Screen {
 				p_onPress_1_ -> sendPacket(0, 2)));
 		mainKs2Button = addRenderableWidget(new Button(i + 3 * (split4Width + 4), j, split4Width, 20, new TranslatableComponent(s + ".main.ks2"),
 				p_onPress_1_ -> sendPacket(0, 3)));
-		zs3Button = addRenderableWidget(new Slider(i, j + 24, split2Width, 20, title, title,
-				0, 15, patternSupplier.get().getZs3(), false, false, p_onPress_1_ -> {},
-				slider -> sendPacket(1, slider.getValueInt())));
-		zs3vButton = addRenderableWidget(new Slider(i + split2Width + 4, j + 24, split2Width, 20, title, title,
-				0, 15, patternSupplier.get().getZs3v(), false, false, p_onPress_1_ -> {},
-				slider -> sendPacket(2, slider.getValueInt())));
+		zs3Button = addRenderableWidget(new Slider(i, j + 24, split2Width, 20,
+				0, 15, patternSupplier.get().getZs3(),
+				slider -> sendPacket(1, slider.getValue())));
+		zs3vButton = addRenderableWidget(new Slider(i + split2Width + 4, j + 24, split2Width, 20,
+				0, 15, patternSupplier.get().getZs3v(),
+				slider -> sendPacket(2, slider.getValue())));
 		shortenedBrakingDistanceButton = addRenderableWidget(new Button(i, j + 48, width, 20, title,
 				p_onPress_1_ -> sendPacket(3)));
 		approachSignalRepeaterButton = addRenderableWidget(new Button(i, j + 72, width, 20, title,
@@ -136,15 +136,6 @@ public class SignalPatternScreen extends Screen {
 		button.setMessage(new TranslatableComponent(SIGNAL_PATTERN + key)
 				.append(": ")
 				.append(new TranslatableComponent(SIGNAL_PATTERN + (on ? "on" : "off"))));
-	}
-	
-	@Override
-	public boolean mouseReleased(double mouseX, double mouseY, int button) {
-		if (button == 0) {
-			zs3Button.dragging = false;
-			zs3vButton.dragging = false;
-		}
-		return super.mouseReleased(mouseX, mouseY, button);
 	}
 	
 	@Override

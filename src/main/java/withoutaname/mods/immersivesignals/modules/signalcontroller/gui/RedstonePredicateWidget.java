@@ -6,10 +6,10 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
-import net.minecraftforge.fmlclient.gui.widget.Slider;
 import withoutaname.mods.immersivesignals.datagen.Language;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.RedstonePredicate;
+import withoutaname.mods.withoutalib.gui.Slider;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -39,12 +39,13 @@ public class RedstonePredicateWidget extends PredicateWidget {
 		westButton = addButton(new Button(x + 60, y, 20, 20, new TranslatableComponent(s + "west"), p_onPress_1_ -> setSide(Direction.WEST)));
 		updateButtons();
 		
-		powerSlider = (Slider) addButton(new Slider(x + 84, y, 80, 20, new TranslatableComponent(s + "power").append(": "), TextComponent.EMPTY,
-				0, 15, redstonePredicate.getPower(), false, true,
-				button -> {}, slider -> getRedstonePredicate().setPower(slider.getValueInt())));
+		powerSlider = addButton(new Slider(x + 84, y, 80, 20,
+				0, 15, redstonePredicate.getPower(),
+				slider -> getRedstonePredicate().setPower(slider.getValue()),
+				new TranslatableComponent(s + "power").append(": "), TextComponent.EMPTY));
 	}
 	
-	private Button addButton(Button button) {
+	private <T extends AbstractWidget> T addButton(T button) {
 		buttonConsumer.accept(button);
 		widgets.add(button);
 		return button;
@@ -69,7 +70,6 @@ public class RedstonePredicateWidget extends PredicateWidget {
 		redstonePredicate = (RedstonePredicate) predicate;
 		updateButtons();
 		powerSlider.setValue(redstonePredicate.getPower());
-		powerSlider.updateSlider();
 	}
 	
 	public RedstonePredicate getRedstonePredicate() {
@@ -81,12 +81,6 @@ public class RedstonePredicateWidget extends PredicateWidget {
 		eastButton.active = redstonePredicate.getSide() != Direction.EAST;
 		southButton.active = redstonePredicate.getSide() != Direction.SOUTH;
 		westButton.active = redstonePredicate.getSide() != Direction.WEST;
-	}
-	
-	@Override
-	public boolean mouseReleased(double mouseX, double mouseY, int button) {
-		powerSlider.dragging = false;
-		return super.mouseReleased(mouseX, mouseY, button);
 	}
 	
 	@Override
