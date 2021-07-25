@@ -3,15 +3,15 @@ package withoutaname.mods.immersivesignals.modules.signalcontroller.gui;
 import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.fml.client.gui.widget.Slider;
-
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.fmlclient.gui.widget.Slider;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.datagen.Language;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
@@ -46,7 +46,7 @@ public class SignalPatternScreen extends Screen {
 	private static final String SIGNAL_PATTERN = Language.SCREEN + ".signal_pattern.";
 	
 	public SignalPatternScreen(Screen lastScreen, Supplier<SignalPattern> patternSupplier) {
-		super(StringTextComponent.EMPTY);
+		super(TextComponent.EMPTY);
 		this.lastScreen = lastScreen;
 		this.patternSupplier = patternSupplier;
 	}
@@ -57,7 +57,7 @@ public class SignalPatternScreen extends Screen {
 		this.guiLeft = (this.width - this.xSize) / 2;
 		this.guiTop = (this.height - this.ySize) / 2;
 		
-		addButton(new SignalDisplay(this.guiLeft + 8, this.guiTop + 50, 4, true, true, patternSupplier));
+		addRenderableWidget(new SignalDisplay(this.guiLeft + 8, this.guiTop + 50, 4, true, true, patternSupplier));
 		
 		int i = this.guiLeft + 48;
 		int j = this.guiTop + 12;
@@ -67,31 +67,31 @@ public class SignalPatternScreen extends Screen {
 		final int split4Width = (width - 3 * 4) / 4;
 		
 		String s = Language.SCREEN + ".signal_pattern";
-		mainNoneButton = addButton(new Button(i, j, split4Width, 20, new TranslationTextComponent(s + ".main.none"),
+		mainNoneButton = addRenderableWidget(new Button(i, j, split4Width, 20, new TranslatableComponent(s + ".main.none"),
 				p_onPress_1_ -> sendPacket(0, 0)));
-		mainHp0Button = addButton(new Button(i + split4Width + 4, j, split4Width, 20, new TranslationTextComponent(s + ".main.hp0"),
+		mainHp0Button = addRenderableWidget(new Button(i + split4Width + 4, j, split4Width, 20, new TranslatableComponent(s + ".main.hp0"),
 				p_onPress_1_ -> sendPacket(0, 1)));
-		mainKs1Button = addButton(new Button(i + 2 * (split4Width + 4), j, split4Width, 20, new TranslationTextComponent(s + ".main.ks1"),
+		mainKs1Button = addRenderableWidget(new Button(i + 2 * (split4Width + 4), j, split4Width, 20, new TranslatableComponent(s + ".main.ks1"),
 				p_onPress_1_ -> sendPacket(0, 2)));
-		mainKs2Button = addButton(new Button(i + 3 * (split4Width + 4), j, split4Width, 20, new TranslationTextComponent(s + ".main.ks2"),
+		mainKs2Button = addRenderableWidget(new Button(i + 3 * (split4Width + 4), j, split4Width, 20, new TranslatableComponent(s + ".main.ks2"),
 				p_onPress_1_ -> sendPacket(0, 3)));
-		zs3Button = addButton(new Slider(i, j + 24, split2Width, 20, title, title,
+		zs3Button = addRenderableWidget(new Slider(i, j + 24, split2Width, 20, title, title,
 				0, 15, patternSupplier.get().getZs3(), false, false, p_onPress_1_ -> {},
 				slider -> sendPacket(1, slider.getValueInt())));
-		zs3vButton = addButton(new Slider(i + split2Width + 4, j + 24, split2Width, 20, title, title,
+		zs3vButton = addRenderableWidget(new Slider(i + split2Width + 4, j + 24, split2Width, 20, title, title,
 				0, 15, patternSupplier.get().getZs3v(), false, false, p_onPress_1_ -> {},
 				slider -> sendPacket(2, slider.getValueInt())));
-		shortenedBrakingDistanceButton = addButton(new Button(i, j + 48, width, 20, title,
+		shortenedBrakingDistanceButton = addRenderableWidget(new Button(i, j + 48, width, 20, title,
 				p_onPress_1_ -> sendPacket(3)));
-		approachSignalRepeaterButton = addButton(new Button(i, j + 72, width, 20, title,
+		approachSignalRepeaterButton = addRenderableWidget(new Button(i, j + 72, width, 20, title,
 				p_onPress_1_ -> sendPacket(4)));
-		zs7Button = addButton(new Button(i, j + 96, split3Width, 20, title,
+		zs7Button = addRenderableWidget(new Button(i, j + 96, split3Width, 20, title,
 				p_onPress_1_ -> sendPacket(5)));
-		sh1Button = addButton(new Button(i + split3Width + 5, j + 96, split3Width, 20, title,
+		sh1Button = addRenderableWidget(new Button(i + split3Width + 5, j + 96, split3Width, 20, title,
 				p_onPress_1_ -> sendPacket(6)));
-		zs1Button = addButton(new Button(i + 2 * (split3Width + 5), j + 96, split3Width, 20, title,
+		zs1Button = addRenderableWidget(new Button(i + 2 * (split3Width + 5), j + 96, split3Width, 20, title,
 				p_onPress_1_ -> sendPacket(7)));
-		markerLightButton = addButton(new Button(i, j + 120, width, 20, title,
+		markerLightButton = addRenderableWidget(new Button(i, j + 120, width, 20, title,
 				p_onPress_1_ -> sendPacket(8)));
 		
 		this.update();
@@ -124,18 +124,18 @@ public class SignalPatternScreen extends Screen {
 	private void update(@Nonnull Slider slider, @Nonnull String key, boolean possible, int value) {
 		slider.active = possible;
 		slider.setValue(value);
-		slider.setMessage(new TranslationTextComponent(SIGNAL_PATTERN + key)
+		slider.setMessage(new TranslatableComponent(SIGNAL_PATTERN + key)
 				.append(": ")
 				.append(value == 0 ?
-						new TranslationTextComponent(SIGNAL_PATTERN + "off") :
-						new StringTextComponent(String.valueOf(value))));
+						new TranslatableComponent(SIGNAL_PATTERN + "off") :
+						new TextComponent(String.valueOf(value))));
 	}
 	
 	private void update(@Nonnull Button button, @Nonnull String key, boolean possible, boolean on) {
 		button.active = possible;
-		button.setMessage(new TranslationTextComponent(SIGNAL_PATTERN + key)
+		button.setMessage(new TranslatableComponent(SIGNAL_PATTERN + key)
 				.append(": ")
-				.append(new TranslationTextComponent(SIGNAL_PATTERN + (on ? "on" : "off"))));
+				.append(new TranslatableComponent(SIGNAL_PATTERN + (on ? "on" : "off"))));
 	}
 	
 	@Override
@@ -148,16 +148,16 @@ public class SignalPatternScreen extends Screen {
 	}
 	
 	@Override
-	public void render(@Nonnull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+	public void render(@Nonnull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 		this.renderBackground(matrixStack);
 		this.drawGuiBackgroundLayer(matrixStack);
 		super.render(matrixStack, mouseX, mouseY, partialTicks);
 	}
 	
-	protected void drawGuiBackgroundLayer(MatrixStack matrixStack) {
-		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-		assert this.minecraft != null;
-		this.minecraft.getTextureManager().bind(GUI_TEXTURE);
+	protected void drawGuiBackgroundLayer(PoseStack matrixStack) {
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+		RenderSystem.setShaderTexture(0, GUI_TEXTURE);
 		int i = this.guiLeft;
 		int j = this.guiTop;
 		this.blit(matrixStack, i, j, 0, 0, this.xSize, this.ySize);

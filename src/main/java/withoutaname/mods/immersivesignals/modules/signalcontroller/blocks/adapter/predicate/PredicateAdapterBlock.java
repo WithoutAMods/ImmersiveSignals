@@ -1,22 +1,24 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuConstructor;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.BaseAdapterBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 
@@ -25,25 +27,20 @@ public abstract class PredicateAdapterBlock<T extends BasePredicate<T>> extends 
 	@SuppressWarnings("deprecation")
 	@Override
 	@Nonnull
-	public ActionResultType use(@Nonnull BlockState state, World world, @Nonnull BlockPos pos, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull BlockRayTraceResult trace) {
-		if (!world.isClientSide) {
-			INamedContainerProvider containerProvider = new INamedContainerProvider() {
-				@Nonnull
+	public InteractionResult use(@Nonnull BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult trace) {
+		if (!level.isClientSide) {
+			SimpleMenuProvider menuProvider = new SimpleMenuProvider(new MenuConstructor() {
+				@Nullable
 				@Override
-				public ITextComponent getDisplayName() {
-					return new TranslationTextComponent("screen.immersivesignals.predicate_adapter");
+				public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
+					return createContainer(pContainerId, level, pos, player);
 				}
-				
-				@Override
-				public Container createMenu(int i, @Nonnull PlayerInventory playerInventory, @Nonnull PlayerEntity playerEntity) {
-					return createContainer(i, world, pos, player);
-				}
-			};
-			NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, pos);
+			}, new TranslatableComponent("screen.immersivesignals.predicate_adapter"));
+			NetworkHooks.openGui((ServerPlayer) player, menuProvider, pos);
 		}
-		return ActionResultType.SUCCESS;
+		return InteractionResult.SUCCESS;
 	}
 	
-	protected abstract PredicateAdapterContainer<T> createContainer(int id, World world, @Nonnull BlockPos pos, PlayerEntity player);
+	protected abstract PredicateAdapterContainer<T> createContainer(int id, Level level, @Nonnull BlockPos pos, Player player);
 	
 }

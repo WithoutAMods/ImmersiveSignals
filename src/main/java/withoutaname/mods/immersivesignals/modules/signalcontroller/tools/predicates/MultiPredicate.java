@@ -1,24 +1,23 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.MultiPredicateScreen;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MultiPredicate<T extends BasePredicate<T>> extends ScreenPredicate<MultiPredicate<T>> {
 	
-	private T subInstance;
 	private final List<T> predicates = new ArrayList<>();
+	private T subInstance;
 	
 	public MultiPredicate() {
 	}
@@ -28,7 +27,7 @@ public class MultiPredicate<T extends BasePredicate<T>> extends ScreenPredicate<
 	}
 	
 	@Override
-	public boolean test(World world, BlockPos pos) {
+	public boolean test(Level world, BlockPos pos) {
 		for (T predicate : predicates) {
 			if (predicate.test(world, pos)) {
 				return true;
@@ -63,7 +62,7 @@ public class MultiPredicate<T extends BasePredicate<T>> extends ScreenPredicate<
 	}
 	
 	@Override
-	public MultiPredicate<T> fromBytes(@Nonnull PacketBuffer buffer) {
+	public MultiPredicate<T> fromBytes(@Nonnull FriendlyByteBuf buffer) {
 		MultiPredicate<T> multiPredicate = new MultiPredicate<>();
 		multiPredicate.subInstance = (T) BasePredicate.getInstance(buffer.readInt());
 		int size = buffer.readInt();
@@ -74,15 +73,15 @@ public class MultiPredicate<T extends BasePredicate<T>> extends ScreenPredicate<
 	}
 	
 	@Override
-	public MultiPredicate<T> fromNBT(INBT inbt) {
+	public MultiPredicate<T> fromTag(Tag tag) {
 		final MultiPredicate<T> multiPredicate = new MultiPredicate<>();
-		if (inbt instanceof CompoundNBT) {
-			CompoundNBT compound = (CompoundNBT) inbt;
+		if (tag instanceof CompoundTag) {
+			CompoundTag compound = (CompoundTag) tag;
 			multiPredicate.subInstance = (T) BasePredicate.getInstance(compound.getInt("subInstance"));
-			final INBT predicates = compound.get("predicates");
-			if (predicates instanceof ListNBT) {
-				for (INBT nbt : (ListNBT) predicates) {
-					multiPredicate.addPredicate(subInstance.fromNBT(nbt));
+			final Tag predicates = compound.get("predicates");
+			if (predicates instanceof ListTag) {
+				for (Tag nbt : (ListTag) predicates) {
+					multiPredicate.addPredicate(subInstance.fromTag(nbt));
 				}
 			}
 		}
@@ -90,7 +89,7 @@ public class MultiPredicate<T extends BasePredicate<T>> extends ScreenPredicate<
 	}
 	
 	@Override
-	public void toBytes(@Nonnull PacketBuffer buffer) {
+	public void toBytes(@Nonnull FriendlyByteBuf buffer) {
 		buffer.writeInt(subInstance.getId());
 		buffer.writeInt(predicates.size());
 		for (T predicate : predicates) {
@@ -98,12 +97,12 @@ public class MultiPredicate<T extends BasePredicate<T>> extends ScreenPredicate<
 		}
 	}
 	
-	public INBT toNBT() {
-		CompoundNBT compoundNBT = new CompoundNBT();
+	public Tag toTag() {
+		CompoundTag compoundNBT = new CompoundTag();
 		compoundNBT.putInt("subInstance", subInstance.getId());
-		final ListNBT listNBT = new ListNBT();
+		final ListTag listNBT = new ListTag();
 		for (T predicate : predicates) {
-			listNBT.add(predicate.toNBT());
+			listNBT.add(predicate.toTag());
 		}
 		compoundNBT.put("predicates", listNBT);
 		return compoundNBT;

@@ -1,20 +1,22 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.gui;
 
-import java.util.function.Supplier;
-import javax.annotation.Nonnull;
-
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.StringTextComponent;
-
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
-import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerTile;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller.SignalControllerEntity;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
-public class SignalDisplay extends Widget {
+import javax.annotation.Nonnull;
+import java.util.function.Supplier;
+
+public class SignalDisplay extends AbstractWidget {
 	
 	private final int mainX;
 	private final int mainY;
@@ -24,7 +26,7 @@ public class SignalDisplay extends Widget {
 	private final Supplier<SignalPattern> patternSupplier;
 	
 	public SignalDisplay(int mainX, int mainY, int size, boolean withZs3, boolean withZs3v, Supplier<SignalPattern> patternSupplier) {
-		super(mainX, withZs3 ? mainY - 9 * size : mainY, 8 * size, ((withZs3 ? 9 : 0) + 16 + (withZs3v ? 9 : 0)) * size, StringTextComponent.EMPTY);
+		super(mainX, withZs3 ? mainY - 9 * size : mainY, 8 * size, ((withZs3 ? 9 : 0) + 16 + (withZs3v ? 9 : 0)) * size, TextComponent.EMPTY);
 		this.mainX = mainX;
 		this.mainY = mainY;
 		this.size = size;
@@ -34,17 +36,20 @@ public class SignalDisplay extends Widget {
 	}
 	
 	@Override
-	public void render(@Nonnull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-		final long time = System.currentTimeMillis() / (SignalControllerTile.BLINK_TIME * 50);
+	public void render(@Nonnull PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+		final long time = System.currentTimeMillis() / (SignalControllerEntity.BLINK_TIME * 50);
 		final SignalPattern pattern = patternSupplier.get();
+		
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 		
 		if (pattern != null) {
 			if (withZs3) {
-				Minecraft.getInstance().getTextureManager().bind(new ResourceLocation(ImmersiveSignals.MODID, "textures/custom/signal_zs3.png"));
+				RenderSystem.setShaderTexture(0, new ResourceLocation(ImmersiveSignals.MODID, "textures/custom/signal_zs3.png"));
 				blit(matrixStack, mainX + size, mainY - 9 * size, 6 * size, 8 * size, pattern.getZs3() % 4 * 32, (float) (pattern.getZs3() / 4 * 32), 24, 32, 128, 128);
 			}
 			
-			Minecraft.getInstance().getTextureManager().bind(new ResourceLocation(ImmersiveSignals.MODID, "textures/custom/signal_main.png"));
+			RenderSystem.setShaderTexture(0, new ResourceLocation(ImmersiveSignals.MODID, "textures/custom/signal_main.png"));
 			blit(matrixStack, mainX, mainY, 8 * size, 16 * size, 128, 0, 128, 256, 256, 256);
 			if (pattern.getMainPattern() == BaseSignalBlock.SignalMainPattern.HP0) {
 				blit(matrixStack, mainX + 3 * size, mainY + 3 * size, 2 * size, 2 * size, 48, 48, 32, 32, 256, 256);
@@ -69,10 +74,12 @@ public class SignalDisplay extends Widget {
 			}
 			
 			if (withZs3v) {
-				Minecraft.getInstance().getTextureManager().bind(new ResourceLocation(ImmersiveSignals.MODID, "textures/custom/signal_zs3v.png"));
+				RenderSystem.setShaderTexture(0, new ResourceLocation(ImmersiveSignals.MODID, "textures/custom/signal_zs3v.png"));
 				blit(matrixStack, mainX + size, mainY + 17 * size, 6 * size, 8 * size, pattern.getZs3v() % 4 * 32, (float) (pattern.getZs3v() / 4 * 32), 24, 32, 128, 128);
 			}
 		}
 	}
 	
+	@Override
+	public void updateNarration(@Nonnull NarrationElementOutput pNarrationElementOutput) {}
 }

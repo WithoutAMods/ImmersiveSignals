@@ -1,14 +1,13 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.network;
 
-import javax.annotation.Nonnull;
-
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.network.NetworkDirection;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
-
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.fmllegacy.network.NetworkDirection;
+import net.minecraftforge.fmllegacy.network.NetworkRegistry;
+import net.minecraftforge.fmllegacy.network.simple.SimpleChannel;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
+
+import javax.annotation.Nonnull;
 
 public class SignalControllerNetworking {
 	
@@ -38,7 +37,7 @@ public class SignalControllerNetworking {
 				.add();
 	}
 	
-	public static void sendToClient(Object packet, @Nonnull ServerPlayerEntity player) {
+	public static void sendToClient(Object packet, @Nonnull ServerPlayer player) {
 		INSTANCE.sendTo(packet, player.connection.connection, NetworkDirection.PLAY_TO_CLIENT);
 	}
 	

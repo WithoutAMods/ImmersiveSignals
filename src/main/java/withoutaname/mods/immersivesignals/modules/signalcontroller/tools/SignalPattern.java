@@ -2,8 +2,7 @@ package withoutaname.mods.immersivesignals.modules.signalcontroller.tools;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.nbt.CompoundNBT;
-
+import net.minecraft.nbt.CompoundTag;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock.SignalMainPattern;
 
@@ -67,7 +66,7 @@ public class SignalPattern {
 	}
 	
 	@Nonnull
-	public static SignalPattern fromNBT(@Nonnull CompoundNBT compoundNBT) {
+	public static SignalPattern fromNBT(@Nonnull CompoundTag compoundNBT) {
 		SignalPattern signalPattern = new SignalPattern();
 		signalPattern.setMainPattern(SignalMainPattern.fromString(compoundNBT.getString("main")));
 		signalPattern.setZs3(compoundNBT.getInt("zs3"));
@@ -95,8 +94,8 @@ public class SignalPattern {
 		return i;
 	}
 	
-	public CompoundNBT toNBT() {
-		CompoundNBT compoundNBT = new CompoundNBT();
+	public CompoundTag toTag() {
+		CompoundTag compoundNBT = new CompoundTag();
 		compoundNBT.putString("main", mainPattern.toString());
 		compoundNBT.putInt("zs3", zs3);
 		compoundNBT.putInt("zs3v", zs3v);

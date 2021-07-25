@@ -1,14 +1,13 @@
 package withoutaname.mods.immersivesignals.datagen;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.data.DataGenerator;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;
-
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signal.SignalRegistration;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
+
+import javax.annotation.Nonnull;
 
 public class Language extends LanguageProvider {
 	

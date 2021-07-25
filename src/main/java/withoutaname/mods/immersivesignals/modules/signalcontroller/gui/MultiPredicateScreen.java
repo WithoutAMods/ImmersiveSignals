@@ -2,16 +2,16 @@ package withoutaname.mods.immersivesignals.modules.signalcontroller.gui;
 
 import javax.annotation.Nonnull;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.DialogTexts;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.StringTextComponent;
-
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.PredicatePacket;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
@@ -40,7 +40,7 @@ public class MultiPredicateScreen extends Screen {
 	private int currentPage = 0;
 	
 	public MultiPredicateScreen(Screen lastScreen, MultiPredicate<?> multiPredicate) {
-		super(StringTextComponent.EMPTY);
+		super(TextComponent.EMPTY);
 		this.lastScreen = lastScreen;
 		this.multiPredicate = multiPredicate;
 	}
@@ -55,7 +55,7 @@ public class MultiPredicateScreen extends Screen {
 		int i = this.guiLeft = (this.width - this.xSize) / 2;
 		int j = this.guiTop = (this.height - this.ySize) / 2;
 		
-		preButton = addButton(new Button(i + 12, j + 12, 20, 20, new StringTextComponent("<"),
+		preButton = addRenderableWidget(new Button(i + 12, j + 12, 20, 20, new TextComponent("<"),
 				button -> {
 					if (currentPage > 0) {
 						currentPage--;
@@ -63,7 +63,7 @@ public class MultiPredicateScreen extends Screen {
 					}
 				}));
 		
-		nextButton = addButton(new Button(i + 156, j + 12, 20, 20, new StringTextComponent(">"),
+		nextButton = addRenderableWidget(new Button(i + 156, j + 12, 20, 20, new TextComponent(">"),
 				button -> {
 					if ((currentPage + 1) * PREDICATES_PER_SIDE < multiPredicate.getPredicates().size()) {
 						currentPage++;
@@ -71,7 +71,7 @@ public class MultiPredicateScreen extends Screen {
 					}
 				}));
 		
-		addButton(new Button(i + 180, j + 12, 20, 20, new StringTextComponent("+"),
+		addRenderableWidget(new Button(i + 180, j + 12, 20, 20, new TextComponent("+"),
 				button -> {
 					final BasePredicate<?> predicate = BasePredicate.getInstance(multiPredicate.getSubInstance().getId());
 					if (predicate != null) {
@@ -85,22 +85,22 @@ public class MultiPredicateScreen extends Screen {
 		BasePredicate<?> instance = BasePredicate.getInstance(multiPredicate.getSubInstance().getId());
 		if (instance != null) {
 			for (int k = 0; k < PREDICATES_PER_SIDE; k++) {
-				predicateWidgets[k] = instance.createWidget(this::addButton, i + 12, j + 40 + k * 24);
-				addButton(predicateWidgets[k]);
+				predicateWidgets[k] = instance.createWidget(this::addRenderableWidget, i + 12, j + 40 + k * 24);
+				addRenderableWidget(predicateWidgets[k]);
 				removeButtons[k] = createRemoveButton(k);
 			}
 		}
 		updateWidgets();
 		
-		addButton(new Button(i + 12, j + 40 + PREDICATES_PER_SIDE * 24 + 4, 92, 20,
-				DialogTexts.GUI_CANCEL, (p_214186_1_) -> onClose()));
-		addButton(new Button(i + 12 + 96, j + 40 + PREDICATES_PER_SIDE * 24 + 4, 92, 20,
-				DialogTexts.GUI_DONE, (p_214187_1_) -> saveAndClose()));
+		addRenderableWidget(new Button(i + 12, j + 40 + PREDICATES_PER_SIDE * 24 + 4, 92, 20,
+				CommonComponents.GUI_CANCEL, (p_214186_1_) -> onClose()));
+		addRenderableWidget(new Button(i + 12 + 96, j + 40 + PREDICATES_PER_SIDE * 24 + 4, 92, 20,
+				CommonComponents.GUI_DONE, (p_214187_1_) -> saveAndClose()));
 	}
 	
 	@Nonnull
 	private Button createRemoveButton(int id) {
-		return addButton(new Button(this.guiLeft + 180, this.guiTop + 40 + id * 24, 20, 20, new StringTextComponent("X"),
+		return addRenderableWidget(new Button(this.guiLeft + 180, this.guiTop + 40 + id * 24, 20, 20, new TextComponent("X"),
 				button -> {
 					multiPredicate.getPredicates().remove(currentPage * PREDICATES_PER_SIDE + id);
 					updateWidgets();
@@ -124,24 +124,24 @@ public class MultiPredicateScreen extends Screen {
 	}
 	
 	@Override
-	public void render(@Nonnull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-		this.renderBackground(matrixStack);
-		this.drawGuiContainerBackgroundLayer(matrixStack);
+	public void render(@Nonnull PoseStack poseStack, int mouseX, int mouseY, float partialTicks) {
+		this.renderBackground(poseStack);
+		this.drawGuiContainerBackgroundLayer(poseStack);
 		assert minecraft != null;
-		Widget.drawCenteredString(matrixStack, minecraft.font,
+		AbstractWidget.drawCenteredString(poseStack, minecraft.font,
 				(multiPredicate.getPredicates().size() == 0 ? 0 : currentPage * PREDICATES_PER_SIDE + 1)
 						+ " - " + (currentPage < multiPredicate.getPredicates().size() / PREDICATES_PER_SIDE ? (currentPage + 1) * PREDICATES_PER_SIDE : currentPage * PREDICATES_PER_SIDE + multiPredicate.getPredicates().size() % PREDICATES_PER_SIDE)
 						+ " / " + multiPredicate.getPredicates().size(), this.guiLeft + 94, this.guiTop + 18, 16777215);
-		super.render(matrixStack, mouseX, mouseY, partialTicks);
+		super.render(poseStack, mouseX, mouseY, partialTicks);
 	}
 	
-	protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack) {
-		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-		assert this.minecraft != null;
-		this.minecraft.getTextureManager().bind(GUI_TEXTURE);
+	protected void drawGuiContainerBackgroundLayer(PoseStack poseStack) {
+		RenderSystem.setShader(GameRenderer::getPositionTexShader);
+		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+		RenderSystem.setShaderTexture(0, GUI_TEXTURE);
 		int i = this.guiLeft;
 		int j = this.guiTop;
-		this.blit(matrixStack, i, j, 0, 0, this.xSize, this.ySize);
+		this.blit(poseStack, i, j, 0, 0, this.xSize, this.ySize);
 	}
 	
 	@Override

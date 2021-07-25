@@ -2,14 +2,13 @@ package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.contr
 
 import javax.annotation.Nonnull;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.datagen.Language;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.SignalDisplay;
@@ -20,7 +19,7 @@ public class SignalControllerScreen extends BaseScreen<SignalControllerContainer
 	
 	private Button overrideButton;
 	
-	public SignalControllerScreen(SignalControllerContainer container, PlayerInventory playerInventory, ITextComponent title) {
+	public SignalControllerScreen(SignalControllerContainer container, Inventory playerInventory, Component title) {
 		super(container, new ResourceLocation(ImmersiveSignals.MODID, "textures/gui/signal_template_small.png"), playerInventory, title, 224, 126);
 	}
 	
@@ -30,19 +29,19 @@ public class SignalControllerScreen extends BaseScreen<SignalControllerContainer
 		int i = this.leftPos;
 		int j = this.topPos;
 		
-		addButton(new SignalDisplay(i + 12, j + 39, 3, true, true,
+		addRenderableWidget(new SignalDisplay(i + 12, j + 39, 3, true, true,
 				() -> menu.isOverride() ? menu.getOverridePattern() : menu.getDefaultPattern()));
 		
 		assert minecraft != null;
 		assert minecraft.gameMode != null;
-		overrideButton = addButton(new Button(i + 48, j + 41, 164, 20, StringTextComponent.EMPTY,
+		overrideButton = addRenderableWidget(new Button(i + 48, j + 41, 164, 20, TextComponent.EMPTY,
 				p_onPress_1_ -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId, 0)));
 		
 		menu.setOnOverrideChanged(this::onOverrideChanged);
 		onOverrideChanged();
 		
-		addButton(new Button(i + 48, j + 41 + 24, 164, 20,
-				new TranslationTextComponent(Language.SCREEN + ".signal_pattern"),
+		addRenderableWidget(new Button(i + 48, j + 41 + 24, 164, 20,
+				new TranslatableComponent(Language.SCREEN + ".signal_pattern"),
 				p_onPress_1_ -> {
 					final SignalPatternScreen signalSelectionScreen = new SignalPatternScreen(this, menu::getOverridePattern);
 					this.minecraft.setScreen(signalSelectionScreen);
@@ -51,12 +50,12 @@ public class SignalControllerScreen extends BaseScreen<SignalControllerContainer
 	}
 	
 	private void onOverrideChanged() {
-		overrideButton.setMessage(new TranslationTextComponent(Language.SCREEN + ".override_pattern")
+		overrideButton.setMessage(new TranslatableComponent(Language.SCREEN + ".override_pattern")
 				.append(": ")
-				.append(new TranslationTextComponent("gui." + (menu.isOverride() ? "yes" : "no"))));
+				.append(new TranslatableComponent("gui." + (menu.isOverride() ? "yes" : "no"))));
 	}
 	
 	@Override
-	protected void renderLabels(@Nonnull MatrixStack matrixStack, int x, int y) {}
+	protected void renderLabels(@Nonnull PoseStack pPoseStack, int x, int y) {}
 	
 }

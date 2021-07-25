@@ -1,24 +1,23 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates;
 
-import java.util.function.Consumer;
-import javax.annotation.Nonnull;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.RedstoneWireBlock;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RedStoneWireBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.PredicateWidget;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.RedstonePredicateWidget;
+
+import javax.annotation.Nonnull;
+import java.util.function.Consumer;
 
 public class RedstonePredicate extends BasePredicate<RedstonePredicate> {
 	
@@ -36,33 +35,32 @@ public class RedstonePredicate extends BasePredicate<RedstonePredicate> {
 	}
 	
 	@Override
-	public boolean test(World world, BlockPos pos) {
+	public boolean test(Level world, BlockPos pos) {
 		return power == getPowerOnSide(world, pos, side);
 	}
 	
 	@Override
-	public RedstonePredicate fromBytes(@Nonnull PacketBuffer buffer) {
+	public RedstonePredicate fromBytes(@Nonnull FriendlyByteBuf buffer) {
 		final byte b = buffer.readByte();
 		return new RedstonePredicate(Direction.values()[b >>> 4], b & 0xf);
 	}
 	
 	@Override
-	public RedstonePredicate fromNBT(INBT inbt) {
-		if (inbt instanceof CompoundNBT) {
-			CompoundNBT nbt = (CompoundNBT) inbt;
+	public RedstonePredicate fromTag(Tag tag) {
+		if (tag instanceof CompoundTag nbt) {
 			return new RedstonePredicate(Direction.values()[nbt.getInt("side")], nbt.getInt("power"));
 		}
 		return new RedstonePredicate();
 	}
 	
 	@Override
-	public void toBytes(@Nonnull PacketBuffer buffer) {
+	public void toBytes(@Nonnull FriendlyByteBuf buffer) {
 		buffer.writeByte((side.ordinal() << 4) + power);
 	}
 	
 	@Override
-	public INBT toNBT() {
-		final CompoundNBT nbt = new CompoundNBT();
+	public Tag toTag() {
+		final CompoundTag nbt = new CompoundTag();
 		nbt.putInt("side", side.ordinal());
 		nbt.putInt("power", power);
 		return nbt;
@@ -75,7 +73,7 @@ public class RedstonePredicate extends BasePredicate<RedstonePredicate> {
 	
 	@OnlyIn(Dist.CLIENT)
 	@Override
-	public PredicateWidget createWidget(Consumer<Widget> buttonConsumer, int x, int y) {
+	public PredicateWidget createWidget(Consumer<AbstractWidget> buttonConsumer, int x, int y) {
 		return new RedstonePredicateWidget(this, buttonConsumer, x, y);
 	}
 	
@@ -97,15 +95,15 @@ public class RedstonePredicate extends BasePredicate<RedstonePredicate> {
 		this.side = side;
 	}
 	
-	private int getPowerOnSide(@Nonnull World world, @Nonnull BlockPos pos, Direction side) {
+	private int getPowerOnSide(@Nonnull Level level, @Nonnull BlockPos pos, Direction side) {
 		BlockPos blockPos = pos.relative(side);
-		BlockState blockstate = world.getBlockState(blockPos);
+		BlockState blockstate = level.getBlockState(blockPos);
 		Block block = blockstate.getBlock();
 		if (blockstate.isSignalSource()) {
 			if (block == Blocks.REDSTONE_BLOCK) {
 				return 15;
 			} else {
-				return block == Blocks.REDSTONE_WIRE ? blockstate.getValue(RedstoneWireBlock.POWER) : world.getDirectSignal(blockPos, side);
+				return block == Blocks.REDSTONE_WIRE ? blockstate.getValue(RedStoneWireBlock.POWER) : level.getDirectSignal(blockPos, side);
 			}
 		} else {
 			return 0;

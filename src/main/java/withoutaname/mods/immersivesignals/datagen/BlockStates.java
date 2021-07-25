@@ -1,16 +1,15 @@
 package withoutaname.mods.immersivesignals.datagen;
 
-import javax.annotation.Nonnull;
-
-import net.minecraft.block.BlockState;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
-
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signal.SignalRegistration;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
+
+import javax.annotation.Nonnull;
 
 public class BlockStates extends BlockStateProvider {
 	

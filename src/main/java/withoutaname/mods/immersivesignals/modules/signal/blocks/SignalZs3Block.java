@@ -1,11 +1,11 @@
 package withoutaname.mods.immersivesignals.modules.signal.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.state.StateContainer.Builder;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.phys.shapes.Shapes;
 
 public class SignalZs3Block extends BaseSignalBlock {
 	
@@ -16,16 +16,16 @@ public class SignalZs3Block extends BaseSignalBlock {
 		this.registerDefaultState(this.stateDefinition.any()
 				.setValue(ROTATION, 0)
 				.setValue(SIGNAL_NUMBER, 0));
-		this.shape = VoxelShapes.box(.25, 0, .25, .75, .75, .75);
+		this.shape = Shapes.box(.25, 0, .25, .75, .75, .75);
 	}
 	
 	@Override
-	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(ROTATION, SIGNAL_NUMBER);
 	}
 	
 	@Override
-	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+	public int getLightEmission(BlockState state, BlockGetter world, BlockPos pos) {
 		return state.getValue(SIGNAL_NUMBER) == 0 ? 0 : 10;
 	}
 	

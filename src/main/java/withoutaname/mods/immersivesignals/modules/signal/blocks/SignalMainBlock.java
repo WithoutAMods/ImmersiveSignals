@@ -1,10 +1,10 @@
 package withoutaname.mods.immersivesignals.modules.signal.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.state.StateContainer.Builder;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 
 public class SignalMainBlock extends BaseSignalBlock {
 	
@@ -22,12 +22,12 @@ public class SignalMainBlock extends BaseSignalBlock {
 	}
 	
 	@Override
-	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(ROTATION, SIGNAL_MAIN_PATTERN, SIGNAL_WHITE0, SIGNAL_WHITE1, SIGNAL_WHITE2, SIGNAL_ZS7);
 	}
 	
 	@Override
-	public int getLightValue(BlockState state, IBlockReader world, BlockPos pos) {
+	public int getLightEmission(BlockState state, BlockGetter world, BlockPos pos) {
 		return state.getValue(SIGNAL_MAIN_PATTERN) != SignalMainPattern.NONE || state.getValue(SIGNAL_WHITE0)
 				|| state.getValue(SIGNAL_WHITE1) || state.getValue(SIGNAL_WHITE2) || state.getValue(SIGNAL_ZS7) ? 10 : 0;
 	}

@@ -1,29 +1,30 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.fmllegacy.network.NetworkHooks;
+import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
-
-public class SignalControllerBlock extends Block {
+public class SignalControllerBlock extends BaseEntityBlock {
 	
 	public SignalControllerBlock() {
 		super(Properties.of(Material.METAL)
@@ -31,37 +32,34 @@ public class SignalControllerBlock extends Block {
 				.strength(1.5F, 6.0F));
 	}
 	
+	@Override
+	public RenderShape getRenderShape(BlockState pState) {
+		return RenderShape.MODEL;
+	}
+	
 	@Nullable
 	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return new SignalControllerTile();
+	public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
+		return new SignalControllerEntity(pos, state);
 	}
 	
+	@Nullable
 	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level pLevel, @Nonnull BlockState pState, @Nonnull BlockEntityType<T> pEntityType) {
+		return pLevel.isClientSide ? null : createTickerHelper(pEntityType, SignalControllerRegistration.SIGNAL_CONTROLLER_ENTITY.get(),
+				(level, pos, blockState, entity) -> entity.tick());
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override
 	@Nonnull
-	public ActionResultType use(@Nonnull BlockState state, World world, @Nonnull BlockPos pos, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull BlockRayTraceResult trace) {
-		if (!world.isClientSide) {
-			INamedContainerProvider containerProvider = new INamedContainerProvider() {
-				@Nonnull
-				@Override
-				public ITextComponent getDisplayName() {
-					return new TranslationTextComponent("screen.immersivesignals.signal_controller");
-				}
-				
-				@Override
-				public Container createMenu(int i, @Nonnull PlayerInventory playerInventory, @Nonnull PlayerEntity playerEntity) {
-					return new SignalControllerContainer(i, world, pos);
-				}
-			};
-			NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, pos);
+	public InteractionResult use(@Nonnull BlockState pState, @Nonnull Level pLevel, @Nonnull BlockPos pPos, @Nonnull Player pPlayer, @Nonnull InteractionHand pHand, BlockHitResult pHit) {
+		if (!pLevel.isClientSide) {
+			MenuProvider containerProvider = new SimpleMenuProvider(
+					(containerId, inventory, player) -> new SignalControllerContainer(containerId, pLevel, pPos),
+					new TranslatableComponent("screen.immersivesignals.signal_controller"));
+			NetworkHooks.openGui((ServerPlayer) pPlayer, containerProvider, pPos);
 		}
-		return ActionResultType.SUCCESS;
+		return InteractionResult.SUCCESS;
 	}
 	
 }

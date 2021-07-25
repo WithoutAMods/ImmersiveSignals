@@ -1,22 +1,21 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.controller;
 
-import javax.annotation.Nonnull;
-
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IntReferenceHolder;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.DataSlot;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.BaseSignalPatternContainer;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
+import javax.annotation.Nonnull;
+
 public class SignalControllerContainer extends BaseSignalPatternContainer {
 	
-	private SignalControllerTile tile;
+	private SignalControllerEntity tile;
 	
 	private SignalPattern defaultPattern = new SignalPattern();
 	private Runnable onDefaultPatternChanged = () -> {};
@@ -25,12 +24,13 @@ public class SignalControllerContainer extends BaseSignalPatternContainer {
 	private SignalPattern overridePattern = new SignalPattern();
 	private Runnable onOverridePatternChanged = () -> {};
 	
-	public SignalControllerContainer(int id, @Nonnull World world, BlockPos pos) {
+	public SignalControllerContainer(int id, @Nonnull Level world, BlockPos pos) {
 		super(SignalControllerRegistration.SIGNAL_CONTROLLER_CONTAINER.get(), id);
-		TileEntity te = world.getBlockEntity(pos);
-		if (te instanceof SignalControllerTile) {
-			tile = (SignalControllerTile) te;
-			addDataSlot(new IntReferenceHolder() {
+		BlockEntity entity = world.getBlockEntity(pos);
+		if (entity instanceof SignalControllerEntity) {
+			tile = (SignalControllerEntity) entity;
+			
+			addDataSlot(new DataSlot() {
 				@Override
 				public int get() {
 					return tile.getDefaultPattern().toInt();
@@ -42,7 +42,7 @@ public class SignalControllerContainer extends BaseSignalPatternContainer {
 					onDefaultPatternChanged.run();
 				}
 			});
-			addDataSlot(new IntReferenceHolder() {
+			addDataSlot(new DataSlot() {
 				@Override
 				public int get() {
 					return tile.isOverride() ? 1 : 0;
@@ -54,7 +54,7 @@ public class SignalControllerContainer extends BaseSignalPatternContainer {
 					onOverrideChanged.run();
 				}
 			});
-			addDataSlot(new IntReferenceHolder() {
+			addDataSlot(new DataSlot() {
 				@Override
 				public int get() {
 					return tile.getOverridePattern().toInt();
@@ -75,8 +75,8 @@ public class SignalControllerContainer extends BaseSignalPatternContainer {
 	}
 	
 	@Override
-	public boolean clickMenuButton(@Nonnull PlayerEntity playerIn, int id) {
-		if (id == 0) {
+	public boolean clickMenuButton(@Nonnull Player pPlayer, int pId) {
+		if (pId == 0) {
 			tile.setOverride(!tile.isOverride());
 			return true;
 		}
@@ -114,7 +114,7 @@ public class SignalControllerContainer extends BaseSignalPatternContainer {
 	}
 	
 	@Override
-	public boolean stillValid(@Nonnull PlayerEntity playerIn) {
+	public boolean stillValid(@Nonnull Player playerIn) {
 		return true;
 	}
 	

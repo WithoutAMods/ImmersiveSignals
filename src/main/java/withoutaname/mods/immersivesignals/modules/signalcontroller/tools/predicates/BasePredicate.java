@@ -1,21 +1,20 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates;
 
-import java.util.function.Consumer;
-import javax.annotation.Nullable;
-
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.nbt.INBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.PredicateWidget;
 
-public abstract class BasePredicate<T extends BasePredicate<T>> {
+import javax.annotation.Nullable;
+import java.util.function.Consumer;
 
+public abstract class BasePredicate<T extends BasePredicate<T>> {
+	
 	@Nullable
 	public static BasePredicate<?> getInstance(int id) {
 		switch (id & 0xf) {
@@ -28,21 +27,21 @@ public abstract class BasePredicate<T extends BasePredicate<T>> {
 		}
 		return null;
 	}
-
+	
 	@OnlyIn(Dist.CLIENT)
-	public PredicateWidget createWidget(Consumer<Widget> buttonConsumer, int x, int y) {
-		return new PredicateWidget(x, y, StringTextComponent.EMPTY);
+	public PredicateWidget createWidget(Consumer<AbstractWidget> buttonConsumer, int x, int y) {
+		return new PredicateWidget(x, y, TextComponent.EMPTY);
 	}
-
-	public abstract boolean test(World world, BlockPos pos);
-
-	public abstract T fromBytes(PacketBuffer buffer);
-
-	public abstract T fromNBT(INBT inbt);
-
-	public abstract void toBytes(PacketBuffer buffer);
-
-	public abstract INBT toNBT();
-
+	
+	public abstract boolean test(Level level, BlockPos pos);
+	
+	public abstract T fromBytes(FriendlyByteBuf buffer);
+	
+	public abstract T fromTag(Tag tag);
+	
+	public abstract void toBytes(FriendlyByteBuf buffer);
+	
+	public abstract Tag toTag();
+	
 	public abstract int getId();
 }

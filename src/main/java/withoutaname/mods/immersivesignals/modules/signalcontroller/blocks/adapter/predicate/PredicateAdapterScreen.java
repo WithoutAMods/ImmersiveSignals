@@ -1,16 +1,13 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapter.predicate;
 
-import javax.annotation.Nonnull;
-
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.datagen.Language;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.PredicateWidget;
@@ -19,17 +16,18 @@ import withoutaname.mods.immersivesignals.modules.signalcontroller.gui.SignalPat
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predicates.BasePredicate;
 import withoutaname.mods.withoutalib.blocks.BaseScreen;
 
+import javax.annotation.Nonnull;
+
 public class PredicateAdapterScreen extends BaseScreen<PredicateAdapterContainer<?>> {
 	
 	private static BasePredicate<?> nextPredicate;
-	
-	private Button nextButton;
-	private Button preButton;
 	protected PredicateWidget predicateWidget;
 	protected Button modifyPatternButton;
+	private Button nextButton;
+	private Button preButton;
 	private Button deleteButton;
 	
-	public PredicateAdapterScreen(PredicateAdapterContainer<?> container, PlayerInventory playerInventory, ITextComponent title) {
+	public PredicateAdapterScreen(PredicateAdapterContainer<?> container, Inventory playerInventory, Component title) {
 		super(container, new ResourceLocation(ImmersiveSignals.MODID, "textures/gui/signal_template_small.png"), playerInventory, title, 224, 126);
 	}
 	
@@ -42,41 +40,40 @@ public class PredicateAdapterScreen extends BaseScreen<PredicateAdapterContainer
 		super.init();
 		int i = this.leftPos;
 		int j = this.topPos;
-		
-		addButton(new SignalDisplay(i + 12, j + 39, 3, true, true,
+		addRenderableWidget(new SignalDisplay(i + 12, j + 39, 3, true, true,
 				menu::getCurrentPattern));
 		
 		assert minecraft != null;
 		assert minecraft.gameMode != null;
 		
-		preButton = addButton(new Button(i + 48, j + 12, 20, 20, new StringTextComponent("<"),
+		preButton = addRenderableWidget(new Button(i + 48, j + 12, 20, 20, new TextComponent("<"),
 				p_onPress_1_ -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId, 0)));
 		
-		nextButton = addButton(new Button(i + 192, j + 12, 20, 20, new StringTextComponent(">"),
+		nextButton = addRenderableWidget(new Button(i + 192, j + 12, 20, 20, new TextComponent(">"),
 				p_onPress_1_ -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId, 1)));
 		
 		if (predicateWidget != null) {
-			addButton(predicateWidget);
+			addRenderableWidget(predicateWidget);
 			updatePredicate();
 		} else {
 			menu.setOnPredicateIDChanged(() -> {
-				predicateWidget = addButton(BasePredicate.getInstance(menu.getPredicateID()).createWidget(this::addButton, i + 48, j + 41));
+				predicateWidget = addRenderableWidget(BasePredicate.getInstance(menu.getPredicateID()).createWidget(this::addRenderableWidget, i + 48, j + 41));
 				menu.setOnPredicateIDChanged(() -> {});
 				updatePredicate();
 			});
 		}
 		
-		modifyPatternButton = addButton(new Button(i + 48, j + 41 + 24, 164, 20, new TranslationTextComponent(Language.SCREEN + ".signal_pattern"),
+		modifyPatternButton = addRenderableWidget(new Button(i + 48, j + 41 + 24, 164, 20, new TranslatableComponent(Language.SCREEN + ".signal_pattern"),
 				p_onPress_1_ -> {
 					final SignalPatternScreen signalSelectionScreen = new SignalPatternScreen(this, menu::getCurrentPattern);
 					this.minecraft.setScreen(signalSelectionScreen);
 					menu.setOnCurrentPatternChanged(signalSelectionScreen::update);
 				}));
 		
-		deleteButton = addButton(new Button(i + 48, j + 94, 20, 20, new StringTextComponent("X"),
+		deleteButton = addRenderableWidget(new Button(i + 48, j + 94, 20, 20, new TextComponent("X"),
 				p_onPress_1_ -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId, 2)));
 		
-		addButton(new Button(i + 192, j + 94, 20, 20, new StringTextComponent("+"),
+		addRenderableWidget(new Button(i + 192, j + 94, 20, 20, new TextComponent("+"),
 				p_onPress_1_ -> minecraft.gameMode.handleInventoryButtonClick(menu.containerId, 3)));
 		
 		menu.setOnPredicatePatternsSizeChanged(this::updatePredicatePatternIDSelection);
@@ -116,15 +113,14 @@ public class PredicateAdapterScreen extends BaseScreen<PredicateAdapterContainer
 	}
 	
 	@Override
-	protected void renderBg(@Nonnull MatrixStack matrixStack, float partialTicks, int x, int y) {
+	protected void renderBg(@Nonnull PoseStack matrixStack, float partialTicks, int x, int y) {
 		super.renderBg(matrixStack, partialTicks, x, y);
 		assert minecraft != null;
-		Widget.drawCenteredString(matrixStack, minecraft.font, (menu.getCurrentPredicatePatternID() + 1) + " / " + menu.getPredicatePatternsSize(), this.leftPos + 130, this.topPos + 18, 16777215);
+		AbstractWidget.drawCenteredString(matrixStack, minecraft.font, (menu.getCurrentPredicatePatternID() + 1) + " / " + menu.getPredicatePatternsSize(), this.leftPos + 130, this.topPos + 18, 16777215);
 	}
 	
 	@Override
-	protected void renderLabels(@Nonnull MatrixStack matrixStack, int x, int y) {
-	}
+	protected void renderLabels(@Nonnull PoseStack matrixStack, int x, int y) {}
 	
 	@Override
 	public void removed() {

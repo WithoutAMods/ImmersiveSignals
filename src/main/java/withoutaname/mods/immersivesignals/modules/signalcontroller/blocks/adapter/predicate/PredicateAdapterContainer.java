@@ -3,13 +3,13 @@ package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.adapt
 import javax.annotation.Nonnull;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IntReferenceHolder;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.DataSlot;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -22,7 +22,7 @@ import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.predica
 
 public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseSignalPatternContainer {
 	
-	private final PlayerEntity player;
+	private final Player player;
 	private PredicateAdapterTile<T> tile;
 	
 	private int predicateID;
@@ -35,13 +35,13 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 	protected Runnable onCurrentPredicatePatternIDChanged = () -> {};
 	protected Runnable onCurrentPatternChanged = () -> {};
 	
-	public PredicateAdapterContainer(ContainerType<PredicateAdapterContainer<T>> type, int id, World world, BlockPos pos, PlayerEntity player) {
+	public PredicateAdapterContainer(MenuType<PredicateAdapterContainer<T>> type, int id, Level world, BlockPos pos, Player player) {
 		super(type, id);
 		this.player = player;
-		TileEntity te = world.getBlockEntity(pos);
+		BlockEntity te = world.getBlockEntity(pos);
 		if (te instanceof PredicateAdapterTile) {
 			tile = (PredicateAdapterTile<T>) te;
-			addDataSlot(new IntReferenceHolder() {
+			addDataSlot(new DataSlot() {
 				@Override
 				public int get() {
 					return tile.predicateInstance.getId();
@@ -53,7 +53,7 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 					onPredicateIDChanged.run();
 				}
 			});
-			addDataSlot(new IntReferenceHolder() {
+			addDataSlot(new DataSlot() {
 				@Override
 				public int get() {
 					return tile.predicatePatterns.size();
@@ -65,7 +65,7 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 					onPredicatePatternsSizeChanged.run();
 				}
 			});
-			addDataSlot(new IntReferenceHolder() {
+			addDataSlot(new DataSlot() {
 				@Override
 				public int get() {
 					return currentPredicatePatternID;
@@ -77,7 +77,7 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 					onCurrentPredicatePatternIDChanged.run();
 				}
 			});
-			addDataSlot(new IntReferenceHolder() {
+			addDataSlot(new DataSlot() {
 				@Override
 				public int get() {
 					if (tile.predicatePatterns.size() > 0) {
@@ -104,7 +104,7 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 	}
 	
 	@Override
-	public boolean clickMenuButton(@Nonnull PlayerEntity playerIn, int id) {
+	public boolean clickMenuButton(@Nonnull Player playerIn, int id) {
 		switch (id) {
 			case 0:
 				if (currentPredicatePatternID > 0) {
@@ -135,7 +135,7 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 	
 	private void sendPredicatePacket() {
 		if (currentPredicatePatternID >= 0 && currentPredicatePatternID < tile.predicatePatterns.size()) {
-			SignalControllerNetworking.sendToClient(new PredicatePacket(tile.predicatePatterns.get(currentPredicatePatternID).getFirst()), (ServerPlayerEntity) this.player);
+			SignalControllerNetworking.sendToClient(new PredicatePacket(tile.predicatePatterns.get(currentPredicatePatternID).getFirst()), (ServerPlayer) this.player);
 		}
 	}
 	
@@ -144,7 +144,7 @@ public class PredicateAdapterContainer<T extends BasePredicate<T>> extends BaseS
 	}
 	
 	@Override
-	public boolean stillValid(@Nonnull PlayerEntity playerIn) {
+	public boolean stillValid(@Nonnull Player playerIn) {
 		return true;
 	}
 	

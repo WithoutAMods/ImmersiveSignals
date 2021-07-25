@@ -1,8 +1,8 @@
 package withoutaname.mods.immersivesignals.modules.signal.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.state.StateContainer.Builder;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 
 public class SignalPostBlock extends BaseSignalBlock {
 	
@@ -16,7 +16,7 @@ public class SignalPostBlock extends BaseSignalBlock {
 	}
 	
 	@Override
-	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(ROTATION, SIGNAL_MASTSIGN);
 	}
 	

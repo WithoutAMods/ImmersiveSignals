@@ -1,14 +1,13 @@
 package withoutaname.mods.immersivesignals.modules.signalcontroller.network;
 
-import java.util.function.Supplier;
-import javax.annotation.Nonnull;
-
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.fml.network.NetworkEvent;
-
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraftforge.fmllegacy.network.NetworkEvent;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.BaseSignalPatternContainer;
+
+import javax.annotation.Nonnull;
+import java.util.function.Supplier;
 
 public class PatternModifyPacket {
 	
@@ -32,20 +31,20 @@ public class PatternModifyPacket {
 		this.value = value;
 	}
 	
-	public PatternModifyPacket(@Nonnull PacketBuffer packetBuffer) {
+	public PatternModifyPacket(@Nonnull FriendlyByteBuf packetBuffer) {
 		this(packetBuffer.readByte(), packetBuffer.readByte());
 	}
 	
-	public void toBytes(@Nonnull PacketBuffer packetBuffer) {
+	public void toBytes(@Nonnull FriendlyByteBuf packetBuffer) {
 		packetBuffer.writeByte(buttonID);
 		packetBuffer.writeByte(value);
 	}
 	
 	public boolean handle(@Nonnull Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
-			ServerPlayerEntity sender = ctx.get().getSender();
+			ServerPlayer sender = ctx.get().getSender();
 			assert sender != null;
-			final Container container = sender.containerMenu;
+			final AbstractContainerMenu container = sender.containerMenu;
 			if (container instanceof BaseSignalPatternContainer) {
 				((BaseSignalPatternContainer) container).onPatternModify(this);
 			}

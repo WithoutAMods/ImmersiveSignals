@@ -3,18 +3,17 @@ package withoutaname.mods.immersivesignals.modules.signalcontroller.blocks.contr
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-
+import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import withoutaname.mods.immersivesignals.modules.signal.SignalRegistration;
 import withoutaname.mods.immersivesignals.modules.signal.blocks.BaseSignalBlock;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.SignalControllerRegistration;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.tools.SignalPattern;
 
-public class SignalControllerTile extends TileEntity implements ITickableTileEntity {
+public class SignalControllerEntity extends BlockEntity {
 	
 	private SignalPattern defaultPattern = new SignalPattern(this::updateSignal);
 	private boolean override = false;
@@ -25,8 +24,8 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 	private boolean ks1Blinking;
 	private int blinkCounter = 0;
 	
-	public SignalControllerTile() {
-		super(SignalControllerRegistration.SIGNAL_CONTROLLER_TILE.get());
+	public SignalControllerEntity(BlockPos pos, BlockState state) {
+		super(SignalControllerRegistration.SIGNAL_CONTROLLER_ENTITY.get(), pos, state);
 	}
 	
 	public SignalPattern getDefaultPattern() {
@@ -52,7 +51,6 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 		return overridePattern;
 	}
 	
-	@Override
 	public void tick() {
 		if (white2Blinking || ks1Blinking) {
 			if (++blinkCounter == BLINK_TIME) {
@@ -139,26 +137,25 @@ public class SignalControllerTile extends TileEntity implements ITickableTileEnt
 	}
 	
 	@Override
-	public void load(@Nonnull BlockState state, @Nonnull CompoundNBT nbt) {
-		super.load(state, nbt);
-		defaultPattern = SignalPattern.fromNBT(nbt.getCompound("defaultPattern"));
+	public void load(@Nonnull CompoundTag tag) {
+		super.load(tag);
+		defaultPattern = SignalPattern.fromNBT(tag.getCompound("defaultPattern"));
 		defaultPattern.setOnChanged(this::updateSignal);
-		override = nbt.getBoolean("override");
-		overridePattern = SignalPattern.fromNBT(nbt.getCompound("overridePattern"));
+		override = tag.getBoolean("override");
+		overridePattern = SignalPattern.fromNBT(tag.getCompound("overridePattern"));
 		overridePattern.setOnChanged(this::updateSignal);
-		ks1Blinking = nbt.getBoolean("ks1Blinking");
-		white2Blinking = nbt.getBoolean("white2Blinking");
+		ks1Blinking = tag.getBoolean("ks1Blinking");
+		white2Blinking = tag.getBoolean("white2Blinking");
 	}
 	
 	@Override
 	@Nonnull
-	public CompoundNBT save(@Nonnull CompoundNBT compound) {
-		compound.put("defaultPattern", defaultPattern.toNBT());
-		compound.putBoolean("override", override);
-		compound.put("overridePattern", overridePattern.toNBT());
-		compound.putBoolean("ks1Blinking", ks1Blinking);
-		compound.putBoolean("white2Blinking", white2Blinking);
-		return super.save(compound);
+	public CompoundTag save(@Nonnull CompoundTag tag) {
+		tag.put("defaultPattern", defaultPattern.toTag());
+		tag.putBoolean("override", override);
+		tag.put("overridePattern", overridePattern.toTag());
+		tag.putBoolean("ks1Blinking", ks1Blinking);
+		tag.putBoolean("white2Blinking", white2Blinking);
+		return super.save(tag);
 	}
-	
 }
