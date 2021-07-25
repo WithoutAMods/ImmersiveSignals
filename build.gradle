@@ -163,9 +163,9 @@ dependencies {
 //    implementation fg.deobf("mcjty.theoneprobe:TheOneProbe-${top_version}")
 
     if (findProject(':WithoutALib') != null) {
-        implementation project(':WithoutALib')
+        compileOnly project(':WithoutALib')
     } else {
-        implementation fg.deobf("withoutaname.mods.withoutalib:WithoutALib:${withoutalib_version}")
+        compileOnly fg.deobf("withoutaname.mods.withoutalib:WithoutALib:${withoutalib_version}")
     }
 
     // Real mod deobf dependency examples - these get remapped to your current mappings
