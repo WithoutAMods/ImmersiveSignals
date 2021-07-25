@@ -7,12 +7,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
+import withoutaname.mods.immersivesignals.ImmersiveSignals;
 import withoutaname.mods.immersivesignals.modules.signal.SignalRegistration;
 import withoutaname.mods.immersivesignals.modules.signalcontroller.network.SignalControllerNetworking;
 
 public class ModSetup {
 	
-	public static final CreativeModeTab DEFAULT_CREATIVE_TAB = new CreativeModeTab("Immersive Signals") {
+	public static final CreativeModeTab DEFAULT_CREATIVE_TAB = new CreativeModeTab(ImmersiveSignals.MODID) {
 		
 		@Nonnull
 		@Override
