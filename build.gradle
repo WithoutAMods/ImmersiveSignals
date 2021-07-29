@@ -15,19 +15,6 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-repositories {
-    maven { // JEI
-        url "https://dvs1.progwml6.com/files/maven"
-    }
-    maven { // TOP
-        name 'tterrag maven'
-        url "https://maven.tterrag.com/"
-    }
-    maven { // WithoutALib
-        url "https://mineplay.link/maven/"
-    }
-}
-
 version = "${minecraft_version}-${mod_version}"
 group = "${mod_base_package}.${mod_id}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = mod_base_name
@@ -150,6 +137,16 @@ repositories {
     // flatDir {
     //     dir 'libs'
     // }
+    maven { // JEI
+        url "https://dvs1.progwml6.com/files/maven"
+    }
+    maven { // TOP
+        name 'tterrag maven'
+        url "https://maven.tterrag.com/"
+    }
+    maven { // WithoutALib
+        url "https://mineplay.link/maven/"
+    }
 }
 
 dependencies {
