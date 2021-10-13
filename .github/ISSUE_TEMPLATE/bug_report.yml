@@ -1,0 +1,58 @@
+name: Bug Report
+description: Report a bug of this mod
+title: "[Bug] "
+labels: ["bug"]
+assignees:
+  - WithoutAName25
+body:
+  - type: textarea
+    attributes:
+      label: Short description
+      description: Short description what happend.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Mod version
+      description: The version of the mod in which the bug occurred.
+      placeholder: 1.17.1-1.0.0
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: WithoutALib version
+      description: The version of WithoutALib where the bug occurred.
+      placeholder: 1.17.1-1.0.0
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Minecraft version
+      description: The version of the Minecraft in which the bug occurred.
+      placeholder: e.g. 1.17.1
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: MINIMUM requiered other mods for this bug
+      description: Only these mods that are required for the bug to occour. Please specify also the version.
+      placeholder: |
+        ExampleMod v1.0.6
+        TestMod v3.7.1
+  - type: textarea
+    attributes:
+      label: Steps to reproduce the error
+      placeholder: |
+        1. 
+        2. 
+        3. 
+        ...
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional information
+      description: "For example: logs, screenshots, ..."
+  - type: markdown
+    attributes:
+      value: "Thanks for completing this form!"

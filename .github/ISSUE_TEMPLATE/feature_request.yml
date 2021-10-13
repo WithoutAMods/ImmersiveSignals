@@ -1,0 +1,26 @@
+name: Feature Request
+description: Suggest an idea for this project
+title: "[Feature] "
+labels: ["enhancement"]
+assignees:
+  - WithoutAName25
+body:
+  - type: textarea
+    attributes:
+      label: Is it related to a problem?
+      placeholder: e.g. It's difficult to do / get ...
+  - type: textarea
+    attributes:
+      label: Your suggestion
+      description: Your suggestion to solve the problem / improve the mod.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Alternative solutions you've considered
+  - type: textarea
+    attributes:
+      label: Additions
+  - type: markdown
+    attributes:
+      value: "Thanks for completing this form!"
