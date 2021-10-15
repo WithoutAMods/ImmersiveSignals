@@ -148,6 +148,9 @@ repositories {
     maven { // WithoutALib
         url "https://withoutaname.eu/maven/releases/"
     }
+    maven { // WithoutALib snapshots
+        url "https://withoutaname.eu/maven/snapshots/"
+    }
 }
 
 dependencies {
@@ -156,16 +159,12 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
+    implementation fg.deobf("withoutaname.mods.withoutalib:WithoutALib:${withoutalib_version}")
+
     compileOnly fg.deobf("mezz.jei:jei-${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${jei_version}")
 
 //    implementation fg.deobf("mcjty.theoneprobe:TheOneProbe-${top_version}")
-
-    if (findProject(':WithoutALib') != null) {
-        implementation project(':WithoutALib')
-    } else {
-        implementation fg.deobf("withoutaname.mods.withoutalib:WithoutALib:${withoutalib_version}")
-    }
 
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
@@ -218,12 +217,12 @@ processResources {
 jar {
     manifest {
         attributes([
-                "Specification-Title": mod_id,
-                "Specification-Vendor": mod_authors,
-                "Specification-Version": "1", // We are version 1 of ourselves
-                "Implementation-Title": project.name,
-                "Implementation-Version": mod_version,
-                "Implementation-Vendor": mod_authors,
+                "Specification-Title"     : mod_id,
+                "Specification-Vendor"    : mod_authors,
+                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : mod_version,
+                "Implementation-Vendor"   : mod_authors,
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
