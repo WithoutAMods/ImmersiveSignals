@@ -146,10 +146,10 @@ repositories {
         url "https://maven.tterrag.com/"
     }
     maven { // WithoutALib
-        url "https://withoutaname.eu/maven/releases/"
+        url "https://repo.withoutaname.eu/releases/"
     }
     maven { // WithoutALib snapshots
-        url "https://withoutaname.eu/maven/snapshots/"
+        url "https://repo.withoutaname.eu/snapshots/"
     }
 }
 
