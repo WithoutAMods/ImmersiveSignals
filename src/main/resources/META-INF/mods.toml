@@ -1,0 +1,28 @@
+modLoader = "kotlinforforge"
+loaderVersion = "[1,)"
+license = "MIT license"
+[[mods]]
+modId = "immersivesignals"
+version = "${version}"
+displayName = "Immersive Signals"
+displayURL = "https://github.com/WithoutAMods/ImmersiveSignals"
+#logoFile="immersivesignals.png"
+#credits="Thanks for this example mod goes to Java"
+authors = "WithoutAName"
+description = '''
+Signals for Immersive Railroading or other train mods
+'''
+
+[[dependencies.immersivesignals]]
+modId = "forge"
+mandatory = true
+versionRange = "[36,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.immersivesignals]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.16.5,1.17)"
+ordering = "NONE"
+side = "BOTH"
