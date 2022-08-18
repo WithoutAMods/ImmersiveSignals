@@ -1,3 +1,5 @@
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -7,6 +9,7 @@ plugins {
     `maven-publish`
     id("pl.allegro.tech.build.axion-release") version "1.13.14"
     kotlin("jvm") version "1.6.21"
+    id("io.gitlab.arturbosch.detekt") version "1.21.0"
 }
 
 scmVersion {
@@ -34,6 +37,8 @@ dependencies {
     "minecraft"("net.minecraftforge:forge:1.16.5-36.2.35")
 
     implementation("thedarkcolour:kotlinforforge:1.16.0")
+
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.21.0")
 }
 
 minecraft {
@@ -90,6 +95,20 @@ minecraft {
             }
         }
     }
+}
+
+detekt {
+    allRules = true
+    autoCorrect = true
+    buildUponDefaultConfig = true
+    config = files("detekt.yml")
+}
+
+tasks.withType<Detekt>().configureEach {
+    jvmTarget = "1.8"
+}
+tasks.withType<DetektCreateBaselineTask>().configureEach {
+    jvmTarget = "1.8"
 }
 
 java {
