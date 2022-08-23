@@ -16,6 +16,7 @@ object ModSetup {
     }
     val DEFAULT_ITEM_PROPERTIES: Item.Properties = Item.Properties().tab(DEFAULT_CREATIVE_TAB)
 
+    @Suppress("UnusedPrivateMember")
     fun init(event: FMLCommonSetupEvent) {
     }
 }

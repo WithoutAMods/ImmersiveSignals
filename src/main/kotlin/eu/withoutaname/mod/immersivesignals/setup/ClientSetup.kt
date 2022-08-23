@@ -4,5 +4,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 
 object ClientSetup {
 
-    fun init(event: FMLClientSetupEvent) {}
+    @Suppress("UnusedPrivateMember")
+    fun init(event: FMLClientSetupEvent) {
+    }
 }
