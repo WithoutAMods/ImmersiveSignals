@@ -1,7 +1,7 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
 
 plugins {
     id("net.minecraftforge.gradle")
@@ -23,20 +23,42 @@ scmVersion {
 
 version = scmVersion.version
 group = "eu.withoutaname.mod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-val archivesBaseName = "cityrpmod"
+val archivesBaseName = "immersivesignals"
 
 repositories {
     mavenCentral()
     maven("https://thedarkcolour.github.io/KotlinForForge/")
     maven("https://www.cursemaven.com")
+    maven("https://teamopenindustry.cc/maven/")
+    maven("https://squiddev.cc/maven/")
 }
 
-sourceSets.main.get().resources { srcDir("src/generated/resources") }
+sourceSets {
+    main.get().resources { srcDir("src/generated/resources") }
+    create("dependencies") {
+        allJava.setSrcDirs(listOf<Any>())
+        resources.setSrcDirs(listOf<Any>())
+    }
+}
+
+configurations {
+    val mod by creating
+    val modRuntime by creating
+    val compileOnly by getting
+    val dependenciesRuntimeOnly by getting
+    modRuntime.extendsFrom(mod)
+    compileOnly.extendsFrom(mod)
+    dependenciesRuntimeOnly.extendsFrom(modRuntime)
+}
 
 dependencies {
     "minecraft"("net.minecraftforge:forge:1.16.5-36.2.35")
 
     implementation("thedarkcolour:kotlinforforge:1.16.0")
+    "modRuntime"(fg.deobf("cam72cam.universalmodcore:UniversalModCore:1.16.5-forge-1.1.1"))
+    "modRuntime"(fg.deobf("org.squiddev:cc-tweaked-1.16.5:1.97.0"))
+    "modRuntime"(fg.deobf("trackapi:TrackAPI:1.16.5-forge-1.2"))
+    "mod"(fg.deobf("cam72cam.immersiverailroading:ImmersiveRailroading:1.16.5-forge-1.9.1"))
 
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.21.0")
 }
@@ -53,8 +75,8 @@ minecraft {
             property("forge.logging.console.level", "debug")
 
             mods {
-                create("cityrpmod") {
-                    source(sourceSets.main.get())
+                create("immersivesignals") {
+                    sources(sourceSets.main.get(), sourceSets["dependencies"])
                 }
             }
         }
@@ -66,8 +88,8 @@ minecraft {
             property("forge.logging.console.level", "debug")
 
             mods {
-                create("cityrpmod") {
-                    source(sourceSets.main.get())
+                create("immersivesignals") {
+                    sources(sourceSets.main.get(), sourceSets["dependencies"])
                 }
             }
         }
@@ -80,7 +102,7 @@ minecraft {
 
             args(
                 "--mod",
-                "cityrpmod",
+                "immersivesignals",
                 "--all",
                 "--output",
                 file("src/generated/resources/"),
@@ -89,7 +111,7 @@ minecraft {
             )
 
             mods {
-                create("cityrpmod") {
+                create("immersivesignals") {
                     source(sourceSets.main.get())
                 }
             }
