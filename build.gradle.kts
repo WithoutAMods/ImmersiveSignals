@@ -140,11 +140,14 @@ java {
 }
 
 tasks.processResources {
-    inputs.property("version", version)
+    val props = mapOf(
+        "version" to version
+    )
+    props.forEach { (name, value) ->
+        inputs.property(name, value)
+    }
     filesMatching("META-INF/mods.toml") {
-        expand(
-            "version" to version
-        )
+        expand(props)
     }
 }
 
