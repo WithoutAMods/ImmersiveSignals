@@ -1,11 +1,15 @@
 package eu.withoutaname.mod.immersivesignals.datagen
 
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent
+import thedarkcolour.kotlinforforge.forge.MOD_BUS
 
 object DataGenerators {
 
-    @JvmStatic
-    fun gatherData(event: GatherDataEvent) {
+    fun init() {
+        MOD_BUS.addListener(::gatherData)
+    }
+
+    private fun gatherData(event: GatherDataEvent) {
         val generator = event.generator
         if (event.includeClient()) {
             generator.addProvider(BlockStates(generator, event.existingFileHelper))
