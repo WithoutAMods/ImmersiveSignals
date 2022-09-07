@@ -1,5 +1,5 @@
-modLoader = "kotlinforforge"
-loaderVersion = "[1,)"
+modLoader = "javafml"
+loaderVersion = "[36,)"
 license = "MIT license"
 [[mods]]
 modId = "immersivesignals"

@@ -1,16 +1,8 @@
 package eu.withoutaname.mod.immersivesignals.signal.util
 
-import net.minecraft.nbt.CompoundNBT
-import net.minecraft.nbt.INBT
+import eu.withoutaname.mod.immersivesignals.signal.util.part.Mast
+import eu.withoutaname.mod.immersivesignals.signal.util.part.SignalPart
+import kotlinx.serialization.Serializable
 
-data class SignalBlockConfiguration(val mastHeight: Float = 1f) {
-    fun toNBT() = CompoundNBT().apply {
-        putFloat("mastHeight", mastHeight)
-    }
-
-    companion object {
-        fun fromNBT(nbt: INBT?) =
-            if (nbt !is CompoundNBT) SignalBlockConfiguration()
-            else SignalBlockConfiguration(nbt.getFloat("mastHeight"))
-    }
-}
+@Serializable
+data class SignalBlockConfiguration(val rotation: Int = 0, val parts: List<SignalPart> = listOf(Mast()))

@@ -1,7 +1,11 @@
 package eu.withoutaname.mod.immersivesignals.signal.block
 
+import eu.withoutaname.mod.immersivesignals.ImmersiveSignals
+import eu.withoutaname.mod.immersivesignals.nbt.getSerializable
+import eu.withoutaname.mod.immersivesignals.nbt.putSerializable
 import eu.withoutaname.mod.immersivesignals.setup.Registration
 import eu.withoutaname.mod.immersivesignals.signal.util.SignalBlockConfiguration
+import kotlinx.serialization.SerializationException
 import net.minecraft.block.BlockState
 import net.minecraft.nbt.CompoundNBT
 import net.minecraft.network.NetworkManager
@@ -17,7 +21,12 @@ class SignalEntity : TileEntity(Registration.signalEntityType) {
         val config = ModelProperty<SignalBlockConfiguration>()
     }
 
-    var signalConfiguration = SignalBlockConfiguration(.75f)
+    var signalConfiguration = SignalBlockConfiguration(0)
+        set(value) {
+            field = value
+            setChanged()
+            requestModelDataUpdate()
+        }
 
     override fun getModelData(): ModelDataMap = ModelDataMap.Builder()
         .withInitial(config, signalConfiguration)
@@ -42,11 +51,20 @@ class SignalEntity : TileEntity(Registration.signalEntityType) {
 
     override fun load(state: BlockState, nbt: CompoundNBT) {
         super.load(state, nbt)
-        signalConfiguration = SignalBlockConfiguration.fromNBT(tileData.get("config"))
+        if (tileData.contains("config"))
+            try {
+                signalConfiguration = tileData.getSerializable("config")!!
+            } catch (e: SerializationException) {
+                ImmersiveSignals.logger.error("Error while loading signal block entity!", e)
+            }
     }
 
     override fun save(nbt: CompoundNBT): CompoundNBT {
-        tileData.put("config", signalConfiguration.toNBT())
+        try {
+            tileData.putSerializable("config", signalConfiguration)
+        } catch (e: SerializationException) {
+            ImmersiveSignals.logger.error("Error while saving signal block entity!", e)
+        }
         return super.save(nbt)
     }
 }

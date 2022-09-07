@@ -1,7 +1,7 @@
 package eu.withoutaname.mod.immersivesignals.datagen
 
+import eu.withoutaname.mod.immersivesignals.MOD_BUS
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent
-import thedarkcolour.kotlinforforge.forge.MOD_BUS
 
 object DataGenerators {
 

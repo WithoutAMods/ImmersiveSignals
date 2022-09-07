@@ -4,13 +4,12 @@ import eu.withoutaname.mod.immersivesignals.ImmersiveSignals
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
-import net.minecraft.item.Items
 
 object ModSetup {
 
     val DEFAULT_CREATIVE_TAB: ItemGroup = object : ItemGroup(ImmersiveSignals.ID) {
         override fun makeIcon(): ItemStack {
-            return ItemStack(Items.BARRIER)
+            return ItemStack(Registration.signalItem)
         }
     }
     val DEFAULT_ITEM_PROPERTIES: Item.Properties = Item.Properties().tab(DEFAULT_CREATIVE_TAB)

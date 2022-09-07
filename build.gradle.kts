@@ -8,7 +8,8 @@ plugins {
     id("org.parchmentmc.librarian.forgegradle") version "1.+"
     `maven-publish`
     id("pl.allegro.tech.build.axion-release") version "1.13.14"
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "1.7.10"
+    kotlin("plugin.serialization") version "1.7.10"
     id("io.gitlab.arturbosch.detekt") version "1.21.0"
 }
 
@@ -27,7 +28,6 @@ val archivesBaseName = "immersivesignals"
 
 repositories {
     mavenCentral()
-    maven("https://thedarkcolour.github.io/KotlinForForge/")
     maven("https://www.cursemaven.com")
     maven("https://teamopenindustry.cc/maven/")
     maven("https://squiddev.cc/maven/")
@@ -54,11 +54,12 @@ configurations {
 dependencies {
     "minecraft"("net.minecraftforge:forge:1.16.5-36.2.35")
 
-    implementation("thedarkcolour:kotlinforforge:1.16.0")
     "modRuntime"(fg.deobf("cam72cam.universalmodcore:UniversalModCore:1.16.5-forge-1.1.1"))
     "modRuntime"(fg.deobf("org.squiddev:cc-tweaked-1.16.5:1.97.0"))
     "modRuntime"(fg.deobf("trackapi:TrackAPI:1.16.5-forge-1.2"))
     "mod"(fg.deobf("cam72cam.immersiverailroading:ImmersiveRailroading:1.16.5-forge-1.9.1"))
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
 
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.21.0")
 }
