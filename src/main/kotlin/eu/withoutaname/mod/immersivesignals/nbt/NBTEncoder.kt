@@ -24,13 +24,13 @@ import net.minecraft.nbt.LongNBT
 import net.minecraft.nbt.ShortNBT
 import net.minecraft.nbt.StringNBT
 
+@Suppress("TooManyFunctions")
 @OptIn(ExperimentalSerializationApi::class)
 class NBTEncoder : AbstractEncoder() {
     override val serializersModule: SerializersModule = EmptySerializersModule()
 
     lateinit var nbt: INBT
     private val structureBuilders = mutableListOf<NBTStructureBuilder>()
-    private lateinit var name: String
 
     override fun beginStructure(descriptor: SerialDescriptor): CompositeEncoder {
         when (descriptor.kind) {
@@ -64,23 +64,16 @@ class NBTEncoder : AbstractEncoder() {
     }
 
     override fun encodeBoolean(value: Boolean) = put(ByteNBT.valueOf(value))
-
     override fun encodeByte(value: Byte) = put(ByteNBT.valueOf(value))
-
     override fun encodeChar(value: Char) = put(StringNBT.valueOf(value.toString()))
-
     override fun encodeDouble(value: Double) = put(DoubleNBT.valueOf(value))
-
     override fun encodeFloat(value: Float) = put(FloatNBT.valueOf(value))
-
     override fun encodeInt(value: Int) = put(IntNBT.valueOf(value))
-
     override fun encodeLong(value: Long) = put(LongNBT.valueOf(value))
-
     override fun encodeShort(value: Short) = put(ShortNBT.valueOf(value))
-
     override fun encodeString(value: String) = put(StringNBT.valueOf(value))
-
     override fun encodeEnum(enumDescriptor: SerialDescriptor, index: Int) =
         put(StringNBT.valueOf(enumDescriptor.getElementName(index)))
+
+    override fun shouldEncodeElementDefault(descriptor: SerialDescriptor, index: Int) = false
 }

@@ -7,7 +7,8 @@ import net.minecraft.client.renderer.vertex.VertexFormatElement
 import net.minecraft.util.Direction
 import net.minecraft.util.math.vector.Vector3f
 import net.minecraftforge.client.model.pipeline.BakedQuadBuilder
-
+import kotlin.math.max
+import kotlin.math.min
 
 private val halfVector3f = v(.5f, .5f, .5f)
 
@@ -16,6 +17,7 @@ private val halfVector3f = v(.5f, .5f, .5f)
  */
 fun v(x: Float, y: Float, z: Float) = Vector3f(x, y, z)
 
+@Suppress("LongParameterList")
 fun putVertex(
     builder: BakedQuadBuilder,
     normal: Vector3f,
@@ -50,6 +52,7 @@ fun putVertex(
     }
 }
 
+@Suppress("LongParameterList")
 fun createQuad(
     topLeft: Vector3f,
     bottomLeft: Vector3f,
@@ -87,6 +90,7 @@ fun createQuad(
     )
 }
 
+@Suppress("LongParameterList")
 fun createQuad(
     topLeft: Vector3f,
     bottomLeft: Vector3f,
@@ -115,104 +119,75 @@ fun createQuad(
     return builder.build()
 }
 
-@Suppress("LongMethod")
+@Suppress("LongParameterList")
 fun createCube(
+    side: Direction?,
     from: Vector3f,
     to: Vector3f,
+    rotation: Int,
+    texture: TextureAtlasSprite,
+    r: Float = 1f,
+    g: Float = 1f,
+    b: Float = 1f,
+    dynamicUV: Boolean = true
+) = createCube(side, from, to, rotation, texture, texture, texture, texture, texture, texture, r, g, b, dynamicUV)
+
+@Suppress("LongParameterList")
+fun createCube(
+    side: Direction?,
+    from: Vector3f,
+    to: Vector3f,
+    rotation: Int,
     up: TextureAtlasSprite,
     down: TextureAtlasSprite,
     north: TextureAtlasSprite,
     south: TextureAtlasSprite,
     east: TextureAtlasSprite,
     west: TextureAtlasSprite,
+    r: Float = 1f,
+    g: Float = 1f,
+    b: Float = 1f,
     dynamicUV: Boolean = true
-): List<BakedQuad?>? {
-    val quads = mutableListOf<BakedQuad>()
-    val fx = from.x()
-    val fy = from.y()
-    val fz = from.z()
-    val tx = to.x()
-    val ty = to.y()
-    val tz = to.z()
-    quads.add(
-        createQuad(
-            v(fx, ty, fz),
-            v(fx, ty, tz),
-            v(tx, ty, tz),
-            v(tx, ty, fz),
-            up,
-            getFrom(dynamicUV, fx),
-            getTo(dynamicUV, tx),
-            getFrom(dynamicUV, fz),
-            getTo(dynamicUV, tz)
-        )
-    )
-    quads.add(
-        createQuad(
-            v(tx, fy, fz),
-            v(tx, fy, tz),
-            v(fx, fy, tz),
-            v(fx, fy, fz),
-            down,
-            getFrom(dynamicUV, 1f - tx),
-            getTo(dynamicUV, 1f - fx),
-            getFrom(dynamicUV, fz),
-            getTo(dynamicUV, tz)
-        )
-    )
-    quads.add(
-        createQuad(
-            v(tx, ty, fz),
-            v(tx, fy, fz),
-            v(fx, fy, fz),
-            v(fx, ty, fz),
-            north,
-            getFrom(dynamicUV, 1f - tx),
-            getTo(dynamicUV, 1f - fx),
-            getFrom(dynamicUV, 1f - ty),
-            getTo(dynamicUV, 1f - fy)
-        )
-    )
-    quads.add(
-        createQuad(
-            v(fx, ty, tz),
-            v(fx, fy, tz),
-            v(tx, fy, tz),
-            v(tx, ty, tz),
-            south,
-            getFrom(dynamicUV, fx),
-            getTo(dynamicUV, tx),
-            getFrom(dynamicUV, 1f - ty),
-            getTo(dynamicUV, 1f - fy)
-        )
-    )
-    quads.add(
-        createQuad(
-            v(tx, ty, tz),
-            v(tx, fy, tz),
-            v(tx, fy, fz),
-            v(tx, ty, fz),
-            east,
-            getFrom(dynamicUV, 1f - tz),
-            getTo(dynamicUV, 1f - fz),
-            getFrom(dynamicUV, 1f - ty),
-            getTo(dynamicUV, 1f - fy)
-        )
-    )
-    quads.add(
-        createQuad(
-            v(fx, ty, fz),
-            v(fx, fy, fz),
-            v(fx, fy, tz),
-            v(fx, ty, tz),
-            west,
-            getFrom(dynamicUV, fz),
-            getTo(dynamicUV, tz),
-            getFrom(dynamicUV, 1f - ty),
-            getTo(dynamicUV, 1f - fy)
-        )
-    )
-    return quads
+) = mutableListOf<BakedQuad>().apply {
+    val fx = min(from.x(), to.x())
+    val fy = min(from.y(), to.y())
+    val fz = min(from.z(), to.z())
+    val tx = max(from.x(), to.x())
+    val ty = max(from.y(), to.y())
+    val tz = max(from.z(), to.z())
+
+    val fff = v(fx, fy, fz)
+    val fft = v(fx, fy, tz)
+    val ftf = v(fx, ty, fz)
+    val ftt = v(fx, ty, tz)
+    val tff = v(tx, fy, fz)
+    val tft = v(tx, fy, tz)
+    val ttf = v(tx, ty, fz)
+    val ttt = v(tx, ty, tz)
+
+    val ffx = getFrom(dynamicUV, fx)
+    val ftx = getFrom(dynamicUV, 1f - tx)
+    val tfx = getTo(dynamicUV, 1f - fx)
+    val ttx = getTo(dynamicUV, tx)
+    val fty = getFrom(dynamicUV, 1f - ty)
+    val tfy = getTo(dynamicUV, 1f - fy)
+    val ffz = getFrom(dynamicUV, fz)
+    val ftz = getFrom(dynamicUV, 1f - tz)
+    val tfz = getTo(dynamicUV, 1f - fz)
+    val ttz = getTo(dynamicUV, tz)
+
+    if (side == if (ty < 1) null else Direction.UP)
+        add(createQuad(ftf, ftt, ttt, ttf, rotation, up, ffx, ttx, ffz, ttz, r, g, b))
+    if (side == if (fy > 0) null else Direction.DOWN)
+        add(createQuad(tff, tft, fft, fff, rotation, down, ftx, tfx, ffz, ttz, r, g, b))
+    if (side == if (fz > 0) null else Direction.NORTH)
+        add(createQuad(ttf, tff, fff, ftf, rotation, north, ftx, tfx, fty, tfy, r, g, b))
+    if (side == if (tz < 1) null else Direction.SOUTH)
+        add(createQuad(ftt, fft, tft, ttt, rotation, south, ffx, ttx, fty, tfy, r, g, b))
+    if (side == if (tx < 1) null else Direction.EAST)
+        add(createQuad(ttt, tft, tff, ttf, rotation, east, ftz, tfz, fty, tfy, r, g, b))
+    if (side == if (fx > 0) null else Direction.WEST)
+        add(createQuad(ftf, fff, fft, ftt, rotation, west, ffz, ttz, fty, tfy, r, g, b))
 }
 
 private fun getFrom(dynamicUV: Boolean, d: Float): Double {

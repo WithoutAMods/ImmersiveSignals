@@ -15,7 +15,7 @@ object SignalItem : Item(ModSetup.DEFAULT_ITEM_PROPERTIES.stacksTo(1)) {
         val level: World = pContext.level
         if (!level.isClientSide) {
             val pos: BlockPos = if (level.getBlockState(pContext.clickedPos).material
-                    .isReplaceable
+                .isReplaceable
             ) pContext.clickedPos else pContext.clickedPos.relative(pContext.clickedFace)
             val rotation: Int = (round((180 - pContext.rotation) * 16.0f / 360.0f).toInt() + 16) % 16
             if (SignalBlock.createSignal(level, pos, SignalConfiguration(rotation, 5.5f))) {

@@ -11,7 +11,7 @@ object SignalModelLoader : IModelLoader<SignalModelGeometry> {
 
     val ID = ResourceLocation(ImmersiveSignals.ID, "signal_loader")
 
-    @Suppress("empty-blocks")
+    @Suppress("EmptyFunctionBlock")
     override fun onResourceManagerReload(resourceManager: IResourceManager) {
     }
 

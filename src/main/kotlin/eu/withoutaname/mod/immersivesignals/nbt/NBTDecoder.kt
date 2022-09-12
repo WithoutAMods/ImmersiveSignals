@@ -12,6 +12,7 @@ import net.minecraft.nbt.INBT
 import net.minecraft.nbt.NumberNBT
 import net.minecraft.nbt.StringNBT
 
+@Suppress("TooManyFunctions")
 @OptIn(ExperimentalSerializationApi::class)
 class NBTDecoder(private val nbt: INBT) : AbstractDecoder() {
     override val serializersModule: SerializersModule = EmptySerializersModule()
@@ -23,7 +24,6 @@ class NBTDecoder(private val nbt: INBT) : AbstractDecoder() {
     private var index = 0
 
     override fun beginStructure(descriptor: SerialDescriptor): CompositeDecoder = NBTDecoder(current)
-
 
     override fun decodeElementIndex(descriptor: SerialDescriptor): Int {
         return when (nbt) {
@@ -48,23 +48,14 @@ class NBTDecoder(private val nbt: INBT) : AbstractDecoder() {
     }
 
     override fun decodeBoolean(): Boolean = (current as NumberNBT).asInt != 0
-
     override fun decodeByte(): Byte = (current as NumberNBT).asByte
-
     override fun decodeChar(): Char = (current as StringNBT).asString.first()
-
     override fun decodeDouble(): Double = (current as NumberNBT).asDouble
-
     override fun decodeFloat(): Float = (current as NumberNBT).asFloat
-
     override fun decodeInt(): Int = (current as NumberNBT).asInt
-
     override fun decodeLong(): Long = (current as NumberNBT).asLong
-
     override fun decodeShort(): Short = (current as NumberNBT).asShort
-
     override fun decodeString(): String = (current as StringNBT).asString
-
     override fun decodeEnum(enumDescriptor: SerialDescriptor): Int =
         enumDescriptor.getElementIndex((current as StringNBT).asString)
 }

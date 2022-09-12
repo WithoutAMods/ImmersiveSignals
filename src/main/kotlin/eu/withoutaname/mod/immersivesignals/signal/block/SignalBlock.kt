@@ -35,7 +35,7 @@ object SignalBlock : Block(Properties.of(Material.METAL).sound(SoundType.METAL).
     override fun asItem() = Registration.signalItem
 
     fun createSignal(world: World, pos: BlockPos, config: SignalConfiguration): Boolean {
-        if (world.isClientSide) throw IllegalStateException("Signal must be created on the server")
+        check(world.isClientSide.not()) { "Signal must be created on the server" }
         for (i in config.blockConfigurations.indices) {
             if (world.getBlockState(pos.above(i)).material.isReplaceable.not()) return false
         }
@@ -51,5 +51,4 @@ object SignalBlock : Block(Properties.of(Material.METAL).sound(SoundType.METAL).
         }
         return true
     }
-
 }

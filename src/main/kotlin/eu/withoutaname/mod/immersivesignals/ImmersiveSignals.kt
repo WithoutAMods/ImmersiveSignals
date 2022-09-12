@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger
 val MOD_BUS: IEventBus
     inline get() = FMLJavaModLoadingContext.get().modEventBus
 
-
+@Suppress("UtilityClassWithPublicConstructor")
 @Mod(ImmersiveSignals.ID)
 class ImmersiveSignals {
 
@@ -22,7 +22,6 @@ class ImmersiveSignals {
         @JvmField
         val logger: Logger = LogManager.getLogger()
     }
-
 
     init {
         Registration.init()

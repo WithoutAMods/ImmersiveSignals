@@ -3,6 +3,9 @@ console-reports:
     - 'ProjectStatisticsReport'
     - 'ComplexityReport'
     - 'NotificationReport'
-#    - 'FindingsReport'
+    # - 'FindingsReport'
     - 'FileBasedFindingsReport'
     - 'LiteFindingsReport'
+style:
+  MagicNumber:
+    active: false
